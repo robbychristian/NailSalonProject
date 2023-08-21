@@ -8,26 +8,28 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Gracey Nails and Lashes Services @yield('title') </title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body>
+<body style="font-family: 'Montserrat', sans-serif;">
     <div id="app">
-
-        <nav class="bg-rose-300 border-gray-200">
-            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <nav class="bg-pink border-gray-200">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto md:p-0 p-4">
                 <a href="/" class="flex items-center">
-                    <img class="w-20 h-20 rounded-full" src="{{ asset('img/logo.png') }}" alt="Large avatar">
+                    <img class="h-28" src="{{ asset('img/logo2.png') }}" alt="Large avatar">
                 </a>
                 <div class="flex md:order-2">
                     <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search"
@@ -80,27 +82,27 @@
                     <ul
                         class="flex flex-col p-4 md:p-0 mt-4 text-lg font-medium border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
                         <li>
-                            <a href="#"
-                                class="block py-2 pl-3 pr-4 text-white rounded md:bg-transparent md:text-rose-700 md:p-0"
+                            <a href="{{ route('index') }}"
+                                class="block py-2 pl-3 pr-4 text-gray-800 md:bg-transparent {{ Request::is('/') ? 'text-rose-700' : '' }} md:p-0"
                                 aria-current="page">Home</a>
                         </li>
                         <li>
+                            <a href="{{ route('about-us') }}"
+                                class="block py-2 pl-3 pr-4 text-gray-800 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-rose-700 md:p-0 {{ Request::is('about-us') ? 'text-rose-700' : '' }}">About
+                                Us</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('services') }}"
+                                class="block py-2 pl-3 pr-4 text-gray-800 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-rose-700 md:p-0 {{ Request::is('services') ? 'text-rose-700' : '' }}">Services</a>
+                        </li>
+                        <li>
                             <a href="#"
-                                class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-rose-700 md:p-0 ">About
+                                class="block py-2 pl-3 pr-4 text-gray-800 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-rose-700 md:p-0">Contact
                                 Us</a>
                         </li>
                         <li>
                             <a href="#"
-                                class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-rose-700 md:p-0">Services</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-rose-700 md:p-0">Contact
-                                Us</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-rose-700 md:p-0">Book
+                                class="block py-2 pl-3 pr-4 text-gray-800 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-rose-700 md:p-0">Book
                                 Now</a>
                         </li>
                     </ul>
@@ -108,7 +110,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
 

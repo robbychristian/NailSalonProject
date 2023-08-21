@@ -14,8 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
-});
+    return view('static.index');
+})->name('index');
+
+Route::get('/about-us', function () {
+    return view('static.about-us');
+})->name('about-us');
+
+Route::get('/services', function () {
+    return view('static.services');
+})->name('services');
 
 Auth::routes();
 
