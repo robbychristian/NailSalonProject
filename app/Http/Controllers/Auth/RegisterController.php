@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\UserProfile;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -50,9 +51,20 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'middle_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'birthday' => ['required'],
+            'contact_no' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'username' => ['required', 'unique:users'],
+            'password' => ['required', 'string'],
+            'street' => ['required'],
+            'region' => ['required'],
+            'province' => ['required'],
+            'city' => ['required'],
+            'barangay' => ['required'],
+            'postal_code' => ['required'],
         ]);
     }
 
@@ -64,10 +76,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $user = User::create([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
+            'username' => $data['username'],
             'password' => Hash::make($data['password']),
+            'user_role' => 2,
+            'is_notify' => $data['is_notify'],
         ]);
+
+        $userProfile = UserProfile::create([
+            'user_id' => $user->id,
+            'middle_name' => $data['middle_name'],
+            'birthday' => $data['birthday'],
+            'contact_no' => $data['contact_no'],
+            'street' => $data['street'],
+            'region' => $data['region'],
+            'province' => $data['province'],
+            'city' => $data['city'],
+            'barangay' => $data['barangay'],
+            'postal_code' => $data['postal_code']
+        ]);
+        return $user;
     }
 }
