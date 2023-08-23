@@ -1,29 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Registration')
 @section('content')
-    {{-- <form action="{{ route('register') }}" method="post">
-        @csrf
-
-        <input type="text"  name="first_name" id="first_name" placeholder="first_name" class="border">
-        <input type="text" name="middle_name" id="middle_name" placeholder="middle_name" class="border">
-        <input type="text" name="last_name" id="last_name" placeholder="last_name" class="border">
-        <input type="date" name="birthday" id="birthday" placeholder="birthday" class="border">
-        <input type="text" name="street" id="street" placeholder="street" class="border">
-        <input type="text" name="region" id="region" placeholder="region" class="border">
-        <input type="text" name="province" id="province" placeholder="province" class="border">
-        <input type="text" name="city" id="city" placeholder="city" class="border">
-        <input type="text" name="barangay" id="barangay" placeholder="barangay" class="border">
-        <input type="text" name="postal_code" id="postal_code" placeholder="postal_code" class="border">
-        <input type="text" name="contact_no" id="contact_no" placeholder="contact_no" class="border">
-        <input type="text" name="email" id="email" placeholder="email" class="border">
-        <input type="text" name="username" id="username" placeholder="username" class="border">
-        <input type="password" name="password" id="password" placeholder="password" class="border">
-        <input type="password" name="confirm_password" id="confirm_password" placeholder="confirm_password" class="border">
-        <input type="checkbox" name="is_notify" id="is_notify">
-
-        <button type="submit">Submit</button>
-    </form> --}}
-
     <section class="bg-pink">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
             <div class="w-full bg-white rounded-lg shadow md:mt-5 mb-10 md xl:p-0">
@@ -241,10 +218,11 @@
                                 updates and promotions.</label>
                         </div>
                         <button type="submit"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                            class="text-white bg-darker-pink hover:bg-[#EDA2B2] focus:ring-1 focus:outline-none focus:ring-[#EDA2B2] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+
+                        <p class="mt-5 text-sm font-semibold text-darker-pink">Already have an account? <a
+                                href="{{ route('login') }}" class="underline">Login</a></p>
                     </form>
-
-
                 </div>
             </div>
         </div>
