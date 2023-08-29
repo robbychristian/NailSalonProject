@@ -21,7 +21,7 @@
                                 <input type="text" value="{{ old('first_name') }}" name="first_name" id="first_name"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 @error('first_name')
-                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
                                 @enderror
                             </div>
@@ -33,7 +33,7 @@
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                                     placeholder="">
                                 @error('middle_name')
-                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
                                 @enderror
                             </div>
@@ -45,7 +45,7 @@
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                                     placeholder="">
                                 @error('last_name')
-                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
                                 @enderror
                             </div>
@@ -58,7 +58,7 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2"
                                 placeholder="">
                             @error('birthday')
-                                <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                     {{ $message }}</p>
                             @enderror
                         </div>
@@ -70,7 +70,7 @@
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                                     placeholder="">
                                 @error('street')
-                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
                                 @enderror
                             </div>
@@ -81,7 +81,7 @@
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                                     placeholder="">
                                 @error('region')
-                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
                                 @enderror
                             </div>
@@ -92,7 +92,7 @@
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                                     placeholder="">
                                 @error('province')
-                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
                                 @enderror
                             </div>
@@ -105,7 +105,7 @@
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                                     placeholder="">
                                 @error('city')
-                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
                                 @enderror
                             </div>
@@ -116,7 +116,7 @@
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                                     placeholder="">
                                 @error('barangay')
-                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
                                 @enderror
                             </div>
@@ -130,7 +130,7 @@
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                                     placeholder="">
                                 @error('postal_code')
-                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
                                 @enderror
                             </div>
@@ -147,7 +147,7 @@
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                                     placeholder="">
                                 @error('contact_no')
-                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
                                 @enderror
                             </div>
@@ -157,7 +157,7 @@
                                 <input type="email" value="{{ old('email') }}" name="email" id="email"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 @error('email')
-                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
                                 @enderror
                             </div>
@@ -168,7 +168,7 @@
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                                     placeholder="">
                                 @error('username')
-                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
                                 @enderror
                             </div>
@@ -179,13 +179,13 @@
                                     class="block mb-2 text-sm font-medium text-gray-900">Password</label>
                                 <input type="password" name="password" id="password"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                                <p id="floating_helper_text" class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                                <p id="floating_helper_text" class="mt-2 text-xs text-gray-500">
                                     Password must be 6-16 characters long, contain uppercase and lowercase
                                     characters, numbers, and special character.
                                 </p>
 
                                 @error('password')
-                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
                                 @enderror
 
@@ -197,7 +197,7 @@
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
 
                                 @error('confirm_password')
-                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
                                 @enderror
                             </div>
