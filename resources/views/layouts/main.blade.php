@@ -30,7 +30,7 @@
 </head>
 
 <body style="font-family: 'Montserrat', sans-serif;">
-    <div class="antialiased bg-gray-50">
+    <div class="antialiased">
         <!-- Navbar -->
         @include('common.navbar')
         <!-- End of Navbar -->
