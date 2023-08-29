@@ -9,6 +9,7 @@ use App\Models\UserProfile;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterController extends Controller
 {
@@ -51,14 +52,19 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'first_name' => ['required', 'string', 'max:255'],
-            'middle_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'regex:/^[\pL\s\-]+$/u'],
+            'middle_name' => ['required', 'regex:/^[\pL\s\-]+$/u'],
+            'last_name' => ['required', 'regex:/^[\pL\s\-]+$/u'],
             'birthday' => ['required'],
             'contact_no' => ['required'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'email', 'unique:users'],
             'username' => ['required', 'unique:users'],
-            'password' => ['required', 'string'],
+            'password' => ['required', Password::min(6)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()],
+            'confirm_password' => ['required', 'same:password'],
             'street' => ['required'],
             'region' => ['required'],
             'province' => ['required'],

@@ -21,6 +21,10 @@
                                 <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                     {{ $message }}</p>
                             @enderror
+                            @if (Session::get('error'))
+                                <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
+                                    {{ Session::get('error') }}</p>
+                            @endif
                         </div>
 
                         <div class="mb-6">
@@ -35,7 +39,7 @@
                         </div>
 
                         <button type="submit"
-                            class="text-white bg-darker-pink hover:bg-[#EDA2B2] focus:ring-1 focus:outline-none focus:ring-[#EDA2B2] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                            class="text-white bg-darker-pink hover:bg-darker-pink-90 focus:ring-1 focus:outline-none focus:ring-darker-pink-90 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
 
                         <p class="mt-5 text-sm font-semibold text-darker-pink">Don't have an account yet? <a
                                 href="{{ route('register') }}" class="underline">Register</a></p>

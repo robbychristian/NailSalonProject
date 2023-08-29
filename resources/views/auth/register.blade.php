@@ -1,6 +1,16 @@
 @extends('layouts.app')
 @section('title', 'Registration')
 @section('content')
+    <script>
+        function onlyNumberKey(evt) {
+
+            // Only ASCII character in that range allowed
+            var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+            if (ASCIICode < 48 || ASCIICode > 57)
+                return false;
+            return true;
+        }
+    </script>
     <section class="bg-pink">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
             <div class="w-full bg-white rounded-lg shadow md:mt-5 mb-10 md xl:p-0">
@@ -30,8 +40,7 @@
                                 <label for="middle_name" class="block mb-2 text-sm font-medium text-gray-900">Middle
                                     name</label>
                                 <input type="text" value="{{ old('middle_name') }}" name="middle_name" id="middle_name"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                                    placeholder="">
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 @error('middle_name')
                                     <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
@@ -42,8 +51,7 @@
                                 <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900">Last
                                     name</label>
                                 <input type="text" value="{{ old('last_name') }}" name="last_name" id="last_name"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                                    placeholder="">
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 @error('last_name')
                                     <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
@@ -55,8 +63,7 @@
                             <label for="birthday" class="block mb-2 text-sm font-medium text-gray-900">Date of
                                 Birth</label>
                             <input type="date" value="{{ old('birthday') }}" name="birthday" id="birthday"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2"
-                                placeholder="">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2">
                             @error('birthday')
                                 <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                     {{ $message }}</p>
@@ -67,8 +74,7 @@
                             <div>
                                 <label for="street" class="block mb-2 text-sm font-medium text-gray-900">Street</label>
                                 <input type="text" value="{{ old('street') }}" name="street" id="street"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                                    placeholder="">
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 @error('street')
                                     <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
@@ -78,8 +84,7 @@
                             <div>
                                 <label for="region" class="block mb-2 text-sm font-medium text-gray-900">Region</label>
                                 <input type="text" value="{{ old('region') }}" name="region" id="region"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                                    placeholder="">
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 @error('region')
                                     <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
@@ -89,8 +94,7 @@
                             <div>
                                 <label for="province" class="block mb-2 text-sm font-medium text-gray-900">Province</label>
                                 <input type="text" value="{{ old('province') }}" name="province" id="province"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                                    placeholder="">
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 @error('province')
                                     <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
@@ -102,8 +106,7 @@
                             <div>
                                 <label for="city" class="block mb-2 text-sm font-medium text-gray-900">City</label>
                                 <input type="text" value="{{ old('city') }}" name="city" id="city"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                                    placeholder="">
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 @error('city')
                                     <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
@@ -113,8 +116,7 @@
                             <div>
                                 <label for="barangay" class="block mb-2 text-sm font-medium text-gray-900">Barangay</label>
                                 <input type="text" value="{{ old('barangay') }}" name="barangay" id="barangay"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                                    placeholder="">
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 @error('barangay')
                                     <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
@@ -125,10 +127,8 @@
                             <div>
                                 <label for="postal_code" class="block mb-2 text-sm font-medium text-gray-900">Postal
                                     Code</label>
-                                <input type="text" value="{{ old('postal_code') }}" name="postal_code"
-                                    id="postal_code"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                                    placeholder="">
+                                <input type="text" value="{{ old('postal_code') }}" name="postal_code" id="postal_code"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 @error('postal_code')
                                     <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
@@ -144,8 +144,8 @@
                                 <label for="contact_no" class="block mb-2 text-sm font-medium text-gray-900">Contact
                                     Number</label>
                                 <input type="text" value="{{ old('contact_no') }}" name="contact_no" id="contact_no"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                                    placeholder="">
+                                    onkeypress="return onlyNumberKey(event)" maxlength="11"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 @error('contact_no')
                                     <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
@@ -165,8 +165,7 @@
                                 <label for="username"
                                     class="block mb-2 text-sm font-medium text-gray-900">Username</label>
                                 <input type="text" value="{{ old('username') }}" name="username" id="username"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                                    placeholder="">
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 @error('username')
                                     <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
@@ -214,7 +213,7 @@
                                 updates and promotions.</label>
                         </div>
                         <button type="submit"
-                            class="text-white bg-darker-pink hover:bg-[#EDA2B2] focus:ring-1 focus:outline-none focus:ring-[#EDA2B2] font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                            class="text-white bg-darker-pink hover:bg-darker-pink-90 focus:ring-1 focus:outline-none focus:ring-darker-pink-90 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
 
                         <p class="mt-5 text-sm font-semibold text-darker-pink">Already have an account? <a
                                 href="{{ route('login') }}" class="underline">Login</a></p>
