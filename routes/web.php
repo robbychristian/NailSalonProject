@@ -30,4 +30,5 @@ Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('users', UserController::class);
+    Route::post('/users-password/{id}', [UserController::class, 'updatePassword'])->name('users.updatePassword');
 });

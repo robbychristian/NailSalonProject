@@ -3,9 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
-class CreateUserRequest extends FormRequest
+class UpdateUserPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,25 +27,17 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => ['required', 'regex:/^[\pL\s\-]+$/u'],
-            'middle_name' => ['required', 'regex:/^[\pL\s\-]+$/u'],
-            'last_name' => ['required', 'regex:/^[\pL\s\-]+$/u'],
-            'birthday' => ['required'],
-            'contact_no' => ['required', 'min:11'],
-            'email' => ['required', 'email', 'unique:users'],
-            'username' => ['required', 'unique:users'],
+            'current_password' => ['required', function ($attribute, $value, $fail) {
+                if (!Hash::check($value, Auth::user()->password)) {
+                    $fail('Old password didn\'t match!');
+                }
+            }],
             'password' => ['required', Password::min(6)
                 ->letters()
                 ->mixedCase()
                 ->numbers()
                 ->symbols()],
             'confirm_password' => ['required', 'same:password'],
-            'street' => ['required'],
-            'region' => ['required'],
-            'province' => ['required'],
-            'city' => ['required'],
-            'barangay' => ['required'],
-            'postal_code' => ['required'],
         ];
     }
 }

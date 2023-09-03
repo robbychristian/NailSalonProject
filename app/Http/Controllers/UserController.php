@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserPasswordRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
@@ -86,7 +88,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('modules.user.edit', compact('user'));
     }
 
     /**
@@ -96,9 +99,35 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
-        //
+        $user = User::where('id', $id)->update([
+            'first_name' => $request['first_name'],
+            'last_name' => $request['last_name'],
+        ]);
+
+        $userProfile = UserProfile::where('user_id', $id)->update([
+            'middle_name' => $request['middle_name'],
+            'birthday' => $request['birthday'],
+            'contact_no' => $request['contact_no'],
+            'street' => $request['street'],
+            'region' => $request['region'],
+            'province' => $request['province'],
+            'city' => $request['city'],
+            'barangay' => $request['barangay'],
+            'postal_code' => $request['postal_code']
+        ]);
+
+        return redirect()->back()->with('success', 'You have successfully edited your profile!');
+    }
+
+    public function updatePassword(UpdateUserPasswordRequest $request, $id)
+    {
+        $user = User::where('id', $id)->update([
+            'password' => Hash::make($request['password'])
+        ]);
+
+        return redirect()->back()->with('success', 'You have successfully edited your password!');
     }
 
     /**

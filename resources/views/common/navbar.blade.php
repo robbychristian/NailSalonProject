@@ -47,7 +47,8 @@
                 </div>
                 <ul class="py-1 text-gray-700" aria-labelledby="dropdown">
                     <li>
-                        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-100">My
+                        <a href="{{ route('users.edit', Auth::user()->id) }}"
+                            class="block py-2 px-4 text-sm hover:bg-gray-100">My
                             profile</a>
                     </li>
                 </ul>

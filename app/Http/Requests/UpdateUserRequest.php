@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
 
-class CreateUserRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,14 +29,6 @@ class CreateUserRequest extends FormRequest
             'last_name' => ['required', 'regex:/^[\pL\s\-]+$/u'],
             'birthday' => ['required'],
             'contact_no' => ['required', 'min:11'],
-            'email' => ['required', 'email', 'unique:users'],
-            'username' => ['required', 'unique:users'],
-            'password' => ['required', Password::min(6)
-                ->letters()
-                ->mixedCase()
-                ->numbers()
-                ->symbols()],
-            'confirm_password' => ['required', 'same:password'],
             'street' => ['required'],
             'region' => ['required'],
             'province' => ['required'],
