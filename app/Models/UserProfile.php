@@ -14,11 +14,6 @@ class UserProfile extends Model
         'middle_name',
         'birthday',
         'contact_no',
-        'street',
-        'region',
-        'province',
-        'city',
-        'barangay',
-        'postal_code'
+        'address'
     ];
 }

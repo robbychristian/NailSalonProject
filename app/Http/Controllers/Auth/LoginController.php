@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -50,10 +52,29 @@ class LoginController extends Controller
 
         $fieldType = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        if (auth()->attempt(array($fieldType => $input['email'], 'password' => $input['password']))) {
-            return redirect()->route('home');
+        if ($request->isMobile) {
+            $user = User::where('email', $input["email"])->first();
+
+            if (!$user || !Hash::check($input['password'], $user->password)) {
+                return response([
+                    'message' => 'Bad credentials'
+                ], 401);
+            }
+
+            $token = $user->createToken('myAppToken')->plainTextToken;
+
+            $response = [
+                'user' => $user,
+                'token' => $token,
+            ];
+
+            return response($response, 201);
         } else {
-            return redirect()->route('login')->with('error', 'These credentials do not match our records.');
+            if (auth()->attempt(array($fieldType => $input['email'], 'password' => $input['password']))) {
+                return redirect()->route('home');
+            } else {
+                return redirect()->route('login')->with('error', 'These credentials do not match our records.');
+            }
         }
     }
 }

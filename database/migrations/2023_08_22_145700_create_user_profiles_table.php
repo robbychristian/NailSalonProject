@@ -19,12 +19,7 @@ class CreateUserProfilesTable extends Migration
             $table->string('middle_name')->nullable();
             $table->string('birthday')->nullable();
             $table->string('contact_no')->nullable();
-            $table->string('street')->nullable();
-            $table->string('region')->nullable();
-            $table->string('province')->nullable();
-            $table->string('city')->nullable();
-            $table->string('barangay')->nullable();
-            $table->string('postal_code')->nullable();
+            $table->string('address')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

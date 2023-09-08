@@ -65,12 +65,7 @@ class RegisterController extends Controller
                 ->numbers()
                 ->symbols()],
             'confirm_password' => ['required', 'same:password'],
-            'street' => ['required'],
-            'region' => ['required'],
-            'province' => ['required'],
-            'city' => ['required'],
-            'barangay' => ['required'],
-            'postal_code' => ['required'],
+            'address' => ['required'],
         ]);
     }
 
@@ -97,12 +92,7 @@ class RegisterController extends Controller
             'middle_name' => $data['middle_name'],
             'birthday' => $data['birthday'],
             'contact_no' => $data['contact_no'],
-            'street' => $data['street'],
-            'region' => $data['region'],
-            'province' => $data['province'],
-            'city' => $data['city'],
-            'barangay' => $data['barangay'],
-            'postal_code' => $data['postal_code']
+            'address' => $data['address'],
         ]);
         return $user;
     }
