@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', '| List of Users')
+@section('title', '| List of Services')
 @section('content')
     <section>
         <div class="px-6 py-8 mx-auto lg:py-0">
@@ -11,12 +11,12 @@
             @endif
             <div class="flex items-center justify-between mb-5">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-                    List of Users
+                    List of Services
                 </h1>
-                <a href="{{ route('users.create') }}"
+                <a href="{{ route('services.create') }}"
                     class="text-white bg-darker-pink hover:bg-darker-pink-90 font-medium rounded-lg text-sm px-4 py-2 inline-flex items-center">
                     <i class="fa-solid fa-plus mr-2"></i>
-                    Add User
+                    Add Service
                 </a>
 
             </div>
@@ -32,40 +32,32 @@
                                 Name
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Email
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Username
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Contact Number
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Action
+                                Actions
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($users as $user)
+                        @forelse ($services as $service)
                             <tr class="bg-white border-b">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ $user->id }}
+                                    {{ $service->id }}
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{ $user->first_name }} {{ $user->last_name }}
+                                    {{ $service->service_name }}
                                 </td>
-                                <td class="px-6 py-4">
-                                    {{ $user->email }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ $user->username }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ $user->userProfile->contact_no }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    <a href="{{ route('users.show', $user->id) }}"
-                                        class="font-medium text-darker-pink hover:underline">View</a>
+                                <td class="px-6 py-4" colspan="3">
+                                    <a href="{{ route('services.edit', $service->id) }}"
+                                        class="font-medium text-darker-pink hover:underline">Edit</a>
+
+                                    <a href="{{ route('services.destroy', $service->id) }}"
+                                        onclick="event.preventDefault(); 
+                                        document.getElementById('delete-form').submit();"
+                                        class="ml-2 font-medium text-red-600 hover:underline">Delete</a>
+                                    <form id="delete-form" action="{{ route('services.destroy', $service->id) }}"
+                                        method="POST" class="d-none">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
                                 </td>
                             </tr>
                         @empty

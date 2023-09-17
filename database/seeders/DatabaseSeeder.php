@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Services;
 use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Database\Seeder;
@@ -55,5 +56,12 @@ class DatabaseSeeder extends Seeder
             'contact_no' => '09123456789',
             'address' => 'Quezon City'
         ]);
+
+        // SERVICES
+        Services::create(['service_name' => 'General Service']);
+        Services::create(['service_name' => 'Nail Extension']);
+        Services::create(['service_name' => 'Waxing']);
+        Services::create(['service_name' => 'Eyelash']);
+        Services::create(['service_name' => 'Eyelash Extensions']);
     }
 }
