@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ProductAddOns;
 use App\Models\Products;
 use App\Models\Services;
 use App\Models\User;
@@ -226,6 +227,18 @@ class DatabaseSeeder extends Seeder
             'product_name' => 'Mascara / Volume look',
             'service_id' => 5,
             'price' => 400
+        ]);
+
+        ProductAddOns::create([
+            'product_id' => '13',
+            'additional' => 'Additional 150 if Orly Brand',
+            'additional_price' => '150',
+        ]);
+
+        ProductAddOns::create([
+            'product_id' => '14',
+            'additional' => 'Additional 150 if Orly Brand',
+            'additional_price' => '150',
         ]);
     }
 }

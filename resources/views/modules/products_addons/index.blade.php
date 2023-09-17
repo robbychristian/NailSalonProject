@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', '| List of products')
+@section('title', '| List of Product Add Ons')
 @section('content')
     <section>
         <div class="px-6 py-8 mx-auto lg:py-0">
@@ -11,23 +11,13 @@
             @endif
             <div class="flex items-center justify-between mb-5">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-                    List of Products
+                    List of Product Add Ons
                 </h1>
-
-                <div>
-
-                    <a href="{{ route('products.create') }}"
-                        class="text-white bg-darker-pink hover:bg-darker-pink-90 font-medium rounded-lg text-sm px-4 py-2 inline-flex items-center">
-                        <i class="fa-solid fa-plus mr-2"></i>
-                        Add Product
-                    </a>
-
-                    <a href="{{ route('product-add-ons.index') }}"
-                        class="text-white bg-darker-pink hover:bg-darker-pink-90 font-medium rounded-lg text-sm px-4 py-2 inline-flex items-center">
-                        <i class="fa-solid fa-plus mr-2"></i>
-                        Product Add Ons
-                    </a>
-                </div>
+                <a href="{{ route('product-add-ons.create') }}"
+                    class="text-white bg-darker-pink hover:bg-darker-pink-90 font-medium rounded-lg text-sm px-4 py-2 inline-flex items-center">
+                    <i class="fa-solid fa-plus mr-2"></i>
+                    Add Product Add Ons
+                </a>
 
             </div>
 
@@ -39,13 +29,13 @@
                                 ID
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Name
+                                Product
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Service Type
+                                Additional
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Price
+                                Additional Price
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Actions
@@ -53,27 +43,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($products as $product)
+                        @forelse ($product_add_ons as $addons)
                             <tr class="bg-white border-b">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ $product->id }}
+                                    {{ $addons->id }}
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{ $product->product_name }}
+                                    {{ $addons->product->product_name }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $product->serviceType->service_name }}
+                                    {{ $addons->additional }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    ₱{{ $product->price }}
+                                    ₱{{ $addons->additional_price }}
                                 </td>
                                 <td class="px-6 py-4" colspan="3">
                                     <div class="flex">
-
-                                        <a href="{{ route('products.edit', $product->id) }}"
+                                        <a href="{{ route('product-add-ons.edit', $addons->id) }}"
                                             class="font-medium text-darker-pink hover:underline">Edit</a>
 
-                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                                        <form action="{{ route('product-add-ons.destroy', $addons->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
