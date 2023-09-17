@@ -45,58 +45,21 @@
                     </div>
                 </div>
 
-                <div class="mb-6">
-                    <label for="birthday" class="block mb-2 text-sm font-medium text-gray-900">Date of
-                        Birth</label>
-                    <input type="date" disabled value="{{ $user->userProfile->birthday }}" name="birthday" id="birthday"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2">
-                </div>
-
-                <div class="grid gap-6 mb-6 md:grid-cols-3">
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
-                        <label for="street" class="block mb-2 text-sm font-medium text-gray-900">Street</label>
-                        <input type="text" disabled value="{{ $user->userProfile->street }}" name="street"
-                            id="street"
+                        <label for="birthday" class="block mb-2 text-sm font-medium text-gray-900">Date of
+                            Birth</label>
+                        <input type="date" disabled value="{{ $user->userProfile->birthday }}" name="birthday"
+                            id="birthday"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2">
+                    </div>
+                    <div>
+                        <label for="address" class="block mb-2 text-sm font-medium text-gray-900">Address</label>
+                        <input type="text" disabled value="{{ $user->userProfile->address }}" name="address"
+                            id="address"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                     </div>
 
-                    <div>
-                        <label for="region" class="block mb-2 text-sm font-medium text-gray-900">Region</label>
-                        <input type="text" disabled value="{{ $user->userProfile->region }}" name="region"
-                            id="region"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                    </div>
-
-                    <div>
-                        <label for="province" class="block mb-2 text-sm font-medium text-gray-900">Province</label>
-                        <input type="text" disabled value="{{ $user->userProfile->province }}" name="province"
-                            id="province"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                    </div>
-                </div>
-
-                <div class="grid gap-6 mb-6 md:grid-cols-3">
-                    <div>
-                        <label for="city" class="block mb-2 text-sm font-medium text-gray-900">City</label>
-                        <input type="text" disabled value="{{ $user->userProfile->city }}" name="city" id="city"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                    </div>
-
-                    <div>
-                        <label for="barangay" class="block mb-2 text-sm font-medium text-gray-900">Barangay</label>
-                        <input type="text" disabled value="{{ $user->userProfile->barangay }}" name="barangay"
-                            id="barangay"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                    </div>
-
-
-                    <div>
-                        <label for="postal_code" class="block mb-2 text-sm font-medium text-gray-900">Postal
-                            Code</label>
-                        <input type="text" disabled value="{{ $user->userProfile->postal_code }}" name="postal_code"
-                            id="postal_code"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                    </div>
                 </div>
 
                 <hr>

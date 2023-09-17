@@ -58,83 +58,27 @@
                         </div>
                     </div>
 
-                    <div class="mb-6">
-                        <label for="birthday" class="block mb-2 text-sm font-medium text-gray-900">Date of
-                            Birth</label>
-                        <input type="date" value="{{ old('birthday') }}" name="birthday" id="birthday"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2">
-                        @error('birthday')
-                            <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
-                                {{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="grid gap-6 mb-6 md:grid-cols-3">
+                    <div class="grid gap-6 mb-6 md:grid-cols-2">
                         <div>
-                            <label for="street" class="block mb-2 text-sm font-medium text-gray-900">Street</label>
-                            <input type="text" value="{{ old('street') }}" name="street" id="street"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                            @error('street')
+                            <label for="birthday" class="block mb-2 text-sm font-medium text-gray-900">Date of
+                                Birth</label>
+                            <input type="date" value="{{ old('birthday') }}" name="birthday" id="birthday"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2">
+                            @error('birthday')
                                 <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                     {{ $message }}</p>
                             @enderror
                         </div>
-
                         <div>
-                            <label for="region" class="block mb-2 text-sm font-medium text-gray-900">Region</label>
-                            <input type="text" value="{{ old('region') }}" name="region" id="region"
+                            <label for="address" class="block mb-2 text-sm font-medium text-gray-900">Address</label>
+                            <input type="text" value="{{ old('address') }}" name="address" id="address"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                            @error('region')
-                                <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
-                                    {{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div>
-                            <label for="province" class="block mb-2 text-sm font-medium text-gray-900">Province</label>
-                            <input type="text" value="{{ old('province') }}" name="province" id="province"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                            @error('province')
+                            @error('address')
                                 <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                     {{ $message }}</p>
                             @enderror
                         </div>
                     </div>
-
-                    <div class="grid gap-6 mb-6 md:grid-cols-3">
-                        <div>
-                            <label for="city" class="block mb-2 text-sm font-medium text-gray-900">City</label>
-                            <input type="text" value="{{ old('city') }}" name="city" id="city"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                            @error('city')
-                                <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
-                                    {{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div>
-                            <label for="barangay" class="block mb-2 text-sm font-medium text-gray-900">Barangay</label>
-                            <input type="text" value="{{ old('barangay') }}" name="barangay" id="barangay"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                            @error('barangay')
-                                <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
-                                    {{ $message }}</p>
-                            @enderror
-                        </div>
-
-
-                        <div>
-                            <label for="postal_code" class="block mb-2 text-sm font-medium text-gray-900">Postal
-                                Code</label>
-                            <input type="text" value="{{ old('postal_code') }}" name="postal_code" id="postal_code"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                            @error('postal_code')
-                                <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
-                                    {{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-
                     <hr>
                     <h4 class="text-lg font-semibold text-gray-900 md:text-xl mb-3 mt-5">Contact Information & Log In
                         Information</h4>

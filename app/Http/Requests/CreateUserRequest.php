@@ -38,12 +38,7 @@ class CreateUserRequest extends FormRequest
                 ->numbers()
                 ->symbols()],
             'confirm_password' => ['required', 'same:password'],
-            'street' => ['required'],
-            'region' => ['required'],
-            'province' => ['required'],
-            'city' => ['required'],
-            'barangay' => ['required'],
-            'postal_code' => ['required'],
+            'address' => ['required']
         ];
     }
 }

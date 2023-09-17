@@ -29,12 +29,7 @@ class UpdateUserRequest extends FormRequest
             'last_name' => ['required', 'regex:/^[\pL\s\-]+$/u'],
             'birthday' => ['required'],
             'contact_no' => ['required', 'min:11'],
-            'street' => ['required'],
-            'region' => ['required'],
-            'province' => ['required'],
-            'city' => ['required'],
-            'barangay' => ['required'],
-            'postal_code' => ['required'],
+            'address' => ['required']
         ];
     }
 }

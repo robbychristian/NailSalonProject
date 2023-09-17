@@ -57,12 +57,7 @@ class UserController extends Controller
             'middle_name' => $request['middle_name'],
             'birthday' => $request['birthday'],
             'contact_no' => $request['contact_no'],
-            'street' => $request['street'],
-            'region' => $request['region'],
-            'province' => $request['province'],
-            'city' => $request['city'],
-            'barangay' => $request['barangay'],
-            'postal_code' => $request['postal_code']
+            'address' => $request['address']
         ]);
 
         return redirect('/users')->with('success', 'You have successfully added a user!');
@@ -110,12 +105,7 @@ class UserController extends Controller
             'middle_name' => $request['middle_name'],
             'birthday' => $request['birthday'],
             'contact_no' => $request['contact_no'],
-            'street' => $request['street'],
-            'region' => $request['region'],
-            'province' => $request['province'],
-            'city' => $request['city'],
-            'barangay' => $request['barangay'],
-            'postal_code' => $request['postal_code']
+            'address' => $request['address']
         ]);
 
         return redirect()->back()->with('success', 'You have successfully edited your profile!');

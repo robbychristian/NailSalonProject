@@ -34,12 +34,7 @@ class DatabaseSeeder extends Seeder
             'middle_name' => NULL,
             'birthday' => NULL,
             'contact_no' => NULL,
-            'street' => NULL,
-            'region' => NULL,
-            'province' => NULL,
-            'city' => NULL,
-            'barangay' => NULL,
-            'postal_code' => NULL
+            'address' => NULL,
         ]);
 
         User::create([
@@ -58,12 +53,7 @@ class DatabaseSeeder extends Seeder
             'middle_name' => 'Garcia',
             'birthday' => '1999-01-01',
             'contact_no' => '09123456789',
-            'street' => 'Moore Street',
-            'region' => 'NCR',
-            'province' => 'NCR',
-            'city' => 'Quezon City',
-            'barangay' => 'Bagong Pagasa',
-            'postal_code' => '1000'
+            'address' => 'Quezon City'
         ]);
     }
 }
