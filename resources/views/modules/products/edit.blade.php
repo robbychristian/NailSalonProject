@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', '| Add Product')
+@section('title', '| Edit Product')
 @section('content')
     <script>
         function onlyNumberKey(evt) {
@@ -15,7 +15,7 @@
         <div class="w-full bg-white rounded-lg shadow md:mt-5 mb-10 md xl:p-0">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-                    Add Product
+                    Edit Product
                 </h1>
 
                 <form action="{{ route('products.update', $product->id) }}" method="post">
