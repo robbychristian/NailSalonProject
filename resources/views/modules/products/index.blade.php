@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', '| List of Services')
+@section('title', '| List of products')
 @section('content')
     <section>
         <div class="px-6 py-8 mx-auto lg:py-0">
@@ -11,12 +11,12 @@
             @endif
             <div class="flex items-center justify-between mb-5">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-                    List of Services
+                    List of Products
                 </h1>
-                <a href="{{ route('services.create') }}"
+                <a href="{{ route('products.create') }}"
                     class="text-white bg-darker-pink hover:bg-darker-pink-90 font-medium rounded-lg text-sm px-4 py-2 inline-flex items-center">
                     <i class="fa-solid fa-plus mr-2"></i>
-                    Add Service
+                    Add Product
                 </a>
 
             </div>
@@ -32,25 +32,38 @@
                                 Name
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Service Type
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Price
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Actions
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($services as $service)
+                        @forelse ($products as $product)
                             <tr class="bg-white border-b">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ $service->id }}
+                                    {{ $product->id }}
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{ $service->service_name }}
+                                    {{ $product->product_name }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $product->serviceType->service_name }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    ₱{{ $product->price }}
                                 </td>
                                 <td class="px-6 py-4" colspan="3">
                                     <div class="flex">
-                                        <a href="{{ route('services.edit', $service->id) }}"
+
+                                        <a href="{{ route('products.edit', $product->id) }}"
                                             class="font-medium text-darker-pink hover:underline">Edit</a>
 
-                                        <form action="{{ route('services.destroy', $service->id) }}" method="POST">
+                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"

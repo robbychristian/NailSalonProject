@@ -78,7 +78,7 @@
                             class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100">Services</a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{ route('products.index') }}"
                             class="flex items-center p-2 pl-11 w-full text-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100">Products</a>
                     </li>
                     <li>

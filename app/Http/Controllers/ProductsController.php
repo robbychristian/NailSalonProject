@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateServiceRequest;
+use App\Http\Requests\CreateProductRequest;
 use App\Models\Products;
 use App\Models\Services;
 use Illuminate\Http\Request;
 
-class ServicesController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class ServicesController extends Controller
      */
     public function index()
     {
-        $services = Services::all();
-        return view('modules.services.index', compact('services'));
+        $products = Products::all();
+        return view('modules.products.index', compact('products'));
     }
 
     /**
@@ -27,7 +27,8 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        return view('modules.services.create');
+        $services = Services::all();
+        return view('modules.products.create', compact('services'));
     }
 
     /**
@@ -36,13 +37,15 @@ class ServicesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateServiceRequest $request)
+    public function store(CreateProductRequest $request)
     {
-        Services::create([
-            'service_name' => $request['service_name']
+        Products::create([
+            'product_name' => $request['product_name'],
+            'service_id' => $request['service_type'],
+            'price' => $request['price'],
         ]);
 
-        return redirect('/services')->with('success', 'You have successfully added a service!');
+        return redirect('/products')->with('success', 'You have successfully added a product!');
     }
 
     /**
@@ -64,8 +67,9 @@ class ServicesController extends Controller
      */
     public function edit($id)
     {
-        $service = Services::find($id);
-        return view('modules.services.edit', compact('service'));
+        $product = Products::find($id);
+        $services = Services::all();
+        return view('modules.products.edit', compact('product', 'services'));
     }
 
     /**
@@ -75,13 +79,15 @@ class ServicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateServiceRequest $request, $id)
+    public function update(CreateProductRequest $request, $id)
     {
-        Services::where('id', $id)->update([
-            'service_name' => $request['service_name']
+        Products::where('id', $id)->update([
+            'product_name' => $request['product_name'],
+            'service_id' => $request['service_type'],
+            'price' => $request['price'],
         ]);
 
-        return redirect('/services')->with('success', 'You have successfully edited the service!');
+        return redirect('/products')->with('success', 'You have successfully added a product!');
     }
 
     /**
@@ -92,8 +98,7 @@ class ServicesController extends Controller
      */
     public function destroy($id)
     {
-        Services::find($id)->delete();
-        Products::where('service_id', $id)->delete();
-        return redirect('/services')->with('success', 'You have successfully deleted the service!');
+        Products::where('id', $id)->delete();
+        return redirect('/products')->with('success', 'You have successfully deleted the product!');
     }
 }
