@@ -5,6 +5,9 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ServicesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Models\ProductAddOns;
+use App\Models\Products;
+use App\Models\Services;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +29,10 @@ Route::get('/about-us', function () {
 })->name('about-us');
 
 Route::get('/services-page', function () {
-    return view('static.services');
+    $services = Services::all();
+    $products = Products::all();
+    $product_add_ons = ProductAddOns::all();
+    return view('static.services', compact('services', 'products', 'product_add_ons'));
 })->name('services-static');
 
 Auth::routes(['verify' => true]);

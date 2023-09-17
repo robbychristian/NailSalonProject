@@ -9,10 +9,34 @@
                 Our Services and Rates
             </h1>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 justify-items-center items-center gap-4">
-                <img class="w-full object-contain" src="{{ asset('img/homepage/services1.jpg') }}" alt="">
-                <img class="w-full object-contain" src="{{ asset('img/homepage/services2.jpg') }}" alt="">
+            <div class="grid lg:grid-cols-3 grid-cols-1 gap-4 justify-items-center">
+
+                @foreach ($services as $service)
+                    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow w-full">
+                        <h1 class="font-bold text-xl text-gray-900 mb-3">{{ $service->service_name }}</h1>
+                        @foreach ($products as $product)
+                            @if ($product->service_id == $service->id)
+                                <div class="flex justify-between mt-2">
+                                    <p>{{ $product->product_name }}</p>
+                                    <p>{{ $product->price }}</p>
+                                </div>
+                                @foreach ($product_add_ons as $addons)
+                                    @if ($product->id == $addons->product_id)
+                                        <div class="flex justify-between">
+                                            <p class="italic text-sm">*{{ $addons->additional }}</p>
+                                            <p class="italic text-sm">{{ $addons->additional_price }}</p>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endif
+                        @endforeach
+                    </div>
+                @endforeach
             </div>
+
+
+
+
 
 
             <h1

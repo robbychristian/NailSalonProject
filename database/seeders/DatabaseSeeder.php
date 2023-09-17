@@ -229,16 +229,35 @@ class DatabaseSeeder extends Seeder
             'price' => 400
         ]);
 
+        //PRODUCT ADDONS
         ProductAddOns::create([
-            'product_id' => '13',
+            'product_id' => 13,
             'additional' => 'Additional 150 if Orly Brand',
-            'additional_price' => '150',
+            'additional_price' => 150,
         ]);
 
         ProductAddOns::create([
-            'product_id' => '14',
+            'product_id' => 14,
             'additional' => 'Additional 150 if Orly Brand',
-            'additional_price' => '150',
+            'additional_price' => 150,
+        ]);
+
+        ProductAddOns::create([
+            'product_id' => 27,
+            'additional' => 'Hybrid',
+            'additional_price' => 500,
+        ]);
+
+        ProductAddOns::create([
+            'product_id' => 27,
+            'additional' => 'Cat Eye',
+            'additional_price' => 500,
+        ]);
+
+        ProductAddOns::create([
+            'product_id' => 27,
+            'additional' => 'Whispy',
+            'additional_price' => 500,
         ]);
     }
 }
