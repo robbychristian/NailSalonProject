@@ -5,6 +5,7 @@ use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\ProductAddOnsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Models\ProductAddOns;
@@ -48,4 +49,5 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('product-add-ons', ProductAddOnsController::class);
     Route::resource('packages', PackagesController::class);
     Route::resource('branches', BranchController::class);
+    Route::resource('staff', StaffController::class);
 });
