@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\ProductAddOnsController;
 use App\Http\Controllers\ProductsController;
@@ -46,4 +47,5 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('products', ProductsController::class);
     Route::resource('product-add-ons', ProductAddOnsController::class);
     Route::resource('packages', PackagesController::class);
+    Route::resource('branches', BranchController::class);
 });
