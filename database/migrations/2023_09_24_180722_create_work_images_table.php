@@ -16,6 +16,7 @@ class CreateWorkImagesTable extends Migration
         Schema::create('work_images', function (Blueprint $table) {
             $table->id();
             $table->string('filename');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
