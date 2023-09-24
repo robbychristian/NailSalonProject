@@ -8,7 +8,9 @@
                     <span class="font-medium">Success!</span> {{ Session::get('success') }}
                 </div>
             @endif
-            <div class="flex items-center justify-between mb-5">
+            <a href="{{ route('products.index') }}" class="text-gray-900  font-medium flex items-center "><i
+                    class="fa-solid fa-arrow-left mr-3"></i><span class="hover:underline">Back</span></a>
+            <div class="flex items-center justify-between mb-5 mt-3">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                     List of Packages
                 </h1>
@@ -48,10 +50,12 @@
                                     {{ $package->package_name }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $package->price }}
+                                    ₱{{ $package->price }}
                                 </td>
                                 <td class="px-6 py-4" colspan="3">
                                     <div class="flex">
+                                        <a href="{{ route('packages.show', $package->id) }}"
+                                            class="font-medium text-darker-pink hover:underline mr-2">View</a>
                                         <a href="{{ route('packages.edit', $package->id) }}"
                                             class="font-medium text-darker-pink hover:underline">Edit</a>
 
