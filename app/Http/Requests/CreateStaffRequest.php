@@ -24,7 +24,9 @@ class CreateStaffRequest extends FormRequest
     public function rules()
     {
         return [
-            'staff_name' => ['required']
+            'staff_name' => ['required'],
+            'services' => ['required'],
+            // 'work_images' => ['mimes:png,jpg,jpeg,gif']
         ];
     }
 }

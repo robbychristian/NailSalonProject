@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateStaffRequest;
+use App\Models\Services;
 use App\Models\Staff;
+use App\Models\WorkImages;
 use Illuminate\Http\Request;
 
 class StaffController extends Controller
@@ -26,7 +28,8 @@ class StaffController extends Controller
      */
     public function create()
     {
-        return view('modules.staff.create');
+        $services = Services::all();
+        return view('modules.staff.create', compact('services'));
     }
 
     /**
@@ -37,9 +40,24 @@ class StaffController extends Controller
      */
     public function store(CreateStaffRequest $request)
     {
-        Staff::create([
-            'staff_name' => $request['staff_name']
+        $staff = Staff::create([
+            'staff_name' => $request->staff_name
         ]);
+
+        foreach ($request->services as $service) {
+            $staff->services()->attach($service);
+        }
+
+
+        if ($request->hasFile('work_images')) {
+            foreach ($request->file('work_images') as $img) {
+                $fileName = time() . '-' . $img->getClientOriginalName();
+                $img->move(public_path('img/work_images/' . $staff->id), $fileName);
+
+                $workImage = WorkImages::create(['filename' => $fileName]);
+                $staff->workImages()->attach($workImage->id);
+            }
+        }
 
         return redirect('/staff')->with('success', 'You have successfully added a staff!');
     }

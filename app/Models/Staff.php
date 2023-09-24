@@ -13,4 +13,14 @@ class Staff extends Model
     protected $fillable = [
         'staff_name'
     ];
+
+    public function services()
+    {
+        return $this->belongsToMany(Services::class);
+    }
+
+    public function workImages()
+    {
+        return $this->belongsToMany(WorkImages::class);
+    }
 }
