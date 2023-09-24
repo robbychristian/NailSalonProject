@@ -755,6 +755,9 @@ video {
 .max-w-2xl {
   max-width: 42rem;
 }
+.max-w-xs {
+  max-width: 20rem;
+}
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -999,6 +1002,10 @@ video {
 }
 .bg-transparent {
   background-color: transparent;
+}
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 .bg-cover {
   background-size: cover;

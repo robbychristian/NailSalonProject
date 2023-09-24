@@ -46,6 +46,9 @@
                                 </td>
                                 <td class="px-6 py-4" colspan="3">
                                     <div class="flex">
+                                        <a href="{{ route('staff.show', $staff->id) }}"
+                                            class="font-medium text-darker-pink hover:underline mr-2">View</a>
+
                                         <a href="{{ route('staff.edit', $staff->id) }}"
                                             class="font-medium text-darker-pink hover:underline">Edit</a>
 

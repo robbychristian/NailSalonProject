@@ -70,7 +70,8 @@ class StaffController extends Controller
      */
     public function show($id)
     {
-        //
+        $staff = Staff::with('workImages')->with('services')->find($id);
+        return view('modules.staff.show', compact('staff'));
     }
 
     /**
