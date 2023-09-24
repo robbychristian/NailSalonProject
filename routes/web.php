@@ -8,6 +8,7 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Models\Packages;
 use App\Models\ProductAddOns;
 use App\Models\Products;
 use App\Models\Services;
@@ -35,7 +36,9 @@ Route::get('/services-page', function () {
     $services = Services::all();
     $products = Products::all();
     $product_add_ons = ProductAddOns::all();
-    return view('static.services', compact('services', 'products', 'product_add_ons'));
+    $packages = Packages::with('products')->get();
+    // return $packages;
+    return view('static.services', compact('services', 'products', 'product_add_ons', 'packages'));
 })->name('services-static');
 
 Auth::routes(['verify' => true]);

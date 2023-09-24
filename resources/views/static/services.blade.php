@@ -12,7 +12,7 @@
             <div class="grid lg:grid-cols-3 grid-cols-1 gap-4 justify-items-center">
 
                 @foreach ($services as $service)
-                    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow w-full">
+                    <div class=" p-6 bg-white border border-gray-200 rounded-lg shadow w-full">
                         <h1 class="font-bold text-xl text-gray-900 mb-3">{{ $service->service_name }}</h1>
                         @foreach ($products as $product)
                             @if ($product->service_id == $service->id)
@@ -32,6 +32,30 @@
                         @endforeach
                     </div>
                 @endforeach
+            </div>
+            <div class="grid grid-cols-1 gap-4 justify-items-center mt-5">
+                <div class="p-6 bg-white border border-gray-200 rounded-lg shadow w-full">
+                    <h1 class="font-bold text-xl text-gray-900 mb-3">Packages</h1>
+                    <div class="grid md:grid-cols-4 grid-cols-1 md:gap-10 gap-4">
+                        @foreach ($packages as $package)
+                            <div>
+                                <div class="flex justify-between">
+                                    <h1 class="font-bold">{{ $package->package_name }}</h1>
+                                    <p class="font-bold">{{ $package->price }}</p>
+                                </div>
+                                <ul class="list-disc list-inside">
+
+                                    @foreach ($package->products as $product)
+                                        <li>
+                                            {{ $product->product_name }}
+                                        </li>
+                                    @endforeach
+                                </ul>
+                                <br>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
 
 

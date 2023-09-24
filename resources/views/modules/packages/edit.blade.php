@@ -46,7 +46,7 @@
                                                         <input id="{{ $product->id }}" type="checkbox" name="product[]"
                                                             value="{{ $product->id }}"
                                                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                                                            {{ in_array($product->id, $package->products->pluck('product_id')->toArray()) ? 'checked' : '' }}>
+                                                            {{ in_array($product->id, $package->products->pluck('id')->toArray()) ? 'checked' : '' }}>
                                                         <label for="{{ $product->id }}"
                                                             class="w-full py-3 ml-2 text-sm font-medium text-gray-900">{{ $product->product_name }}</label>
                                                     </div>

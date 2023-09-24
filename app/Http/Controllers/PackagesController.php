@@ -49,15 +49,8 @@ class PackagesController extends Controller
             'price' => $request->price
         ]);
 
-
-        // $user = User::find($userId); // Replace with how you get the user
-        // $user->permissions()->sync($request->input('permissions', []));
-
         foreach ($request->product as $product) {
-            PackageProducts::create([
-                'package_id' => $package->id,
-                'product_id' => $product
-            ]);
+            $package->products()->attach($product);
         }
 
         return redirect('/packages')->with('success', 'You have successfully added a package!');
@@ -82,12 +75,7 @@ class PackagesController extends Controller
      */
     public function edit($id)
     {
-        $package = Packages::find($id);
-        // $packagesProducts = DB::table('package_products')
-        //     ->where('package_id', $package->id)
-        //     ->get();
-        // return $package->packageProducts;
-        // // dd($package->products);
+        $package = Packages::with('products')->find($id);
         $services = Services::all();
         $products = Products::all();
         return view('modules.packages.edit', compact('products', 'services', 'package'));
@@ -108,9 +96,7 @@ class PackagesController extends Controller
         ]);
 
         $package = Packages::find($id);
-        $package->products()->sync($request->product, []);
-        // $package->update()
-
+        $package->products()->sync($request->product);
         return redirect('/packages')->with('success', 'You have successfully edited a package!');
     }
 
@@ -122,6 +108,10 @@ class PackagesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $package = Packages::find($id);
+        $package->delete();
+        $package->products()->detach();
+
+        return redirect('/packages')->with('success', 'You have successfully deleted the package!');
     }
 }

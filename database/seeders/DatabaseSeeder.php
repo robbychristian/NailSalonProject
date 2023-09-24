@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Packages;
 use App\Models\ProductAddOns;
 use App\Models\Products;
 use App\Models\Services;
@@ -67,163 +68,163 @@ class DatabaseSeeder extends Seeder
         Services::create(['service_name' => 'Eyelash Extensions']);
 
         //PRODUCTS
-        Products::create([
+        $product1 = Products::create([
             'product_name' => 'Manicure',
             'service_id' => 1,
             'price' => 90
         ]);
 
-        Products::create([
+        $product2 = Products::create([
             'product_name' => 'Pedicure',
             'service_id' => 1,
             'price' => 100
         ]);
 
-        Products::create([
+        $product3 = Products::create([
             'product_name' => 'Gel polish (Orly brand)',
             'service_id' => 1,
             'price' => 280
         ]);
 
-        Products::create([
+        $product4 = Products::create([
             'product_name' => 'Gel polish (China brand)',
             'service_id' => 1,
             'price' => 180
         ]);
 
-        Products::create([
+        $product5 = Products::create([
             'product_name' => 'Gel polish (Coucou brand)',
             'service_id' => 1,
             'price' => 220
         ]);
 
-        Products::create([
+        $product6 = Products::create([
             'product_name' => 'Gel polish removal',
             'service_id' => 1,
             'price' => 50
         ]);
 
-        Products::create([
+        $product7 = Products::create([
             'product_name' => 'Foot Spa Ordinary',
             'service_id' => 1,
             'price' => 160
         ]);
 
-        Products::create([
+        $product8 = Products::create([
             'product_name' => 'Gel Foot Spa',
             'service_id' => 1,
             'price' => 220
         ]);
 
-        Products::create([
+        $product9 = Products::create([
             'product_name' => 'Hand Spa',
             'service_id' => 1,
             'price' => 120
         ]);
 
-        Products::create([
+        $product10 = Products::create([
             'product_name' => 'Foot Massage (30mins)',
             'service_id' => 1,
             'price' => 150
         ]);
 
-        Products::create([
+        $product11 = Products::create([
             'product_name' => 'Parrafin Wax (Hand)',
             'service_id' => 1,
             'price' => 150
         ]);
 
-        Products::create([
+        $product12 = Products::create([
             'product_name' => 'Parrafin Wax (Foot)',
             'service_id' => 1,
             'price' => 200
         ]);
 
-        Products::create([
+        $product13 = Products::create([
             'product_name' => 'Softgel w/ china gel polish',
             'service_id' => 2,
             'price' => 750,
         ]);
 
-        Products::create([
+        $product14 = Products::create([
             'product_name' => 'Polygel w/ china gel polish',
             'service_id' => 2,
             'price' => 900
         ]);
 
-        Products::create([
+        $product15 = Products::create([
             'product_name' => 'Nail Extension removal',
             'service_id' => 2,
             'price' => 150
         ]);
 
-        Products::create([
+        $product16 = Products::create([
             'product_name' => 'Nail Art',
             'service_id' => 2,
             'price' => 150
         ]);
 
-        Products::create([
+        $product17 = Products::create([
             'product_name' => 'Rhinestone',
             'service_id' => 2,
             'price' => 50
         ]);
 
-        Products::create([
+        $product18 = Products::create([
             'product_name' => 'Eyebrow waxing',
             'service_id' => 3,
             'price' => 100
         ]);
 
-        Products::create([
+        $product19 = Products::create([
             'product_name' => 'Upper lip waxing',
             'service_id' => 3,
             'price' => 50
         ]);
 
-        Products::create([
+        $product20 = Products::create([
             'product_name' => 'Under Arm waxing',
             'service_id' => 3,
             'price' => 150
         ]);
 
-        Products::create([
+        $product21 = Products::create([
             'product_name' => 'Half Leg waxing',
             'service_id' => 3,
             'price' => 250
         ]);
 
-        Products::create([
+        $product22 = Products::create([
             'product_name' => 'Full Leg waxing',
             'service_id' => 3,
             'price' => 400
         ]);
 
-        Products::create([
+        $product23 = Products::create([
             'product_name' => 'Brazillian waxing',
             'service_id' => 3,
             'price' => 500
         ]);
 
-        Products::create([
+        $product24 = Products::create([
             'product_name' => 'Eyelash lift',
             'service_id' => 4,
             'price' => 200
         ]);
 
-        Products::create([
+        $product25 = Products::create([
             'product_name' => 'with Tint',
             'service_id' => 4,
             'price' => 250
         ]);
 
-        Products::create([
+        $product26 = Products::create([
             'product_name' => 'Natural Look',
             'service_id' => 5,
             'price' => 250
         ]);
 
-        Products::create([
+        $product27 = Products::create([
             'product_name' => 'Mascara / Volume look',
             'service_id' => 5,
             'price' => 400
@@ -259,5 +260,77 @@ class DatabaseSeeder extends Seeder
             'additional' => 'Whispy',
             'additional_price' => 500,
         ]);
+
+        $package1 = Packages::create([
+            'package_name' => 'Package A',
+            'price' => '330'
+        ]);
+        $package1->products()->attach([$product1->id, $product2->id, $product7->id]);
+
+        $package2 = Packages::create([
+            'package_name' => 'Package B',
+            'price' => '330'
+        ]);
+        $package2->products()->attach([$product1->id, $product2->id, $product10->id]);
+
+        $package3 = Packages::create([
+            'package_name' => 'Package C',
+            'price' => '530'
+        ]);
+        $package3->products()->attach([$product1->id, $product2->id, $product12->id, $product7->id]);
+
+        $package4 = Packages::create([
+            'package_name' => 'Package D',
+            'price' => '500'
+        ]);
+        $package4->products()->attach([$product1->id, $product2->id, $product4->id, $product7->id]);
+
+        $package5 = Packages::create([
+            'package_name' => 'Package E',
+            'price' => '700'
+        ]);
+        $package5->products()->attach([$product1->id, $product2->id, $product3->id, $product7->id]);
+
+        $package6 = Packages::create([
+            'package_name' => 'Package F',
+            'price' => '420'
+        ]);
+        $package6->products()->attach([$product1->id, $product2->id, $product4->id, $product7->id]);
+
+        $package7 = Packages::create([
+            'package_name' => 'Package G',
+            'price' => '520'
+        ]);
+        $package7->products()->attach([$product1->id, $product2->id, $product3->id, $product7->id]);
+
+        $package8 = Packages::create([
+            'package_name' => 'Package H',
+            'price' => '610'
+        ]);
+        $package8->products()->attach([$product1->id, $product2->id, $product3->id, $product24->id]);
+
+        $package9 = Packages::create([
+            'package_name' => 'Package I',
+            'price' => '800'
+        ]);
+        $package9->products()->attach([$product1->id, $product2->id, $product3->id, $product24->id]);
+
+        $package9 = Packages::create([
+            'package_name' => 'Package J',
+            'price' => '600'
+        ]);
+        $package9->products()->attach([$product1->id, $product2->id, $product4->id, $product24->id]);
+
+        $package10 = Packages::create([
+            'package_name' => 'Package K',
+            'price' => '1000'
+        ]);
+        $package10->products()->attach([$product13->id, $product2->id, $product7->id]);
+
+        $package10 = Packages::create([
+            'package_name' => 'Package L',
+            'price' => '1050'
+        ]);
+        $package10->products()->attach([$product13->id, $product2->id, $product4->id, $product7->id]);
     }
 }

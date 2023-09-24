@@ -98,7 +98,9 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        Products::where('id', $id)->delete();
-        return redirect('/products')->with('success', 'You have successfully deleted the product!');
+        $products = Products::find($id);
+        $products->delete();
+        $products->package()->detach();
+        return redirect('/products')->with('success', 'You have successfully deleted the product and has been removed from the associated packages!');
     }
 }

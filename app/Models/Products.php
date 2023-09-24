@@ -20,4 +20,9 @@ class Products extends Model
     {
         return $this->belongsTo(Services::class, 'service_id', 'id');
     }
+
+    public function package()
+    {
+        return $this->belongsToMany(Packages::class);
+    }
 }

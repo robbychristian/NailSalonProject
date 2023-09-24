@@ -13,16 +13,9 @@ class CreatePackageProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('package_products', function (Blueprint $table) {
-            $table->unsignedBigInteger('package_id');
-            $table->unsignedBigInteger('product_id');
-
-            $table->foreign('package_id')->references('id')->on('packages');
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->softDeletes();
-            $table->timestamps();
-
-            $table->primary(['package_id', 'product_id']);
+        Schema::create('packages_products', function (Blueprint $table) {
+            $table->foreignId('packages_id')->constrained();
+            $table->foreignId('products_id')->constrained();
         });
     }
 

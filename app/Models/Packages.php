@@ -17,6 +17,6 @@ class Packages extends Model
 
     public function products()
     {
-        return $this->hasMany(PackageProducts::class, 'package_id');
+        return $this->belongsToMany(Products::class);
     }
 }
