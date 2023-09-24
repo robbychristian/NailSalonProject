@@ -64,7 +64,8 @@ class PackagesController extends Controller
      */
     public function show($id)
     {
-        //
+        $package = Packages::with('products')->find($id);
+        return view('modules.packages.show', compact('package'));
     }
 
     /**
