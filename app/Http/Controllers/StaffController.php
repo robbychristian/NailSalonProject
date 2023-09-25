@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateStaffRequest;
+use App\Http\Requests\UpdateStaffRequest;
 use App\Models\Services;
 use App\Models\Staff;
 use App\Models\WorkImages;
@@ -40,9 +41,14 @@ class StaffController extends Controller
      */
     public function store(CreateStaffRequest $request)
     {
-        $staff = Staff::create([
-            'staff_name' => $request->staff_name
-        ]);
+        if ($request->hasFile('staff_image')) {
+            $fileName = time() . '-' . $request->staff_image->getClientOriginalName();
+            $staff = Staff::create([
+                'staff_name' => $request->staff_name,
+                'staff_image' => $fileName
+            ]);
+            $request->staff_image->move(public_path('img/profile_pictures/' . $staff->id), $fileName);
+        }
 
         foreach ($request->services as $service) {
             $staff->services()->attach($service);
@@ -94,12 +100,21 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateStaffRequest $request, $id)
+    public function update(UpdateStaffRequest $request, $id)
     {
-        Staff::where('id', $id)->update([
-            'staff_name' => $request->staff_name
-        ]);
-        // TODO: UPDATE STAFF WITH PRODUCTS & IMAGES
+        if ($request->hasFile('staff_image')) {
+            $fileName = time() . '-' . $request->staff_image->getClientOriginalName();
+            $staff = Staff::where('id', $id)->update([
+                'staff_name' => $request->staff_name,
+                'staff_image' => $fileName
+            ]);
+            $request->staff_image->move(public_path('img/profile_pictures/' . $id), $fileName);
+        } else {
+            $staff = Staff::where('id', $id)->update([
+                'staff_name' => $request->staff_name,
+            ]);
+        }
+
         $staff = Staff::find($id);
         $staff->services()->sync($request->services);
 

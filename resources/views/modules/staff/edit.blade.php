@@ -24,6 +24,25 @@
                     </div>
 
                     <div class="mb-6">
+                        <label class="block mb-2 text-sm font-medium text-gray-900" for="multiple_files">
+                            Staff Image</label>
+                        <div class="grid grid-cols-1 lg:grid-cols-2">
+                            <img class="h-auto max-w-xs"
+                                src="{{ asset('img/profile_pictures/' . $staff->id . '/' . $staff->staff_image) }}"
+                                alt="">
+                            <div>
+                                <input
+                                    class="block w-full text-sm text-gray-900 border border-gray-300 cursor-pointer bg-gray-50"
+                                    id="multiple_files" type="file" name="staff_image">
+                                @error('staff_image')
+                                    <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
+                                        {{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
                         <label for="staff_specialty" class="block mb-2 text-sm font-medium text-gray-900">Staff
                             Specialty</label>
 
@@ -47,7 +66,7 @@
                         <div class="border border-darker-pink border-2 p-2">
                             <div class="flex items-center">
                                 <i class="fa-solid fa-circle-info mr-3 text-darker-pink"></i>
-                                <p class="text-sm"><b>Note:</b>If you want to upload a new set of images, simply
+                                <p class="text-sm"><b>Note:</b> If you want to upload a new set of images, simply
                                     click
                                     the 'choose files' button. If you want to remove an existing image from the staff's work
                                     images, check the box instead. </p>

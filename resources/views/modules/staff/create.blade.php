@@ -23,6 +23,17 @@
                     </div>
 
                     <div class="mb-6">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            for="multiple_files">Upload Staff Image</label>
+                        <input class="block w-full text-sm text-gray-900 border border-gray-300 cursor-pointer bg-gray-50"
+                            id="multiple_files" type="file" name="staff_image">
+                        @error('staff_image')
+                            <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
+                                {{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="mb-6">
                         <label for="staff_specialty" class="block mb-2 text-sm font-medium text-gray-900">Staff
                             Specialty</label>
 

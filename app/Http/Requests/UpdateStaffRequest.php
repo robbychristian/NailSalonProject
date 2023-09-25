@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateStaffRequest extends FormRequest
+class UpdateStaffRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class CreateStaffRequest extends FormRequest
     {
         return [
             'staff_name' => ['required'],
-            'staff_image' => ['required', 'mimes:png,jpg,jpeg,gif'],
+            'staff_image' => ['mimes:png,jpg,jpeg,gif'],
             'services' => ['required'],
             // 'work_images' => ['mimes:png,jpg,jpeg,gif'],
 

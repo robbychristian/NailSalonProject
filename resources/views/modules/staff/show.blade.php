@@ -15,6 +15,13 @@
                 </div>
 
                 <div>
+                    <label for="staff_image" class="block mb-2 text-sm font-medium text-gray-900">Staff Image</label>
+                    <img class="h-auto max-w-xs"
+                        src="{{ asset('img/profile_pictures/' . $staff->id . '/' . $staff->staff_image) }}" alt="">
+                </div>
+
+
+                <div>
                     <label for="services" class="block mb-2 text-sm font-medium text-gray-900">Services</label>
                     <ul class="list-disc list-inside text-sm">
                         @foreach ($staff->services as $service)
