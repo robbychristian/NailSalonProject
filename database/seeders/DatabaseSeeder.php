@@ -6,8 +6,10 @@ use App\Models\Packages;
 use App\Models\ProductAddOns;
 use App\Models\Products;
 use App\Models\Services;
+use App\Models\Staff;
 use App\Models\User;
 use App\Models\UserProfile;
+use App\Models\WorkImages;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -61,11 +63,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // SERVICES
-        Services::create(['service_name' => 'General Service']);
-        Services::create(['service_name' => 'Nail Extension']);
-        Services::create(['service_name' => 'Waxing']);
-        Services::create(['service_name' => 'Eyelash']);
-        Services::create(['service_name' => 'Eyelash Extensions']);
+        $service1 = Services::create(['service_name' => 'General Service']);
+        $service2 = Services::create(['service_name' => 'Nail Extension']);
+        $service3 = Services::create(['service_name' => 'Waxing']);
+        $service4 = Services::create(['service_name' => 'Eyelash']);
+        $service5 = Services::create(['service_name' => 'Eyelash Extensions']);
 
         //PRODUCTS
         $product1 = Products::create([
@@ -261,6 +263,7 @@ class DatabaseSeeder extends Seeder
             'additional_price' => 500,
         ]);
 
+        // PACKAGES
         $package1 = Packages::create([
             'package_name' => 'Package A',
             'price' => '330'
@@ -332,5 +335,61 @@ class DatabaseSeeder extends Seeder
             'price' => '1050'
         ]);
         $package10->products()->attach([$product13->id, $product2->id, $product4->id, $product7->id]);
+
+        //STAFF
+        //STAFF 1
+        $staff1 = Staff::create([
+            'staff_name' => 'Marvie Japilla',
+            'staff_image' => 'sample-profile.jpg'
+        ]);
+        $staff1->services()->attach([$service1->id, $service2->id]);
+        $image1 = WorkImages::create([
+            'filename' => 'sample-img.jpg'
+        ]);
+        $staff1->workImages()->attach([$image1->id]);
+
+        //STAFF 2
+        $staff2 = Staff::create([
+            'staff_name' => 'Princess Glori',
+            'staff_image' => 'sample-profile.jpg'
+        ]);
+        $staff2->services()->attach([$service4->id, $service5->id]);
+        $image2 = WorkImages::create([
+            'filename' => 'sample-img.jpg'
+        ]);
+        $staff2->workImages()->attach([$image2->id]);
+
+        //STAFF 3
+        $staff3 = Staff::create([
+            'staff_name' => 'Marie Laureta',
+            'staff_image' => 'sample-profile.jpg'
+        ]);
+        $staff3->services()->attach([$service1->id, $service2->id, $service3->id]);
+        $image3 = WorkImages::create([
+            'filename' => 'sample-img.jpg'
+        ]);
+        $staff3->workImages()->attach([$image3->id]);
+
+        //STAFF 4
+        $staff4 = Staff::create([
+            'staff_name' => 'Heverly Dela Cruz',
+            'staff_image' => 'sample-profile.jpg'
+        ]);
+        $staff4->services()->attach([$service1->id, $service2->id, $service3->id]);
+        $image4 = WorkImages::create([
+            'filename' => 'sample-img.jpg'
+        ]);
+        $staff4->workImages()->attach([$image4->id]);
+
+        //STAFF 5
+        $staff5 = Staff::create([
+            'staff_name' => 'Marivic Daroy',
+            'staff_image' => 'sample-profile.jpg'
+        ]);
+        $staff5->services()->attach([$service1->id, $service2->id, $service3->id]);
+        $image5 = WorkImages::create([
+            'filename' => 'sample-img.jpg'
+        ]);
+        $staff5->workImages()->attach([$image5->id]);
     }
 }
