@@ -82,8 +82,9 @@ class StaffController extends Controller
      */
     public function edit($id)
     {
-        $staff = Staff::find($id);
-        return view('modules.staff.edit', compact('staff'));
+        $staff = Staff::with('workImages')->with('services')->find($id);
+        $services = Services::all();
+        return view('modules.staff.edit', compact('staff', 'services'));
     }
 
     /**
@@ -96,8 +97,29 @@ class StaffController extends Controller
     public function update(CreateStaffRequest $request, $id)
     {
         Staff::where('id', $id)->update([
-            'staff_name' => $request['staff_name']
+            'staff_name' => $request->staff_name
         ]);
+        // TODO: UPDATE STAFF WITH PRODUCTS & IMAGES
+        $staff = Staff::find($id);
+        $staff->services()->sync($request->services);
+
+        if ($request->hasFile('work_images')) {
+            foreach ($request->file('work_images') as $img) {
+                $fileName = time() . '-' . $img->getClientOriginalName();
+                $img->move(public_path('img/work_images/' . $staff->id), $fileName);
+
+                $workImage = WorkImages::create(['filename' => $fileName]);
+                $staff->workImages()->attach($workImage->id);
+            }
+        }
+
+        if ($request->selected_images != null) {
+
+            foreach ($request->selected_images as $removeImg) {
+                WorkImages::find($removeImg)->delete();
+                $staff->workImages()->detach($removeImg);
+            }
+        }
 
         return redirect('/staff')->with('success', 'You have successfully edited a staff!');
     }
@@ -110,7 +132,11 @@ class StaffController extends Controller
      */
     public function destroy($id)
     {
-        Staff::find($id)->delete();
+        $staff = Staff::find($id);
+        $staff->delete();
+        $staff->services()->detach();
+        $staff->workImages()->detach();
+
         return redirect('/staff')->with('success', 'You have successfully deleted a staff!');
     }
 }

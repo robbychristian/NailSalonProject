@@ -24,12 +24,14 @@
                 </div>
 
                 <div>
-                    <label for="work_image" class="block mb-2 text-sm font-medium text-gray-900">Work Images</label>
+                    <label for="work_image" class="block mb-2 text-sm font-medium text-gray-900">Saved Work Images</label>
                     <div class="grid grid-cols-1 md:grid-cols-3">
-                        @foreach ($staff->workImages as $img)
+                        @forelse ($staff->workImages as $img)
                             <img class="h-auto max-w-xs"
                                 src="{{ asset('img/work_images/' . $staff->id . '/' . $img->filename) }}" alt="">
-                        @endforeach
+                        @empty
+                            <small>There are no saved work images available.</small>
+                        @endforelse
                     </div>
                 </div>
             </div>

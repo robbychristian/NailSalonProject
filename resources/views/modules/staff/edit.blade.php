@@ -9,7 +9,7 @@
                     Edit Staff
                 </h1>
 
-                <form action="{{ route('staff.update', $staff->id) }}" method="post">
+                <form action="{{ route('staff.update', $staff->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -22,6 +22,65 @@
                                 {{ $message }}</p>
                         @enderror
                     </div>
+
+                    <div class="mb-6">
+                        <label for="staff_specialty" class="block mb-2 text-sm font-medium text-gray-900">Staff
+                            Specialty</label>
+
+                        @foreach ($services as $service)
+                            <div class="flex items-center mb-4">
+                                <input id="default-checkbox" type="checkbox" value="{{ $service->id }}" name="services[]"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                                    {{ in_array($service->id, $staff->services->pluck('id')->toArray()) ? 'checked' : '' }}>
+                                <label for="default-checkbox"
+                                    class="ml-2 text-sm font-medium text-gray-900">{{ $service->service_name }}</label>
+                            </div>
+                        @endforeach
+
+                        @error('services')
+                            <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
+                                {{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <div class="border border-darker-pink border-2 p-2">
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-circle-info mr-3 text-darker-pink"></i>
+                                <p class="text-sm"><b>Note:</b>If you want to upload a new set of images, simply
+                                    click
+                                    the 'choose files' button. If you want to remove an existing image from the staff's work
+                                    images, check the box instead. </p>
+                            </div>
+                        </div>
+                        <div class="mt-4 mb-6">
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                for="multiple_files">Upload New Work Images</label>
+                            <input
+                                class="block w-full text-sm text-gray-900 border border-gray-300 cursor-pointer bg-gray-50"
+                                id="multiple_files" type="file" name="work_images[]" multiple>
+                            @error('work_images')
+                                <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
+                                    {{ $message }}</p>
+                            @enderror
+                        </div>
+                        <label for="work_image" class="block text-sm font-medium text-gray-900">Saved Work Images</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 mt-4 mb-5">
+                            @forelse ($staff->workImages as $img)
+                                <div>
+                                    <input type="checkbox"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                                        name="selected_images[]" value="{{ $img->id }}">
+                                    <img class="h-auto max-w-xs"
+                                        src="{{ asset('img/work_images/' . $staff->id . '/' . $img->filename) }}"
+                                        alt="">
+                                </div>
+                            @empty
+                                <small>There are no saved work images available.</small>
+                            @endforelse
+                        </div>
+                    </div>
+
 
                     <a href="{{ route('staff.index') }}"
                         class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mr-1">Back</a>
