@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Branches;
 use App\Models\Packages;
 use App\Models\ProductAddOns;
 use App\Models\Products;
@@ -335,6 +336,10 @@ class DatabaseSeeder extends Seeder
             'price' => '1050'
         ]);
         $package10->products()->attach([$product13->id, $product2->id, $product4->id, $product7->id]);
+
+        //BRANCHES
+        Branches::create(['branch_address' => 'Sampaloc Manila']);
+        Branches::create(['branch_address' => 'Quezon City']);
 
         //STAFF
         //STAFF 1

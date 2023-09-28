@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\ProductAddOnsController;
@@ -53,4 +54,5 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('packages', PackagesController::class);
     Route::resource('branches', BranchController::class);
     Route::resource('staff', StaffController::class);
+    Route::resource('booking', BookingController::class);
 });
