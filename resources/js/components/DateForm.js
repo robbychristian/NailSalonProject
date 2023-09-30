@@ -9,6 +9,7 @@ import { TimePicker } from "@mui/x-date-pickers";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
+import moment from "moment";
 
 const DateForm = ({ onDateChange, onTimeChange, onBranchChange, errors }) => {
     const [branches, setBranches] = useState([]);
@@ -47,16 +48,9 @@ const DateForm = ({ onDateChange, onTimeChange, onBranchChange, errors }) => {
                                 label="Choose a date"
                                 name="date"
                                 className="w-full"
-                                disablePast
-                                onError={(newError) => setDateError(newError)}
-                                onChange={(e) => onDateChange(e._d)}
-                                slotProps={{
-                                    textField: {
-                                        helperText:
-                                            dateError == "disablePast" &&
-                                            "Date is invalid!",
-                                    },
-                                }}
+                                onChange={(e) => onDateChange(moment(e._d).format('YYYY-MM-DD'))}
+                                minDate={moment().add(1, 'day')}
+                                defaultValue={moment().add(1, 'day')}
                             />
                         </DemoContainer>
 
@@ -65,16 +59,10 @@ const DateForm = ({ onDateChange, onTimeChange, onBranchChange, errors }) => {
                                 label="Choose a time"
                                 name="time"
                                 className="w-full"
-                                disablePast
-                                onError={(newError) => setTimeError(newError)}
                                 onChange={(e) => onTimeChange(e._d)}
-                                slotProps={{
-                                    textField: {
-                                        helperText:
-                                            timeError == "disablePast" &&
-                                            "Time is invalid!",
-                                    },
-                                }}
+                                minTime={moment('10:00 AM', 'h:mm A')}
+                                maxTime={moment('10:00 PM', 'h:mm A')}
+                                defaultValue={moment('10:00 AM', 'h:mm A')}
                             />
                         </DemoContainer>
                     </LocalizationProvider>
@@ -91,11 +79,6 @@ const DateForm = ({ onDateChange, onTimeChange, onBranchChange, errors }) => {
                         defaultValue="None"
                         onChange={(e) => onBranchChange(e.target.value)}
                         fullWidth
-                        helperText={
-                            errors.branchError !== undefined
-                                ? "Incorrect entry."
-                                : ""
-                        }
                     >
                         <MenuItem value="None">-- Choose a branch --</MenuItem>
                         {branches.map((item, index) => (
