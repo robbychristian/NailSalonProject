@@ -10,9 +10,10 @@ import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 
-const DateForm = ({ onDateChange, onTimeChange, onBranchChange }) => {
+const DateForm = ({ onDateChange, onTimeChange, onBranchChange, errors }) => {
     const [branches, setBranches] = useState([]);
-    const [errors, setErrors] = useState({ date: "", time: "", branch: "" });
+    const [dateError, setDateError] = useState(null);
+    const [timeError, setTimeError] = useState(null);
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: "#fff",
@@ -47,7 +48,15 @@ const DateForm = ({ onDateChange, onTimeChange, onBranchChange }) => {
                                 name="date"
                                 className="w-full"
                                 disablePast
+                                onError={(newError) => setDateError(newError)}
                                 onChange={(e) => onDateChange(e._d)}
+                                slotProps={{
+                                    textField: {
+                                        helperText:
+                                            dateError == "disablePast" &&
+                                            "Date is invalid!",
+                                    },
+                                }}
                             />
                         </DemoContainer>
 
@@ -56,21 +65,39 @@ const DateForm = ({ onDateChange, onTimeChange, onBranchChange }) => {
                                 label="Choose a time"
                                 name="time"
                                 className="w-full"
+                                disablePast
+                                onError={(newError) => setTimeError(newError)}
                                 onChange={(e) => onTimeChange(e._d)}
+                                slotProps={{
+                                    textField: {
+                                        helperText:
+                                            timeError == "disablePast" &&
+                                            "Time is invalid!",
+                                    },
+                                }}
                             />
                         </DemoContainer>
                     </LocalizationProvider>
 
                     <TextField
                         sx={{ mt: 1.5 }}
-                        // error
+                        error={
+                            errors.branchError !== undefined
+                                ? errors.branchError
+                                : false
+                        }
                         select
                         label="Choose a branch"
-                        defaultValue=""
+                        defaultValue="None"
                         onChange={(e) => onBranchChange(e.target.value)}
                         fullWidth
-                        // helperText="Incorrect entry."
+                        helperText={
+                            errors.branchError !== undefined
+                                ? "Incorrect entry."
+                                : ""
+                        }
                     >
+                        <MenuItem value="None">-- Choose a branch --</MenuItem>
                         {branches.map((item, index) => (
                             <MenuItem key={index} value={item.branch_address}>
                                 {item.branch_address}
