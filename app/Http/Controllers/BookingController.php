@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Branches;
+use App\Models\Packages;
+use App\Models\ProductAddOns;
+use App\Models\Products;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -88,6 +91,19 @@ class BookingController extends Controller
         $branches = Branches::all();
         return response()->json([
             'branches' => $branches
+        ]);
+    }
+
+    public function getProductsAndPackages()
+    {
+        $products = Products::all();
+        $addons = ProductAddOns::all();
+        $packages = Packages::with('products')->get();
+
+        return response()->json([
+            'products' => $products,
+            'addons' => $addons,
+            'packages' => $packages
         ]);
     }
 }

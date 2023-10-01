@@ -55,6 +55,23 @@ const Booking = () => {
 
   //END OF DATE FORM
 
+  //SERVICES FORM
+  const [selectedService1, setSelectedService1] = useState(null);
+  const [selectedService2, setSelectedService2] = useState(null);
+  const [selectedService3, setSelectedService3] = useState(null);
+
+  const handleService1Change = (s1) => {
+    setSelectedService1(s1);
+  }
+
+  const handleService2Change = (s2) => {
+    setSelectedService2(s2);
+  }
+
+  const handleService3Change = (s3) => {
+    setSelectedService3(s3);
+  }
+
   const [activeStep, setActiveStep] = useState(0);
   const handleNext = () => {
     if (activeStep === 0) {
@@ -90,6 +107,29 @@ const Booking = () => {
         console.log(selectedDate);
         console.log(selectedTime);
         console.log(selectedBranch);
+        setActiveStep(activeStep + 1);
+      }
+    } else if (activeStep === 1) {
+      if (selectedService1 == null) {
+        toast.error('Choose atleast 1 service!');
+      } else if (selectedService1 === selectedService2 || selectedService1 === selectedService3) {
+        toast.error('Same service has been selected! Choose different service!');
+      } else if (selectedService2 !== null) {
+        if (selectedService2 === selectedService1 || selectedService2 === selectedService3) {
+          toast.error('Same service has been selected! Choose different service!');
+        } else {
+          setActiveStep(activeStep + 1);
+        }
+      } else if (selectedService3 !== null) {
+        if (selectedService3 === selectedService1 || selectedService3 === selectedService2) {
+          toast.error('Same service has been selected! Choose different service!');
+        } else {
+          setActiveStep(activeStep + 1);
+        }
+      } else {
+        console.log(selectedService1);
+        console.log(selectedService2);
+        console.log(selectedService3);
         setActiveStep(activeStep + 1);
       }
     }
@@ -149,7 +189,12 @@ const Booking = () => {
                   errors={dateFormError}
                 />
               )}
-              {activeStep === 1 && <ServicesForm />}
+              {activeStep === 1 && (
+                <ServicesForm
+                  onService1Change={handleService1Change}
+                  onService2Change={handleService2Change}
+                  onService3Change={handleService3Change}
+                />)}
               {activeStep === 2 && <TechnicianForm />}
               <Box
                 sx={{
@@ -183,6 +228,9 @@ const Booking = () => {
       {/* {console.log(moment().add(1, 'days').format('YYYY-MM-DD'))}
       {console.log(moment('10:00 AM', 'h:mm A').format('LT'))} */}
       {console.log(selectedDate, selectedTime, selectedBranch)}
+      {console.log(selectedService1)}
+      {console.log(selectedService2)}
+      {console.log(selectedService3)}
     </React.Fragment>
   );
 };
