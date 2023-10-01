@@ -26,6 +26,10 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change }) 
     const [selectedAddonId2, setSelectedAddonId2] = useState("");
     const [selectedAddonId3, setSelectedAddonId3] = useState("");
 
+    const [selectedAddonPrice1, setSelectedAddonPrice1] = useState(0);
+    const [selectedAddonPrice2, setSelectedAddonPrice2] = useState(0);
+    const [selectedAddonPrice3, setSelectedAddonPrice3] = useState(0);
+
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: "#fff",
         ...theme.typography.body2,
@@ -50,9 +54,33 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change }) 
         const price1 = parseFloat(selectedPrice1) || 0;
         const price2 = parseFloat(selectedPrice2) || 0;
         const price3 = parseFloat(selectedPrice3) || 0;
-        const newTotalPrice = price1 + price2 + price3;
+
+        if (!hasAddons1 || !selectedProduct1) {
+            setSelectedAddonPrice1(0)
+        }
+
+        if (!hasAddons2 || !selectedProduct2) {
+            setSelectedAddonPrice2(0)
+        }
+
+        if (!hasAddons3 || !selectedProduct3) {
+            setSelectedAddonPrice2(0)
+        }
+
+        const addonPrice1 = parseFloat(selectedAddonPrice1) || 0;
+        const addonPrice2 = parseFloat(selectedAddonPrice2) || 0;
+        const addonPrice3 = parseFloat(selectedAddonPrice3) || 0;
+
+
+        const newTotalPrice = price1 + price2 + price3 + addonPrice1 + addonPrice2 + addonPrice3
+        console.log(`ito yung prices 1 ${price1}`)
+        console.log(`ito yung prices 2 ${price2}`)
+        console.log(`ito yung prices 3 ${price3}`)
+        console.log(`ito yung prices add1 ${addonPrice1}`)
+        console.log(`ito yung prices add2 ${addonPrice2}`)
+        console.log(`ito yung prices add3 ${addonPrice3}`)
         setTotalPrice(newTotalPrice);
-    }, [selectedPrice1, selectedPrice2, selectedPrice3])
+    }, [selectedPrice1, selectedPrice2, selectedPrice3, selectedAddonPrice1, selectedAddonPrice2, selectedAddonPrice3]);
 
     const addonsMap = {};
 
@@ -101,6 +129,10 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change }) 
                                 onChange={(e) => {
                                     const addonId = e.target.value;
                                     setSelectedAddonId1(addonId);
+                                    const selectedAddOn1 = addOns.find((item) => item.id == addonId);
+                                    const addonPrice1 = selectedAddOn1.additional_price
+                                    setSelectedAddonPrice1(addonPrice1);
+                                    // console.log(`ito yung addon ${addonPrice1}`)
                                 }}
                             >
                                 {addOns
@@ -153,6 +185,10 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change }) 
                                 onChange={(e) => {
                                     const addonId = e.target.value;
                                     setSelectedAddonId2(addonId);
+
+                                    const selectedAddOn2 = addOns.find((item) => item.id == addonId);
+                                    const addonPrice2 = selectedAddOn2.additional_price
+                                    setSelectedAddonPrice2(addonPrice2);
                                 }}
                             >
                                 {addOns
@@ -206,6 +242,9 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change }) 
                                 onChange={(e) => {
                                     const addonId = e.target.value;
                                     setSelectedAddonId3(addonId);
+                                    const selectedAddOn3 = addOns.find((item) => item.id == addonId);
+                                    const addonPrice3 = selectedAddOn3.additional_price
+                                    setSelectedAddonPrice3(addonPrice3);
                                 }}
                             >
                                 {addOns
