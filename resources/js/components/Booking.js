@@ -14,21 +14,9 @@ import TechnicianForm from "./TechnicianForm";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
+import SummaryForm from "./SummaryForm";
 
-const steps = ["Pick Schedule and Branch", "Choose Services", "Assigned Technician"];
-
-// function getStepContent(step) {
-//   switch (step) {
-//     case 0:
-//       return <DateForm />
-//     case 1:
-//       return <ServicesForm />;
-//     case 2:
-//       return <TechnicianForm />;
-//     default:
-//       throw new Error('Unknown step');
-//   }
-// }
+const steps = ["Pick Schedule and Branch", "Choose Services", "Assigned Technician", "Summary Form"];
 
 const Booking = () => {
   // DATE FORM
@@ -59,6 +47,7 @@ const Booking = () => {
   const [selectedService1, setSelectedService1] = useState(null);
   const [selectedService2, setSelectedService2] = useState(null);
   const [selectedService3, setSelectedService3] = useState(null);
+  const [price, setPrice] = useState(null);
 
   const handleService1Change = (s1) => {
     setSelectedService1(s1);
@@ -70,6 +59,17 @@ const Booking = () => {
 
   const handleService3Change = (s3) => {
     setSelectedService3(s3);
+  }
+
+  const handlePrice = (price) => {
+    setPrice(price);
+  }
+
+  //TECHNICIAN FORM
+  const [selectedStaff, setSelectedStaff] = useState(null);
+
+  const handleSelectedStaff = (staff) => {
+    setSelectedStaff(staff);
   }
 
   const [activeStep, setActiveStep] = useState(0);
@@ -130,6 +130,12 @@ const Booking = () => {
         console.log(selectedService1);
         console.log(selectedService2);
         console.log(selectedService3);
+        setActiveStep(activeStep + 1);
+      }
+    } else if (activeStep === 2) {
+      if (selectedStaff == null) {
+        toast.error('Choose a technician!');
+      } else {
         setActiveStep(activeStep + 1);
       }
     }
@@ -194,8 +200,24 @@ const Booking = () => {
                   onService1Change={handleService1Change}
                   onService2Change={handleService2Change}
                   onService3Change={handleService3Change}
+                  onPriceChange={handlePrice}
                 />)}
-              {activeStep === 2 && <TechnicianForm />}
+              {activeStep === 2 &&
+                <TechnicianForm
+                  onStaffChange={handleSelectedStaff}
+                />}
+              {activeStep === 3 &&
+                <SummaryForm
+                  dateValue={selectedDate}
+                  timeValue={selectedTime}
+                  branchValue={selectedBranch}
+                  service1Value={selectedService1}
+                  service2Value={selectedService2}
+                  service3Value={selectedService3}
+                  technicianValue={selectedStaff}
+                  priceValue={price}
+                />
+              }
               <Box
                 sx={{
                   display: "flex",
@@ -231,6 +253,7 @@ const Booking = () => {
       {console.log(selectedService1)}
       {console.log(selectedService2)}
       {console.log(selectedService3)}
+      {console.log(selectedStaff)}
     </React.Fragment>
   );
 };

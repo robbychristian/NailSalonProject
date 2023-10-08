@@ -26,3 +26,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('getBranches', [BookingController::class, 'getBranches']);
 Route::get('getProductsAndPackages', [BookingController::class, 'getProductsAndPackages']);
+Route::get('getStaff', [BookingController::class, 'getStaff']);
+Route::get('getStaffName/{id}', [BookingController::class, 'getStaffName']);

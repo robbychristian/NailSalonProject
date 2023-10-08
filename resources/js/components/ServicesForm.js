@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 
-const ServicesForm = ({ onService1Change, onService2Change, onService3Change }) => {
+const ServicesForm = ({ onService1Change, onService2Change, onService3Change, onPriceChange }) => {
     const [products, setProducts] = useState([]);
     const [addOns, setAddOns] = useState([]);
     const [packages, setPackages] = useState([]);
@@ -80,6 +80,7 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change }) 
         console.log(`ito yung prices add2 ${addonPrice2}`)
         console.log(`ito yung prices add3 ${addonPrice3}`)
         setTotalPrice(newTotalPrice);
+        onPriceChange(newTotalPrice);
     }, [selectedPrice1, selectedPrice2, selectedPrice3, selectedAddonPrice1, selectedAddonPrice2, selectedAddonPrice3]);
 
     const addonsMap = {};

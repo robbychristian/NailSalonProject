@@ -6,6 +6,7 @@ use App\Models\Branches;
 use App\Models\Packages;
 use App\Models\ProductAddOns;
 use App\Models\Products;
+use App\Models\Staff;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -104,6 +105,23 @@ class BookingController extends Controller
             'products' => $products,
             'addons' => $addons,
             'packages' => $packages
+        ]);
+    }
+
+    public function getStaff()
+    {
+        $staff = Staff::with('workImages')->with('services')->get();
+
+        return response()->json([
+            'staff' => $staff
+        ]);
+    }
+
+    public function getStaffName($id)
+    {
+        $selectedStaff = Staff::find($id);
+        return response()->json([
+            'selectedStaff' => $selectedStaff
         ]);
     }
 }
