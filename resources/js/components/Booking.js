@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -15,10 +15,17 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 import SummaryForm from "./SummaryForm";
+import CustomerForm from "./CustomerForm";
 
-const steps = ["Pick Schedule and Branch", "Choose Services", "Assigned Technician", "Summary Form"];
+const steps = ["Customer Details", "Pick Schedule and Branch", "Choose Services", "Assigned Technician", "Summary Form"];
 
-const Booking = () => {
+const Booking = (props) => {
+  //USER FORM
+  const [selectedUser, setSelectedUser] = useState("None");
+  const handleUserChange = (user) => {
+    setSelectedUser(user);
+  }
+
   // DATE FORM
   const [selectedDate, setSelectedDate] = useState(moment().add(1, 'days').format('YYYY-MM-DD'));
   const [selectedTime, setSelectedTime] = useState(moment('10:00 AM', 'h:mm A').format('LT'));
@@ -75,6 +82,13 @@ const Booking = () => {
   const [activeStep, setActiveStep] = useState(0);
   const handleNext = () => {
     if (activeStep === 0) {
+      if (selectedUser == "None") {
+        toast.error('User is required!');
+      } else {
+        setActiveStep(activeStep + 1);
+      }
+
+    } else if (activeStep === 1) {
       if (
         selectedDate === null ||
         selectedTime === null ||
@@ -109,7 +123,7 @@ const Booking = () => {
         console.log(selectedBranch);
         setActiveStep(activeStep + 1);
       }
-    } else if (activeStep === 1) {
+    } else if (activeStep === 2) {
       if (selectedService1 == null) {
         toast.error('Choose atleast 1 service!');
       } else if (selectedService1 === selectedService2 || selectedService1 === selectedService3) {
@@ -132,7 +146,7 @@ const Booking = () => {
         console.log(selectedService3);
         setActiveStep(activeStep + 1);
       }
-    } else if (activeStep === 2) {
+    } else if (activeStep === 3) {
       if (selectedStaff == null) {
         toast.error('Choose a technician!');
       } else {
@@ -143,6 +157,16 @@ const Booking = () => {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+  useEffect(() => {
+    if (JSON.parse(props.auth).user_role == 2) {
+      setActiveStep(1)
+      setSelectedUser(JSON.parse(props.auth).id)
+    } else {
+      setActiveStep(0)
+    }
+  }, [])
+
 
   return (
     <React.Fragment>
@@ -188,6 +212,12 @@ const Booking = () => {
             <React.Fragment>
               {/* {getStepContent(activeStep)} */}
               {activeStep === 0 && (
+                <CustomerForm
+                  onUserChange={handleUserChange}
+                  authUser={JSON.parse(props.auth)}
+                />
+              )}
+              {activeStep === 1 && (
                 <DateForm
                   onDateChange={handleDateChange}
                   onTimeChange={handleTimeChange}
@@ -195,18 +225,18 @@ const Booking = () => {
                   errors={dateFormError}
                 />
               )}
-              {activeStep === 1 && (
+              {activeStep === 2 && (
                 <ServicesForm
                   onService1Change={handleService1Change}
                   onService2Change={handleService2Change}
                   onService3Change={handleService3Change}
                   onPriceChange={handlePrice}
                 />)}
-              {activeStep === 2 &&
+              {activeStep === 3 &&
                 <TechnicianForm
                   onStaffChange={handleSelectedStaff}
                 />}
-              {activeStep === 3 &&
+              {activeStep === 4 &&
                 <SummaryForm
                   dateValue={selectedDate}
                   timeValue={selectedTime}
@@ -216,6 +246,7 @@ const Booking = () => {
                   service3Value={selectedService3}
                   technicianValue={selectedStaff}
                   priceValue={price}
+                  userValue={selectedUser}
                 />
               }
               <Box
@@ -261,5 +292,7 @@ const Booking = () => {
 export default Booking;
 
 if (document.getElementById("booking")) {
-  ReactDOM.render(<Booking />, document.getElementById("booking"));
+  const element = document.getElementById('booking')
+  const props = Object.assign({}, element.dataset)
+  ReactDOM.render(<Booking {...props} />, document.getElementById("booking"));
 }

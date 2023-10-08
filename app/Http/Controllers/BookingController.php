@@ -7,6 +7,8 @@ use App\Models\Packages;
 use App\Models\ProductAddOns;
 use App\Models\Products;
 use App\Models\Staff;
+use App\Models\User;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -122,6 +124,25 @@ class BookingController extends Controller
         $selectedStaff = Staff::find($id);
         return response()->json([
             'selectedStaff' => $selectedStaff
+        ]);
+    }
+
+    public function getAllUsers()
+    {
+        $users = User::where('user_role', 2)->get();
+
+        return response()->json([
+            'users' => $users
+        ]);
+    }
+
+    public function getUserDetails($id)
+    {
+        $selectedUser = User::find($id);
+        $selectedUserProfile = UserProfile::where('user_id', $id)->get();
+        return response()->json([
+            'selectedUser' => $selectedUser,
+            'selectedUserProfile' => $selectedUserProfile,
         ]);
     }
 }

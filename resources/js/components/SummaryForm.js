@@ -6,6 +6,10 @@ import Paper from "@mui/material/Paper";
 
 const SummaryForm = (props) => {
     const [staffName, setStaffName] = useState([]);
+    const [fname, setFname] = useState("");
+    const [lname, setLname] = useState("");
+    const [number, setNumber] = useState("");
+    const [email, setEmail] = useState("");
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: "#fff",
@@ -21,9 +25,69 @@ const SummaryForm = (props) => {
             })
     }, [props.technicianValue]);
 
+    useEffect(() => {
+        axios.get(`/api/getUser/${props.userValue}`)
+            .then((response) => {
+                setFname(response.data.selectedUser.first_name);
+                setLname(response.data.selectedUser.last_name);
+                setEmail(response.data.selectedUser.email);
+                setNumber(response.data.selectedUserProfile[0].contact_no);
+            })
+    }, [props.userValue]);
+
     return (
         <Fragment>
             <Grid container spacing={2}>
+                <Grid item xs={6}>
+                    <Typography variant="subtitle1">
+                        <b>Customer Details</b>
+                    </Typography>
+                    <TextField
+                        sx={{ mt: 1.5 }}
+                        label="First Name"
+                        fullWidth
+                        value={fname}
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                        variant="filled"
+
+                    />
+                    <TextField
+                        sx={{ mt: 1.5 }}
+                        label="Last Name"
+                        fullWidth
+                        value={lname}
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                        variant="filled"
+
+                    />
+
+                    <TextField
+                        sx={{ mt: 1.5 }}
+                        label="Contact Number"
+                        fullWidth
+                        value={number}
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                        variant="filled"
+
+                    />
+                    <TextField
+                        sx={{ mt: 1.5 }}
+                        label="Email"
+                        fullWidth
+                        value={email}
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                        variant="filled"
+
+                    />
+                </Grid>
                 <Grid item xs={6}>
                     <Typography variant="subtitle1">
                         <b>Booking Details</b>
@@ -63,6 +127,9 @@ const SummaryForm = (props) => {
 
                     />
                 </Grid>
+            </Grid>
+
+            <Grid container spacing={2} sx={{ mt: 2 }}>
                 <Grid item xs={6}>
                     <Typography variant="subtitle1">
                         <b> Service Details</b>
@@ -102,10 +169,8 @@ const SummaryForm = (props) => {
 
                     />
                 </Grid>
-            </Grid>
-
-            <Grid container spacing={2} sx={{ mt: 2 }}>
                 <Grid item xs={6}>
+
                     <Typography variant="subtitle1">
                         <b> Technician Details</b>
                     </Typography>
@@ -120,9 +185,11 @@ const SummaryForm = (props) => {
                         variant="filled"
 
                     />
-
                 </Grid>
-                <Grid item xs={6}>
+            </Grid>
+            <Grid container spacing={2} sx={{ mt: 2 }}>
+
+                <Grid item xs={12}>
                     <Typography variant="subtitle1">
                         <b>Payment Details</b>
                     </Typography>
@@ -144,6 +211,7 @@ const SummaryForm = (props) => {
                     />
                 </Grid>
             </Grid>
+
         </Fragment>
     )
 }

@@ -28,3 +28,5 @@ Route::get('getBranches', [BookingController::class, 'getBranches']);
 Route::get('getProductsAndPackages', [BookingController::class, 'getProductsAndPackages']);
 Route::get('getStaff', [BookingController::class, 'getStaff']);
 Route::get('getStaffName/{id}', [BookingController::class, 'getStaffName']);
+Route::get('getAllUsers', [BookingController::class, 'getAllUsers']);
+Route::get('getUser/{id}', [BookingController::class, 'getUserDetails']);
