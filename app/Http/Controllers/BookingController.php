@@ -145,4 +145,12 @@ class BookingController extends Controller
             'selectedUserProfile' => $selectedUserProfile,
         ]);
     }
+
+    public function getAddOns($id)
+    {
+        $addons = ProductAddOns::find($id);
+        return response()->json([
+            'addons' => $addons
+        ]);
+    }
 }

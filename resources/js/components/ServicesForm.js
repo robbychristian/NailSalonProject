@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 
-const ServicesForm = ({ onService1Change, onService2Change, onService3Change, onPriceChange }) => {
+const ServicesForm = ({ onService1Change, onService2Change, onService3Change, onAddOn1Change, onAddOn2Change, onAddOn3Change, onPriceChange }) => {
     const [products, setProducts] = useState([]);
     const [addOns, setAddOns] = useState([]);
     const [packages, setPackages] = useState([]);
@@ -22,9 +22,9 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
     const [selectedProduct2, setSelectedProduct2] = useState(null);
     const [selectedProduct3, setSelectedProduct3] = useState(null);
 
-    const [selectedAddonId1, setSelectedAddonId1] = useState("");
-    const [selectedAddonId2, setSelectedAddonId2] = useState("");
-    const [selectedAddonId3, setSelectedAddonId3] = useState("");
+    // const [selectedAddonId1,  setSelectedAddonId1] = useState("");
+    // const [selectedAddonId2, setSelectedAddonId2] = useState("");
+    // const [selectedAddonId3, setSelectedAddonId3] = useState("");
 
     const [selectedAddonPrice1, setSelectedAddonPrice1] = useState(0);
     const [selectedAddonPrice2, setSelectedAddonPrice2] = useState(0);
@@ -129,7 +129,7 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
                                 name="addons"
                                 onChange={(e) => {
                                     const addonId = e.target.value;
-                                    setSelectedAddonId1(addonId);
+                                    onAddOn1Change(addonId);
                                     const selectedAddOn1 = addOns.find((item) => item.id == addonId);
                                     const addonPrice1 = selectedAddOn1.additional_price
                                     setSelectedAddonPrice1(addonPrice1);
@@ -185,7 +185,7 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
                                 name="addons"
                                 onChange={(e) => {
                                     const addonId = e.target.value;
-                                    setSelectedAddonId2(addonId);
+                                    onAddOn2Change(addonId);
 
                                     const selectedAddOn2 = addOns.find((item) => item.id == addonId);
                                     const addonPrice2 = selectedAddOn2.additional_price
@@ -242,7 +242,7 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
                                 name="addons"
                                 onChange={(e) => {
                                     const addonId = e.target.value;
-                                    setSelectedAddonId3(addonId);
+                                    onAddOn3Change(addonId);
                                     const selectedAddOn3 = addOns.find((item) => item.id == addonId);
                                     const addonPrice3 = selectedAddOn3.additional_price
                                     setSelectedAddonPrice3(addonPrice3);
@@ -281,8 +281,6 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
                     />
                 </Grid>
             </Grid>
-            {/* {console.log(selectedAddonId1, selectedAddonId2, selectedAddonId3)} */}
-            {console.log(selectedAddonId1)}
         </Fragment>
     )
 }

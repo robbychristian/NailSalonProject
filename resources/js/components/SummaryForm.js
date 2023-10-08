@@ -11,6 +11,10 @@ const SummaryForm = (props) => {
     const [number, setNumber] = useState("");
     const [email, setEmail] = useState("");
 
+    const [addOns1, setAddOn1] = useState("");
+    const [addOns2, setAddOn2] = useState("");
+    const [addOns3, setAddOn3] = useState("");
+
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: "#fff",
         ...theme.typography.body2,
@@ -34,6 +38,27 @@ const SummaryForm = (props) => {
                 setNumber(response.data.selectedUserProfile[0].contact_no);
             })
     }, [props.userValue]);
+
+    useEffect(() => {
+        axios.get(`/api/getProductAddOns/${props.addOn1Value}`)
+            .then((response) => {
+                setAddOn1(response.data.addons.additional);
+            })
+    }, [props.addOn1Value]);
+
+    useEffect(() => {
+        axios.get(`/api/getProductAddOns/${props.addOn2Value}`)
+            .then((response) => {
+                setAddOn2(response.data.addons.additional);
+            })
+    }, [props.addOn2Value]);
+
+    useEffect(() => {
+        axios.get(`/api/getProductAddOns/${props.addOn3Value}`)
+            .then((response) => {
+                setAddOn3(response.data.addons.additional);
+            })
+    }, [props.addOn3Value]);
 
     return (
         <Fragment>
@@ -145,6 +170,20 @@ const SummaryForm = (props) => {
                         variant="filled"
 
                     />
+                    {props.addOn1Value &&
+
+                        <TextField
+                            sx={{ mt: 1.5 }}
+                            label="Add Ons"
+                            fullWidth
+                            value={addOns1}
+                            InputProps={{
+                                readOnly: true,
+                            }}
+                            variant="filled"
+
+                        />
+                    }
                     <TextField
                         sx={{ mt: 1.5 }}
                         label="Service 2"
@@ -157,6 +196,21 @@ const SummaryForm = (props) => {
 
                     />
 
+                    {props.addOn2Value &&
+
+                        <TextField
+                            sx={{ mt: 1.5 }}
+                            label="Add Ons"
+                            fullWidth
+                            value={addOns2}
+                            InputProps={{
+                                readOnly: true,
+                            }}
+                            variant="filled"
+
+                        />
+                    }
+
                     <TextField
                         sx={{ mt: 1.5 }}
                         label="Service 3"
@@ -168,6 +222,21 @@ const SummaryForm = (props) => {
                         variant="filled"
 
                     />
+
+                    {props.addOn3Value &&
+
+                        <TextField
+                            sx={{ mt: 1.5 }}
+                            label="Add Ons"
+                            fullWidth
+                            value={addOns3}
+                            InputProps={{
+                                readOnly: true,
+                            }}
+                            variant="filled"
+
+                        />
+                    }
                 </Grid>
                 <Grid item xs={6}>
 

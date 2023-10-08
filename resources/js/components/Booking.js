@@ -54,6 +54,11 @@ const Booking = (props) => {
   const [selectedService1, setSelectedService1] = useState(null);
   const [selectedService2, setSelectedService2] = useState(null);
   const [selectedService3, setSelectedService3] = useState(null);
+
+  const [selectedAddonId1, setSelectedAddonId1] = useState("");
+  const [selectedAddonId2, setSelectedAddonId2] = useState("");
+  const [selectedAddonId3, setSelectedAddonId3] = useState("");
+
   const [price, setPrice] = useState(null);
 
   const handleService1Change = (s1) => {
@@ -67,6 +72,20 @@ const Booking = (props) => {
   const handleService3Change = (s3) => {
     setSelectedService3(s3);
   }
+
+  const handleAddOn1Change = (addon1) => {
+    setSelectedAddonId1(addon1);
+  }
+
+  const handleAddOn2Change = (addon2) => {
+    setSelectedAddonId2(addon2);
+  }
+
+
+  const handleAddOn3Change = (addon3) => {
+    setSelectedAddonId3(addon3);
+  }
+
 
   const handlePrice = (price) => {
     setPrice(price);
@@ -155,6 +174,9 @@ const Booking = (props) => {
     }
   };
   const handleBack = () => {
+    setSelectedAddonId1("");
+    setSelectedAddonId2("");
+    setSelectedAddonId3("");
     setActiveStep(activeStep - 1);
   };
 
@@ -230,7 +252,11 @@ const Booking = (props) => {
                   onService1Change={handleService1Change}
                   onService2Change={handleService2Change}
                   onService3Change={handleService3Change}
+                  onAddOn1Change={handleAddOn1Change}
+                  onAddOn2Change={handleAddOn2Change}
+                  onAddOn3Change={handleAddOn3Change}
                   onPriceChange={handlePrice}
+
                 />)}
               {activeStep === 3 &&
                 <TechnicianForm
@@ -244,6 +270,9 @@ const Booking = (props) => {
                   service1Value={selectedService1}
                   service2Value={selectedService2}
                   service3Value={selectedService3}
+                  addOn1Value={selectedAddonId1}
+                  addOn2Value={selectedAddonId2}
+                  addOn3Value={selectedAddonId3}
                   technicianValue={selectedStaff}
                   priceValue={price}
                   userValue={selectedUser}
