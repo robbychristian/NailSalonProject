@@ -12,6 +12,7 @@ use App\Models\Staff;
 use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
@@ -22,7 +23,12 @@ class BookingController extends Controller
      */
     public function index()
     {
-        return view('modules.booking.index');
+        if (Auth::user()->user_role == 1) {
+            $bookings = Bookings::all();
+        } else {
+            $bookings = Bookings::where('user_id', Auth::user()->id)->get();
+        }
+        return view('modules.booking.index', compact('bookings'));
     }
 
     /**
@@ -115,7 +121,8 @@ class BookingController extends Controller
      */
     public function show($id)
     {
-        //
+        $booking = Bookings::with('packages')->with('products')->find($id);
+        return view('modules.booking.show', compact('booking'));
     }
 
     /**

@@ -20,15 +20,27 @@
 
             </div>
 
-            {{-- <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left text-gray-900">
                     <thead class="text-xs text-gray-700 uppercase bg-dark-pink">
                         <tr>
                             <th scope="col" class="px-6 py-3">
-                                ID
+                                Booking ID
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Name
+                                Customer Name
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Date
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Time In
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Branch
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Payment Status
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Actions
@@ -36,23 +48,43 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($staff as $staff)
+                        @forelse ($bookings as $booking)
                             <tr class="bg-white border-b">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ $staff->id }}
+                                    {{ $booking->id }}
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{ $staff->staff_name }}
+                                    {{ $booking->user->first_name }} {{ $booking->user->last_name }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ \Carbon\Carbon::parse($booking->date)->format('m-d-Y') }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ \Carbon\Carbon::parse($booking->time_in)->format('h:i A') }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $booking->branch->branch_address }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    @if ($booking->payment->payment_status == 1)
+                                        <span
+                                            class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Paid</span>
+                                    @else
+                                        <span
+                                            class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Not
+                                            Yet
+                                            Paid</span>
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4" colspan="3">
                                     <div class="flex">
-                                        <a href="{{ route('staff.show', $staff->id) }}"
+                                        <a href="{{ route('booking.show', $booking->id) }}"
                                             class="font-medium text-darker-pink hover:underline mr-2">View</a>
 
-                                        <a href="{{ route('staff.edit', $staff->id) }}"
+                                        <a href="{{ route('booking.edit', $booking->id) }}"
                                             class="font-medium text-darker-pink hover:underline">Edit</a>
 
-                                        <form action="{{ route('staff.destroy', $staff->id) }}" method="POST">
+                                        <form action="{{ route('booking.destroy', $booking->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
@@ -68,7 +100,7 @@
                         @endforelse
                     </tbody>
                 </table>
-            </div> --}}
+            </div>
 
         </div>
 

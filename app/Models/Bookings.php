@@ -29,4 +29,29 @@ class Bookings extends Model
     {
         return $this->belongsToMany(Products::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function userProfile()
+    {
+        return $this->belongsTo(UserProfile::class, 'user_id', 'id');
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branches::class, 'branch_id', 'id');
+    }
+
+    public function staff()
+    {
+        return $this->belongsTo(Staff::class, 'staff_id', 'id');
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo(Payments::class, 'id', 'booking_id');
+    }
 }
