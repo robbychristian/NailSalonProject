@@ -27,11 +27,11 @@ class UpdateUserPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'current_password' => ['required', function ($attribute, $value, $fail) {
-                if (!Hash::check($value, Auth::user()->password)) {
-                    $fail('Old password didn\'t match!');
-                }
-            }],
+            // 'current_password' => ['required', function ($attribute, $value, $fail) {
+            //     if (!Hash::check($value, Auth::user()->password)) {
+            //         $fail('Old password didn\'t match!');
+            //     }
+            // }],
             'password' => ['required', Password::min(6)
                 ->letters()
                 ->mixedCase()

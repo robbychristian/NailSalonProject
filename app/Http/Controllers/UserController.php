@@ -107,8 +107,12 @@ class UserController extends Controller
             'contact_no' => $request['contact_no'],
             'address' => $request['address']
         ]);
+        if ($request->isMobile) {
+            return "true";
+        } else {
 
-        return redirect()->back()->with('success', 'You have successfully edited your profile!');
+            return redirect()->back()->with('success', 'You have successfully edited your profile!');
+        }
     }
 
     public function updatePassword(UpdateUserPasswordRequest $request, $id)
@@ -117,7 +121,11 @@ class UserController extends Controller
             'password' => Hash::make($request['password'])
         ]);
 
-        return redirect()->back()->with('success', 'You have successfully edited your password!');
+        if ($request['isMobile']) {
+            return 'true';
+        } else {
+            return redirect()->back()->with('success', 'You have successfully edited your password!');
+        }
     }
 
     /**

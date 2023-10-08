@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\UserController;
+use App\Models\Packages;
+use App\Models\ProductAddOns;
+use App\Models\Products;
+use App\Models\Services;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +29,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('getBranches', [BookingController::class, 'getBranches']);
+Route::resource('users', UserController::class);
+Route::post('/update-password/{id}', [UserController::class, 'updatePassword'])->name('users.updatePassword');
+
+
+Route::get('/services-page', function () {
+    $services = Services::all();
+    $products = Products::all();
+    $product_add_ons = ProductAddOns::all();
+    $packages = Packages::with('products')->get();
+    // return $packages;
+    return response([
+        'services' => $services,
+        'products' => $products,
+        'product_add_ons' => $product_add_ons,
+        'packages' => $packages,
+    ]);
+})->name('services-static');

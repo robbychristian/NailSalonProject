@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserProfile;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -54,6 +55,7 @@ class LoginController extends Controller
 
         if ($request->isMobile) {
             $user = User::where('email', $input["email"])->first();
+            $userProfile = UserProfile::where('user_id', $user->id)->first();
 
             if (!$user || !Hash::check($input['password'], $user->password)) {
                 return response([
@@ -65,6 +67,7 @@ class LoginController extends Controller
 
             $response = [
                 'user' => $user,
+                'user_profile' => $userProfile,
                 'token' => $token,
             ];
 
