@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -14,23 +14,19 @@ import TechnicianForm from "./TechnicianForm";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
+import SummaryForm from "./SummaryForm";
+import CustomerForm from "./CustomerForm";
+import axios from "axios";
 
-const steps = ["Pick Schedule and Branch", "Choose Services", "Assigned Technician"];
+const steps = ["Customer Details", "Pick Schedule and Branch", "Choose Services", "Assigned Technician", "Summary Form"];
 
-// function getStepContent(step) {
-//   switch (step) {
-//     case 0:
-//       return <DateForm />
-//     case 1:
-//       return <ServicesForm />;
-//     case 2:
-//       return <TechnicianForm />;
-//     default:
-//       throw new Error('Unknown step');
-//   }
-// }
+const Booking = (props) => {
+  //USER FORM
+  const [selectedUser, setSelectedUser] = useState("None");
+  const handleUserChange = (user) => {
+    setSelectedUser(user);
+  }
 
-const Booking = () => {
   // DATE FORM
   const [selectedDate, setSelectedDate] = useState(moment().add(1, 'days').format('YYYY-MM-DD'));
   const [selectedTime, setSelectedTime] = useState(moment('10:00 AM', 'h:mm A').format('LT'));
@@ -55,9 +51,64 @@ const Booking = () => {
 
   //END OF DATE FORM
 
+  //SERVICES FORM
+  const [selectedService1, setSelectedService1] = useState(null);
+  const [selectedService2, setSelectedService2] = useState(null);
+  const [selectedService3, setSelectedService3] = useState(null);
+
+  const [selectedAddonId1, setSelectedAddonId1] = useState("");
+  const [selectedAddonId2, setSelectedAddonId2] = useState("");
+  const [selectedAddonId3, setSelectedAddonId3] = useState("");
+
+  const [price, setPrice] = useState(null);
+
+  const handleService1Change = (s1) => {
+    setSelectedService1(s1);
+  }
+
+  const handleService2Change = (s2) => {
+    setSelectedService2(s2);
+  }
+
+  const handleService3Change = (s3) => {
+    setSelectedService3(s3);
+  }
+
+  const handleAddOn1Change = (addon1) => {
+    setSelectedAddonId1(addon1);
+  }
+
+  const handleAddOn2Change = (addon2) => {
+    setSelectedAddonId2(addon2);
+  }
+
+
+  const handleAddOn3Change = (addon3) => {
+    setSelectedAddonId3(addon3);
+  }
+
+
+  const handlePrice = (price) => {
+    setPrice(price);
+  }
+
+  //TECHNICIAN FORM
+  const [selectedStaff, setSelectedStaff] = useState(null);
+
+  const handleSelectedStaff = (staff) => {
+    setSelectedStaff(staff);
+  }
+
   const [activeStep, setActiveStep] = useState(0);
   const handleNext = () => {
     if (activeStep === 0) {
+      if (selectedUser == "None") {
+        toast.error('User is required!');
+      } else {
+        setActiveStep(activeStep + 1);
+      }
+
+    } else if (activeStep === 1) {
       if (
         selectedDate === null ||
         selectedTime === null ||
@@ -92,11 +143,77 @@ const Booking = () => {
         console.log(selectedBranch);
         setActiveStep(activeStep + 1);
       }
+    } else if (activeStep === 2) {
+      if (selectedService1 == null) {
+        toast.error('Choose atleast 1 service!');
+      } else if (selectedService1 === selectedService2 || selectedService1 === selectedService3) {
+        toast.error('Same service has been selected! Choose different service!');
+      } else if (selectedService2 !== null) {
+        if (selectedService2 === selectedService1 || selectedService2 === selectedService3) {
+          toast.error('Same service has been selected! Choose different service!');
+        } else {
+          setActiveStep(activeStep + 1);
+        }
+      } else if (selectedService3 !== null) {
+        if (selectedService3 === selectedService1 || selectedService3 === selectedService2) {
+          toast.error('Same service has been selected! Choose different service!');
+        } else {
+          setActiveStep(activeStep + 1);
+        }
+      } else {
+        console.log(selectedService1);
+        console.log(selectedService2);
+        console.log(selectedService3);
+        setActiveStep(activeStep + 1);
+      }
+    } else if (activeStep === 3) {
+      if (selectedStaff == null) {
+        toast.error('Choose a technician!');
+      } else {
+        setActiveStep(activeStep + 1);
+      }
+    } else if (activeStep === 4) {
+      const formdata = new FormData();
+      formdata.append('user_id', selectedUser);
+      formdata.append('date', moment(selectedDate).format('YYYY-MM-DD h:mm A'));
+      formdata.append('time_in', moment(`${selectedDate} ${selectedTime}`, 'YYYY-MM-DD h:mm A').format('YYYY-MM-DD h:mm A'));
+      formdata.append('time_out', moment(`${selectedDate} ${selectedTime}`, 'YYYY-MM-DD h:mm A').add(1, 'hour').add(30, 'minutes').format('YYYY-MM-DD h:mm A'));
+      formdata.append('branch', selectedBranch);
+      formdata.append('staff_id', selectedStaff);
+
+      formdata.append('service1', selectedService1);
+      formdata.append('addon1', selectedAddonId1);
+      formdata.append('service2', selectedService2);
+      formdata.append('addon2', selectedAddonId2);
+      formdata.append('service3', selectedService3);
+      formdata.append('addon3', selectedAddonId3);
+
+      formdata.append('total_price', price);
+
+      // console.log([...formdata]);
+      axios.post('/booking', formdata)
+        .then((response) => {
+          console.log(response)
+          setActiveStep(activeStep + 1);
+        })
     }
   };
   const handleBack = () => {
+    setSelectedAddonId1("");
+    setSelectedAddonId2("");
+    setSelectedAddonId3("");
     setActiveStep(activeStep - 1);
   };
+
+  useEffect(() => {
+    if (JSON.parse(props.auth).user_role == 2) {
+      setActiveStep(1)
+      setSelectedUser(JSON.parse(props.auth).id)
+    } else {
+      setActiveStep(0)
+    }
+  }, [])
+
 
   return (
     <React.Fragment>
@@ -130,18 +247,22 @@ const Booking = () => {
           {activeStep === steps.length ? (
             <React.Fragment>
               <Typography variant="h5" gutterBottom>
-                Thank you for your order.
+                Thank You for Booking With Us!
               </Typography>
               <Typography variant="subtitle1">
-                Your order number is #2001539. We have emailed
-                your order confirmation, and will send you an
-                update when your order has shipped.
+                Thank you for your reservation. Payment can be done on-site or through GCash on your mobile application.
               </Typography>
             </React.Fragment>
           ) : (
             <React.Fragment>
               {/* {getStepContent(activeStep)} */}
               {activeStep === 0 && (
+                <CustomerForm
+                  onUserChange={handleUserChange}
+                  authUser={JSON.parse(props.auth)}
+                />
+              )}
+              {activeStep === 1 && (
                 <DateForm
                   onDateChange={handleDateChange}
                   onTimeChange={handleTimeChange}
@@ -149,8 +270,37 @@ const Booking = () => {
                   errors={dateFormError}
                 />
               )}
-              {activeStep === 1 && <ServicesForm />}
-              {activeStep === 2 && <TechnicianForm />}
+              {activeStep === 2 && (
+                <ServicesForm
+                  onService1Change={handleService1Change}
+                  onService2Change={handleService2Change}
+                  onService3Change={handleService3Change}
+                  onAddOn1Change={handleAddOn1Change}
+                  onAddOn2Change={handleAddOn2Change}
+                  onAddOn3Change={handleAddOn3Change}
+                  onPriceChange={handlePrice}
+
+                />)}
+              {activeStep === 3 &&
+                <TechnicianForm
+                  onStaffChange={handleSelectedStaff}
+                />}
+              {activeStep === 4 &&
+                <SummaryForm
+                  dateValue={selectedDate}
+                  timeValue={selectedTime}
+                  branchValue={selectedBranch}
+                  service1Value={selectedService1}
+                  service2Value={selectedService2}
+                  service3Value={selectedService3}
+                  addOn1Value={selectedAddonId1}
+                  addOn2Value={selectedAddonId2}
+                  addOn3Value={selectedAddonId3}
+                  technicianValue={selectedStaff}
+                  priceValue={price}
+                  userValue={selectedUser}
+                />
+              }
               <Box
                 sx={{
                   display: "flex",
@@ -183,6 +333,10 @@ const Booking = () => {
       {/* {console.log(moment().add(1, 'days').format('YYYY-MM-DD'))}
       {console.log(moment('10:00 AM', 'h:mm A').format('LT'))} */}
       {console.log(selectedDate, selectedTime, selectedBranch)}
+      {console.log(selectedService1)}
+      {console.log(selectedService2)}
+      {console.log(selectedService3)}
+      {console.log(selectedStaff)}
     </React.Fragment>
   );
 };
@@ -190,5 +344,7 @@ const Booking = () => {
 export default Booking;
 
 if (document.getElementById("booking")) {
-  ReactDOM.render(<Booking />, document.getElementById("booking"));
+  const element = document.getElementById('booking')
+  const props = Object.assign({}, element.dataset)
+  ReactDOM.render(<Booking {...props} />, document.getElementById("booking"));
 }

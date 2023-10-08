@@ -2,7 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bookings;
 use App\Models\Branches;
+use App\Models\Packages;
+use App\Models\Payments;
+use App\Models\ProductAddOns;
+use App\Models\Products;
+use App\Models\Staff;
+use App\Models\User;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -35,7 +43,68 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $booking = [
+            'user_id' => $request->user_id,
+            'date' => $request->date,
+            'time_in' => $request->time_in,
+            'time_out' => $request->time_out,
+            'branch' => $request->branch,
+            'staff_id' => $request->staff_id,
+            'service1' => $request->service1,
+            'addon1' => $request->addon1,
+            'service2' => $request->service2,
+            'addon2' => $request->addon2,
+            'service3' => $request->service3,
+            'addon3' => $request->addon3,
+            'total_price' => $request->total_price
+        ];
+
+        $branchId = Branches::where('branch_address', $booking['branch'])->pluck('id')->first();
+        $service1 = Products::where('product_name', $booking['service1'])->pluck('id')->first();
+        $service2 = Products::where('product_name', $booking['service2'])->pluck('id')->first();
+        $service3 = Products::where('product_name', $booking['service3'])->pluck('id')->first();
+        $package1 = Packages::where('package_name', $booking['service1'])->pluck('id')->first();
+        $package2 = Packages::where('package_name', $booking['service2'])->pluck('id')->first();
+        $package3 = Packages::where('package_name', $booking['service3'])->pluck('id')->first();
+
+        $products = [$service1, $service2, $service3];
+
+        $notNullProducts = array_filter($products, function ($value) {
+            return $value !== null;
+        });
+
+        $packages = [$package1, $package2, $package3];
+
+        $notNullPackages = array_filter($packages, function ($value) {
+            return $value !== null;
+        });
+
+        $bookingDetails = Bookings::create([
+            'user_id' => $booking['user_id'],
+            'date' => $booking['date'],
+            'time_in' => $booking['time_in'],
+            'time_out' => $booking['time_out'],
+            'branch_id' => $branchId,
+            'staff_id' => $booking['staff_id'],
+        ]);
+
+        if (count($notNullProducts) != 0) {
+            foreach ($notNullProducts as $products) {
+                $bookingDetails->products()->attach($products);
+            }
+        }
+
+        if (count($notNullPackages) != 0) {
+            foreach ($notNullPackages as $packages) {
+                $bookingDetails->packages()->attach($packages);
+            }
+        }
+
+        $payment = Payments::create([
+            'booking_id' => $bookingDetails->id,
+            'total_price' => $booking['total_price'],
+            'payment_status' => 0,
+        ]);
     }
 
     /**
@@ -88,6 +157,63 @@ class BookingController extends Controller
         $branches = Branches::all();
         return response()->json([
             'branches' => $branches
+        ]);
+    }
+
+    public function getProductsAndPackages()
+    {
+        $products = Products::all();
+        $addons = ProductAddOns::all();
+        $packages = Packages::with('products')->get();
+
+        return response()->json([
+            'products' => $products,
+            'addons' => $addons,
+            'packages' => $packages
+        ]);
+    }
+
+    public function getStaff()
+    {
+        $staff = Staff::with('workImages')->with('services')->get();
+
+        return response()->json([
+            'staff' => $staff
+        ]);
+    }
+
+    public function getStaffName($id)
+    {
+        $selectedStaff = Staff::find($id);
+        return response()->json([
+            'selectedStaff' => $selectedStaff
+        ]);
+    }
+
+    public function getAllUsers()
+    {
+        $users = User::where('user_role', 2)->get();
+
+        return response()->json([
+            'users' => $users
+        ]);
+    }
+
+    public function getUserDetails($id)
+    {
+        $selectedUser = User::find($id);
+        $selectedUserProfile = UserProfile::where('user_id', $id)->get();
+        return response()->json([
+            'selectedUser' => $selectedUser,
+            'selectedUserProfile' => $selectedUserProfile,
+        ]);
+    }
+
+    public function getAddOns($id)
+    {
+        $addons = ProductAddOns::find($id);
+        return response()->json([
+            'addons' => $addons
         ]);
     }
 }
