@@ -31,6 +31,9 @@
                                 Name
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Specialty
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Actions
                             </th>
                         </tr>
@@ -43,6 +46,15 @@
                                 </th>
                                 <td class="px-6 py-4">
                                     {{ $staff->staff_name }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    <ul class="list-disc">
+                                        @foreach ($staff->services as $service)
+                                            <li>
+                                                {{ $service->service_name }}
+                                            </li>
+                                        @endforeach
+                                    </ul>
                                 </td>
                                 <td class="px-6 py-4" colspan="3">
                                     <div class="flex">

@@ -10,7 +10,7 @@
             @endif
             <div class="flex items-center justify-between mb-5">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-                    List of Users
+                    List of Customers
                 </h1>
                 <a href="{{ route('users.create') }}"
                     class="text-white bg-darker-pink hover:bg-darker-pink-90 font-medium rounded-lg text-sm px-4 py-2 inline-flex items-center">
@@ -40,6 +40,9 @@
                                 Contact Number
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Notify Status
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Action
                             </th>
                         </tr>
@@ -61,6 +64,17 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $user->userProfile->contact_no }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    @if ($user->is_notify == 1)
+                                        <span
+                                            class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Subscribe</span>
+                                    @else
+                                        <span
+                                            class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Did
+                                            Not
+                                            Subscribe</span>
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4">
                                     <a href="{{ route('users.show', $user->id) }}"
