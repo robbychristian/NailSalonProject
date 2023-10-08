@@ -25,4 +25,9 @@ class Products extends Model
     {
         return $this->belongsToMany(Packages::class);
     }
+
+    public function bookings()
+    {
+        return $this->belongsToMany(Bookings::class);
+    }
 }

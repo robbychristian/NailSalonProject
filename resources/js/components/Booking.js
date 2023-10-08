@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 import SummaryForm from "./SummaryForm";
 import CustomerForm from "./CustomerForm";
+import axios from "axios";
 
 const steps = ["Customer Details", "Pick Schedule and Branch", "Choose Services", "Assigned Technician", "Summary Form"];
 
@@ -171,6 +172,30 @@ const Booking = (props) => {
       } else {
         setActiveStep(activeStep + 1);
       }
+    } else if (activeStep === 4) {
+      const formdata = new FormData();
+      formdata.append('user_id', selectedUser);
+      formdata.append('date', moment(selectedDate).format('YYYY-MM-DD h:mm A'));
+      formdata.append('time_in', moment(`${selectedDate} ${selectedTime}`, 'YYYY-MM-DD h:mm A').format('YYYY-MM-DD h:mm A'));
+      formdata.append('time_out', moment(`${selectedDate} ${selectedTime}`, 'YYYY-MM-DD h:mm A').add(1, 'hour').add(30, 'minutes').format('YYYY-MM-DD h:mm A'));
+      formdata.append('branch', selectedBranch);
+      formdata.append('staff_id', selectedStaff);
+
+      formdata.append('service1', selectedService1);
+      formdata.append('addon1', selectedAddonId1);
+      formdata.append('service2', selectedService2);
+      formdata.append('addon2', selectedAddonId2);
+      formdata.append('service3', selectedService3);
+      formdata.append('addon3', selectedAddonId3);
+
+      formdata.append('total_price', price);
+
+      // console.log([...formdata]);
+      axios.post('/booking', formdata)
+        .then((response) => {
+          console.log(response)
+          setActiveStep(activeStep + 1);
+        })
     }
   };
   const handleBack = () => {
@@ -222,12 +247,10 @@ const Booking = (props) => {
           {activeStep === steps.length ? (
             <React.Fragment>
               <Typography variant="h5" gutterBottom>
-                Thank you for your order.
+                Thank You for Booking With Us!
               </Typography>
               <Typography variant="subtitle1">
-                Your order number is #2001539. We have emailed
-                your order confirmation, and will send you an
-                update when your order has shipped.
+                Thank you for your reservation. Payment can be done on-site or through GCash on your mobile application.
               </Typography>
             </React.Fragment>
           ) : (
