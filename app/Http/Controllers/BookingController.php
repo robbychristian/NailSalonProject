@@ -156,7 +156,8 @@ class BookingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Bookings::find($id)->delete();
+        return redirect('/booking')->with('success', 'You have successfully deleted the booking!');
     }
 
     public function getBranches()
