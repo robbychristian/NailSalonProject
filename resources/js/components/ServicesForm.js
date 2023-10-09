@@ -1,4 +1,4 @@
-import { FormControl, FormControlLabel, Grid, InputAdornment, Radio, RadioGroup, TextField } from "@mui/material";
+import { Card, CardContent, FormControl, FormControlLabel, Grid, InputAdornment, Radio, RadioGroup, TextField, Typography } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -50,6 +50,25 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
             })
     }, []);
 
+    const [servicesMenu, setServicesMenu] = useState([]);
+    const [productsMenu, setProductsMenu] = useState([]);
+    const [productAddOnsMenu, setProductAddOnsMenu] = useState([]);
+    const [packagesMenu, setPackagesMenu] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get('/api/getAllServices')
+            .then((response) => {
+                setServicesMenu(response.data.services);
+                setProductsMenu(response.data.products);
+                setProductAddOnsMenu(response.data.product_add_ons);
+                setPackagesMenu(response.data.packages);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }, []);
+
     useEffect(() => {
         const price1 = parseFloat(selectedPrice1) || 0;
         const price2 = parseFloat(selectedPrice2) || 0;
@@ -93,7 +112,64 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
         <Fragment>
             <Grid container spacing={2}>
                 <Grid item xs={6}>
-                    <Item>Left</Item>
+                    <Card variant="outlined">
+                        <CardContent>
+
+                            <div className="grid grid-cols-2 gap-4 mb-3">
+                                {servicesMenu.map((service) => (
+                                    <div className="text-sm">
+                                        <div className="mb-2">
+                                            <Typography variant="subtitle1">
+                                                {service.service_name}
+                                            </Typography>
+                                            {productsMenu.filter((product) => product.service_id == service.id)
+                                                .map((product) => (
+                                                    <div>
+                                                        <div className="flex justify-between mb-1   " key={product.id}>
+                                                            <p>{product.product_name}</p>
+                                                            <p>{product.price}</p>
+                                                        </div>
+
+                                                        {productAddOnsMenu.filter((addons) => addons.product_id == product.id)
+                                                            .map((addons) => (
+                                                                <div className="flex justify-between">
+                                                                    <p className="italic text-sm">{addons.additional}</p>
+                                                                    <p className="italic text-sm">{addons.additional_price}</p>
+                                                                </div>
+                                                            ))
+                                                        }
+                                                    </div>
+                                                ))}
+                                        </div>
+                                    </div>
+                                ))}
+
+                            </div>
+                            <hr></hr>
+                            <div className="grid grid-cols-2 gap-4 mt-3">
+                                {packagesMenu.map((packages) => (
+                                    <div className="text-sm">
+                                        <div className="flex justify-between">
+                                            <Typography variant="subtitle1">
+                                                {packages.package_name}
+                                            </Typography>
+                                            <Typography variant="subtitle1">
+                                                {packages.price}
+                                            </Typography>
+                                        </div>
+
+                                        <div>
+                                            {packages.products.map((products) => (
+                                                <ul className="list-disc list-inside">
+                                                    <li>{products.product_name}</li>
+                                                </ul>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </CardContent>
+                    </Card>
                 </Grid>
                 <Grid item xs={6}>
                     <TextField
@@ -280,8 +356,8 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
                         value={totalPrice}
                     />
                 </Grid>
-            </Grid>
-        </Fragment>
+            </Grid >
+        </Fragment >
     )
 }
 

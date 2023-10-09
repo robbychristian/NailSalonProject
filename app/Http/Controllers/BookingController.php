@@ -8,6 +8,7 @@ use App\Models\Packages;
 use App\Models\Payments;
 use App\Models\ProductAddOns;
 use App\Models\Products;
+use App\Models\Services;
 use App\Models\Staff;
 use App\Models\User;
 use App\Models\UserProfile;
@@ -222,6 +223,21 @@ class BookingController extends Controller
         $addons = ProductAddOns::find($id);
         return response()->json([
             'addons' => $addons
+        ]);
+    }
+
+    public function getAllServices()
+    {
+        $services = Services::all();
+        $products = Products::all();
+        $product_add_ons = ProductAddOns::all();
+        $packages = Packages::with('products')->get();
+
+        return response()->json([
+            'services' => $services,
+            'products' => $products,
+            'product_add_ons' => $product_add_ons,
+            'packages' => $packages,
         ]);
     }
 }
