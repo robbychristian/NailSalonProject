@@ -1,4 +1,4 @@
-import { Grid, TextField } from "@mui/material";
+import { Card, CardContent, Grid, TextField } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
@@ -10,6 +10,8 @@ import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import moment from "moment";
+import FullCalendar from "@fullcalendar/react";
+import timeGridPlugin from '@fullcalendar/timegrid';
 
 const DateForm = ({ onDateChange, onTimeChange, onBranchChange, errors }) => {
     const [branches, setBranches] = useState([]);
@@ -39,7 +41,12 @@ const DateForm = ({ onDateChange, onTimeChange, onBranchChange, errors }) => {
         <Fragment>
             <Grid container spacing={2}>
                 <Grid item xs={6}>
-                    <Item>Left</Item>
+
+                    <FullCalendar
+                        plugins={[timeGridPlugin]}
+                        initialView="timeGridWeek"
+                    />
+
                 </Grid>
                 <Grid item xs={6}>
                     <LocalizationProvider dateAdapter={AdapterMoment}>
