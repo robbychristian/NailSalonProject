@@ -15,6 +15,7 @@
                         <h1 class="font-bold">{{ $package->package_name }}</h1>
                         <p class="font-bold">₱{{ $package->price }}</p>
                     </div>
+                    <p>{{ $package->package_description }}</p>
                     <ul class="list-disc list-inside">
 
                         @foreach ($package->products as $product)

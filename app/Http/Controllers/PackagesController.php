@@ -46,6 +46,7 @@ class PackagesController extends Controller
     {
         $package = Packages::create([
             'package_name' => $request->package_name,
+            'package_description' => $request->package_description,
             'price' => $request->price
         ]);
 
@@ -93,6 +94,7 @@ class PackagesController extends Controller
     {
         Packages::where('id', $id)->update([
             'package_name' => $request->package_name,
+            'package_description' => $request->package_description,
             'price' => $request->price
         ]);
 

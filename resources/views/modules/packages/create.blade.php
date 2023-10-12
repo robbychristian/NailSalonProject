@@ -22,10 +22,22 @@
                     @csrf
 
                     <div class="mb-6">
-                        <label for="package_name" class="block mb-2 text-sm font-medium text-gray-900">Name of Service</label>
+                        <label for="package_name" class="block mb-2 text-sm font-medium text-gray-900">Name of Package</label>
                         <input type="text" value="{{ old('package_name') }}" name="package_name" id="package_name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                         @error('package_name')
+                            <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
+                                {{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="package_description"
+                            class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+                        <textarea value="{{ old('package_description') }}" name="package_description" id="message" rows="4"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"></textarea>
+
+                        @error('package_description')
                             <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                 {{ $message }}</p>
                         @enderror

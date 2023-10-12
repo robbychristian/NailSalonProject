@@ -33,6 +33,9 @@
                                 Package Name
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Package Description
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Price
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -48,6 +51,9 @@
                                 </th>
                                 <td class="px-6 py-4">
                                     {{ $package->package_name }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $package->package_description }}
                                 </td>
                                 <td class="px-6 py-4">
                                     ₱{{ $package->price }}

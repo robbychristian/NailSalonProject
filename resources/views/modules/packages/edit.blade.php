@@ -33,6 +33,18 @@
                     </div>
 
                     <div class="mb-6">
+                        <label for="package_description"
+                            class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+                        <textarea value="{{ $package->package_description }}" name="package_description" id="message" rows="4"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500">{{ $package->package_description }}</textarea>
+
+                        @error('package_description')
+                            <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
+                                {{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="mb-6">
                         <label for="" class="block mb-2 text-sm font-medium text-gray-900">List of Products</label>
                         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                             @foreach ($services as $service)
