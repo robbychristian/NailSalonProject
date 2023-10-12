@@ -39,7 +39,8 @@ class ServicesController extends Controller
     public function store(CreateServiceRequest $request)
     {
         Services::create([
-            'service_name' => $request['service_name']
+            'service_name' => $request['service_name'],
+            'service_description' => $request->service_description,
         ]);
 
         return redirect('/services')->with('success', 'You have successfully added a service!');
@@ -78,7 +79,8 @@ class ServicesController extends Controller
     public function update(CreateServiceRequest $request, $id)
     {
         Services::where('id', $id)->update([
-            'service_name' => $request['service_name']
+            'service_name' => $request['service_name'],
+            'service_description' => $request['service_description'],
         ]);
 
         return redirect('/services')->with('success', 'You have successfully edited the service!');

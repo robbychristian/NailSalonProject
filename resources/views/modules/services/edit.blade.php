@@ -23,6 +23,18 @@
                         @enderror
                     </div>
 
+                    <div class="mb-6">
+                        <label for="service_description"
+                            class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+                        <textarea value="{{ $service->service_description }}" name="service_description" id="message" rows="4"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500">{{ $service->service_description }}</textarea>
+
+                        @error('service_description')
+                            <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
+                                {{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <a href="{{ route('services.index') }}"
                         class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mr-1">Back</a>
                     <button type="submit"

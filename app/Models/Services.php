@@ -11,7 +11,8 @@ class Services extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'service_name'
+        'service_name',
+        'service_description'
     ];
 
     public function staff()
