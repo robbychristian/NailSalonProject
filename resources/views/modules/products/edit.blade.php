@@ -32,6 +32,18 @@
                     </div>
 
                     <div class="mb-6">
+                        <label for="product_description"
+                            class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+                        <textarea value="{{ $product->product_description }}" name="product_description" id="message" rows="4"
+                            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500">{{ $product->product_description }}</textarea>
+
+                        @error('product_description')
+                            <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
+                                {{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="mb-6">
 
                         <label for="service_type" class="block mb-2 text-sm font-medium text-gray-900">Service Type</label>
                         <select id="service_type" name="service_type"

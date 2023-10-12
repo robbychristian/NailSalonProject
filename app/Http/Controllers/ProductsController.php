@@ -41,6 +41,7 @@ class ProductsController extends Controller
     {
         Products::create([
             'product_name' => $request['product_name'],
+            'product_description' => $request->product_description,
             'service_id' => $request['service_type'],
             'price' => $request['price'],
         ]);
@@ -83,6 +84,7 @@ class ProductsController extends Controller
     {
         Products::where('id', $id)->update([
             'product_name' => $request['product_name'],
+            'product_description' => $request['product_description'],
             'service_id' => $request['service_type'],
             'price' => $request['price'],
         ]);

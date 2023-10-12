@@ -47,6 +47,9 @@
                                 Name
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Description
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Service Type
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -65,6 +68,9 @@
                                 </th>
                                 <td class="px-6 py-4">
                                     {{ $product->product_name }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $product->product_description }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $product->serviceType->service_name }}
