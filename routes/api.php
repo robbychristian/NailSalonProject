@@ -53,3 +53,4 @@ Route::get('getAllUsers', [BookingController::class, 'getAllUsers']);
 Route::get('getUser/{id}', [BookingController::class, 'getUserDetails']);
 Route::get('getProductAddOns/{id}', [BookingController::class, 'getAddOns']);
 Route::get('getAllServices', [BookingController::class, 'getAllServices']);
+Route::get('getAllBookings', [BookingController::class, 'getAllBookings']);

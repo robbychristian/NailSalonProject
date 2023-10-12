@@ -17,6 +17,7 @@ const DateForm = ({ onDateChange, onTimeChange, onBranchChange, errors }) => {
     const [branches, setBranches] = useState([]);
     const [dateError, setDateError] = useState(null);
     const [timeError, setTimeError] = useState(null);
+    const [events, setEvents] = useState([]);
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: "#fff",
@@ -37,6 +38,20 @@ const DateForm = ({ onDateChange, onTimeChange, onBranchChange, errors }) => {
             });
     }, []);
 
+    useEffect(() => {
+        axios
+            .get('/api/getAllBookings')
+            .then((response) => {
+                const eventData = response.data.bookings.map(booking => ({
+                    title: 'Event', // You can customize this title
+                    start: moment(booking.time_in, "YYYY-MM-DD h:mm A").format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
+                    end: moment(booking.time_out, "YYYY-MM-DD h:mm A").format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
+                }));
+                // console.log(eventData)
+                setEvents(eventData);
+            })
+    }, [])
+
     return (
         <Fragment>
             <Grid container spacing={2}>
@@ -45,6 +60,7 @@ const DateForm = ({ onDateChange, onTimeChange, onBranchChange, errors }) => {
                     <FullCalendar
                         plugins={[timeGridPlugin]}
                         initialView="timeGridWeek"
+                        events={events}
                     />
 
                 </Grid>
