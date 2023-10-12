@@ -240,4 +240,12 @@ class BookingController extends Controller
             'packages' => $packages,
         ]);
     }
+
+    public function getAllBookings()
+    {
+        $bookings = Bookings::all();
+        return response()->json([
+            'bookings' => $bookings
+        ]);
+    }
 }
