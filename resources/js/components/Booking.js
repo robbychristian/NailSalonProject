@@ -284,6 +284,9 @@ const Booking = (props) => {
               {activeStep === 3 &&
                 <TechnicianForm
                   onStaffChange={handleSelectedStaff}
+                  userIdValue={selectedUser}
+                  dateValue={selectedDate}
+                  timeValue={selectedTime}
                 />}
               {activeStep === 4 &&
                 <SummaryForm
@@ -307,15 +310,17 @@ const Booking = (props) => {
                   justifyContent: "flex-end",
                 }}
               >
-                {activeStep !== 0 && (
-                  <Button
-                    onClick={handleBack}
-                    sx={{ mt: 3, ml: 1 }}
-                  >
-                    Back
-                  </Button>
-                )}
-
+                {(JSON.parse(props.auth).user_role === 1 && activeStep === 0) ||
+                  (JSON.parse(props.auth).user_role === 2 && activeStep === 1)
+                  ? null
+                  : (
+                    <Button
+                      onClick={handleBack}
+                      sx={{ mt: 3, ml: 1 }}
+                    >
+                      Back
+                    </Button>
+                  )}
                 <Button
                   variant="contained"
                   onClick={handleNext}
@@ -336,7 +341,7 @@ const Booking = (props) => {
       {console.log(selectedService1)}
       {console.log(selectedService2)}
       {console.log(selectedService3)}
-      {console.log(selectedStaff)}
+      {console.log(selectedUser)}
     </React.Fragment>
   );
 };

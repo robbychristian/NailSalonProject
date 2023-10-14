@@ -4,8 +4,9 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import axios from "axios";
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import moment from "moment";
 
-const TechnicianForm = ({ onStaffChange }) => {
+const TechnicianForm = ({ onStaffChange, ...props }) => {
     const [staff, setStaff] = useState([]);
     const [openedStaff, setOpenedStaff] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,7 +32,17 @@ const TechnicianForm = ({ onStaffChange }) => {
     };
 
     useEffect(() => {
-        axios.get('/api/getStaff')
+        let time_in = moment(`${props.dateValue} ${props.timeValue}`, 'YYYY-MM-DD h:mm A').format('YYYY-MM-DD h:mm A')
+        let time_out = moment(`${props.dateValue} ${props.timeValue}`, 'YYYY-MM-DD h:mm A').add(1, 'hour').add(30, 'minutes').format('YYYY-MM-DD h:mm A')
+
+        console.log(time_in);
+        console.log(time_out);
+        axios.get('/api/getAvailableStaff', {
+            params: {
+                time_in: time_in,
+                time_out: time_out
+            }
+        })
             .then((response) => {
                 setStaff(response.data.staff)
                 console.log(response.data.staff)

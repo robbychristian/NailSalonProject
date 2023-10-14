@@ -112,6 +112,18 @@ class BookingController extends Controller
             'total_price' => $booking['total_price'],
             'payment_status' => 0,
         ]);
+
+        $numberOfBookings = Bookings::where('user_id', $booking['user_id'])->count();
+        if ($numberOfBookings >= 5) {
+            User::where('id', $booking['user_id'])->update([
+                'is_loyal' => 1
+            ]);
+        } else {
+            User::where('id', $booking['user_id'])->update([
+                'is_loyal' => NULL
+            ]);
+        }
+        // return $numberOfBookings;
     }
 
     /**
@@ -246,6 +258,40 @@ class BookingController extends Controller
         $bookings = Bookings::all();
         return response()->json([
             'bookings' => $bookings
+        ]);
+    }
+
+    public function getAvailableStaff(Request $request)
+    {
+        $requestedTimeIn = $request->time_in;
+        $requestedTimeOut = $request->time_out;
+
+        // Retrieve staff members with bookings that overlap with the requested time
+        $bookedStaff = Bookings::where(function ($query) use ($requestedTimeIn, $requestedTimeOut) {
+            $query->where(function ($query) use ($requestedTimeIn, $requestedTimeOut) {
+                $query->where('time_in', '<=', $requestedTimeIn)
+                    ->where('time_out', '>=', $requestedTimeIn);
+            })->orWhere(function ($query) use ($requestedTimeIn, $requestedTimeOut) {
+                $query->where('time_in', '<', $requestedTimeOut)
+                    ->where('time_out', '>=', $requestedTimeOut);
+            })->orWhere(function ($query) use ($requestedTimeIn, $requestedTimeOut) {
+                $query->where('time_in', '>=', $requestedTimeIn)
+                    ->where('time_out', '<=', $requestedTimeOut);
+            });
+        })->pluck('staff_id')->toArray();
+
+        $allStaff = Staff::with('workImages')->with('services')->pluck('id')->toArray();
+
+        // Use array_diff to remove values in $bookedStaff from $allStaff
+        $availableStaff = array_diff($allStaff, $bookedStaff);
+
+        // Convert the result back to an indexed array if needed
+        $availableStaff = array_values($availableStaff);
+
+        $staff = Staff::with('workImages')->with('services')->whereIn('id', $availableStaff)->get();
+
+        return response()->json([
+            'staff' => $staff
         ]);
     }
 }
