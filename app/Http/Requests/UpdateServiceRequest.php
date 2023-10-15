@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreatePackagesRequest extends FormRequest
+class UpdateServiceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,9 @@ class CreatePackagesRequest extends FormRequest
      */
     public function rules()
     {
+        $serviceId = $this->route('service');
         return [
-            'package_name' => ['required', 'unique:packages,package_name', 'unique:products,product_name'],
-            'product'  => ['required'],
-            'price' => ['required']
+            'service_name' => ['required', 'unique:services,service_name,' . $serviceId]
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateServiceRequest;
+use App\Http\Requests\UpdateServiceRequest;
 use App\Models\Products;
 use App\Models\Services;
 use Illuminate\Http\Request;
@@ -76,7 +77,7 @@ class ServicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateServiceRequest $request, $id)
+    public function update(UpdateServiceRequest $request, $id)
     {
         Services::where('id', $id)->update([
             'service_name' => $request['service_name'],

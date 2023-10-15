@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Products;
 use App\Models\Services;
 use Illuminate\Http\Request;
@@ -80,7 +81,7 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateProductRequest $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
         Products::where('id', $id)->update([
             'product_name' => $request['product_name'],

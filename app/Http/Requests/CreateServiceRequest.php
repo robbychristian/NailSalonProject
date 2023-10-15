@@ -24,7 +24,7 @@ class CreateServiceRequest extends FormRequest
     public function rules()
     {
         return [
-            'service_name' => ['required']
+            'service_name' => ['required', 'unique:services,service_name']
         ];
     }
 }
