@@ -78,6 +78,11 @@
                         @foreach ($booking->products as $products)
                             <input type="text" disabled value="{{ $products->product_name }}" name="service"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 mt-3">
+                            @foreach ($booking->productsAddOns as $addons)
+                                @if ($addons->product_id == $products->id)
+                                    <small><span class="font-medium">Add Ons:</span> {{ $addons->additional }}</small>
+                                @endif
+                            @endforeach
                         @endforeach
                         @foreach ($booking->packages as $packages)
                             <input type="text" disabled value="{{ $packages->package_name }}" name="service"

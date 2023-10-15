@@ -81,6 +81,12 @@ class BookingController extends Controller
             return $value !== null;
         });
 
+        $addons = [$booking['addon1'], $booking['addon2'], $booking['addon3']];
+
+        $notNullAddOns = array_filter($addons, function ($value) {
+            return $value !== null;
+        });
+
         $packages = [$package1, $package2, $package3];
 
         $notNullPackages = array_filter($packages, function ($value) {
@@ -99,6 +105,12 @@ class BookingController extends Controller
         if (count($notNullProducts) != 0) {
             foreach ($notNullProducts as $products) {
                 $bookingDetails->products()->attach($products);
+            }
+        }
+
+        if (count($notNullAddOns) != 0) {
+            foreach ($notNullAddOns as $addons) {
+                $bookingDetails->productsAddOns()->attach($addons);
             }
         }
 
@@ -135,7 +147,7 @@ class BookingController extends Controller
      */
     public function show($id)
     {
-        $booking = Bookings::with('packages')->with('products')->find($id);
+        $booking = Bookings::with('packages', 'products', 'productsAddOns')->find($id);
         return view('modules.booking.show', compact('booking'));
     }
 

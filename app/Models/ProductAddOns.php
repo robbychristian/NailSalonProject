@@ -20,4 +20,9 @@ class ProductAddOns extends Model
     {
         return $this->belongsTo(Products::class, 'product_id', 'id');
     }
+
+    public function bookings()
+    {
+        return $this->belongsToMany(Bookings::class);
+    }
 }
