@@ -4,9 +4,20 @@
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
         <div class="w-full bg-white rounded-lg shadow md:mt-5 mb-10 md xl:p-0">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-                    View Booking Reservation Details
-                </h1>
+                <div class="flex justify-between">
+                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                        View Booking Reservation Details
+                    </h1>
+
+                    @if (!$booking->reviews)
+                        <a href="{{ route('reviews.create', $booking->id) }}"
+                            class="text-white bg-darker-pink hover:bg-darker-pink-90 font-medium rounded-lg text-sm px-4 py-2 inline-flex items-center">
+                            <i class="fa-solid fa-star mr-2"></i>
+                            Give Review
+                        </a>
+                    @endif
+                </div>
+
 
                 <h4 class="text-lg font-semibold text-gray-900 md:text-xl mb-3">Customer Information</h4>
                 <div class="grid gap-6 mb-6 md:grid-cols-3">
@@ -120,6 +131,13 @@
                         @endif
                     </div>
                 </div>
+
+                @if ($booking->reviews)
+                    <h4 class="text-lg font-semibold text-gray-900 md:text-xl mb-3">Review</h4>
+                    <div class="grid gap-6 mb-6">
+                        <div id="view-review" data-review="{{ $booking->reviews }}"></div>
+                    </div>
+                @endif
 
                 <div class="mb-6">
                     <a href="{{ route('booking.index') }}"

@@ -59,4 +59,9 @@ class Bookings extends Model
     {
         return $this->belongsToMany(ProductAddOns::class);
     }
+
+    public function reviews()
+    {
+        return $this->belongsTo(Reviews::class, 'id', 'booking_id');
+    }
 }

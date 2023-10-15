@@ -8,6 +8,7 @@ use App\Models\Packages;
 use App\Models\Payments;
 use App\Models\ProductAddOns;
 use App\Models\Products;
+use App\Models\Reviews;
 use App\Models\Services;
 use App\Models\Staff;
 use App\Models\User;
@@ -150,7 +151,8 @@ class BookingController extends Controller
      */
     public function show($id)
     {
-        $booking = Bookings::with('packages', 'products', 'productsAddOns')->find($id);
+        $booking = Bookings::with('packages', 'products', 'productsAddOns', 'reviews')->find($id);
+        // return $booking;
         return view('modules.booking.show', compact('booking'));
     }
 
@@ -351,5 +353,32 @@ class BookingController extends Controller
                 ]);
             }
         }
+    }
+
+    public function giveReviews($id)
+    {
+        $booking = Bookings::find($id);
+        return view('modules.reviews.create', compact('booking'));
+    }
+
+    public function saveReviews(Request $request)
+    {
+        $review = [
+            'user_id' => $request->user_id,
+            'booking_id' => $request->booking_id,
+            'review_score' => $request->review_score,
+            'review_desc' => $request->review_desc,
+        ];
+
+        Reviews::create([
+            'user_id' => $review['user_id'],
+            'booking_id' => $review['booking_id'],
+            'review_score' => $review['review_score'],
+            'review_desc' => $review['review_desc'],
+        ]);
+
+        return response()->json(
+            ['redirect' => route('booking.show', $review['booking_id'])]
+        );
     }
 }
