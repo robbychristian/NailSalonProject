@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 
-const ServicesForm = ({ onService1Change, onService2Change, onService3Change, onAddOn1Change, onAddOn2Change, onAddOn3Change, onPriceChange }) => {
+const ServicesForm = ({ onService1Change, onService2Change, onService3Change, onServiceTypeId1Change, onServiceTypeId2Change, onServiceTypeId3Change, onAddOn1Change, onAddOn2Change, onAddOn3Change, onPriceChange }) => {
     const [products, setProducts] = useState([]);
     const [addOns, setAddOns] = useState([]);
     const [packages, setPackages] = useState([]);
@@ -21,10 +21,6 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
     const [selectedProduct1, setSelectedProduct1] = useState(null);
     const [selectedProduct2, setSelectedProduct2] = useState(null);
     const [selectedProduct3, setSelectedProduct3] = useState(null);
-
-    // const [selectedAddonId1,  setSelectedAddonId1] = useState("");
-    // const [selectedAddonId2, setSelectedAddonId2] = useState("");
-    // const [selectedAddonId3, setSelectedAddonId3] = useState("");
 
     const [selectedAddonPrice1, setSelectedAddonPrice1] = useState(0);
     const [selectedAddonPrice2, setSelectedAddonPrice2] = useState(0);
@@ -183,6 +179,8 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
                             const selectedPackage = packages.find((data) => data.package_name === e.target.value);
                             const selectedPrice = selectedProduct ? selectedProduct.price : (selectedPackage ? selectedPackage.price : "");
                             setSelectedPrice1(selectedPrice);
+                            const productServiceType = selectedProduct ? selectedProduct.service_id : (selectedPackage ? 1 : "");
+                            onServiceTypeId1Change(productServiceType);
 
                             const hasAddons = selectedProduct ? selectedProduct.id in addonsMap : false;
                             setHasAddons1(hasAddons);
@@ -238,6 +236,8 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
                             const selectedPackage = packages.find((data) => data.package_name === e.target.value);
                             const selectedPrice = selectedProduct ? selectedProduct.price : (selectedPackage ? selectedPackage.price : "");
                             setSelectedPrice2(selectedPrice);
+                            const productServiceType = selectedProduct ? selectedProduct.service_id : (selectedPackage ? 1 : "");
+                            onServiceTypeId2Change(productServiceType);
 
                             const hasAddons = selectedProduct ? selectedProduct.id in addonsMap : false;
                             setHasAddons2(hasAddons);
@@ -297,6 +297,8 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
                             const selectedPrice = selectedProduct ? selectedProduct.price : (selectedPackage ? selectedPackage.price : "");
                             setSelectedPrice3(selectedPrice);
 
+                            const productServiceType = selectedProduct ? selectedProduct.service_id : (selectedPackage ? 1 : "");
+                            onServiceTypeId3Change(productServiceType);
                             const hasAddons = selectedProduct ? selectedProduct.id in addonsMap : false;
                             setHasAddons3(hasAddons);
                             setSelectedProduct3(selectedProduct);

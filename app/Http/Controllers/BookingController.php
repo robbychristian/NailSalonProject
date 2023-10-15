@@ -13,6 +13,7 @@ use App\Models\Staff;
 use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
@@ -265,6 +266,18 @@ class BookingController extends Controller
     {
         $requestedTimeIn = $request->time_in;
         $requestedTimeOut = $request->time_out;
+        $serviceTypes = [
+            $request->serviceType1,
+            $request->serviceType2,
+            $request->serviceType3,
+        ];
+        $userId = $request->userId;
+
+        // get the major service type for staff
+        $serviceTypeCollection = new Collection($serviceTypes);
+        $majorValue = $serviceTypeCollection->mode();
+
+        $majorServiceId = implode(',', $majorValue);
 
         // Retrieve staff members with bookings that overlap with the requested time
         $bookedStaff = Bookings::where(function ($query) use ($requestedTimeIn, $requestedTimeOut) {
@@ -288,10 +301,34 @@ class BookingController extends Controller
         // Convert the result back to an indexed array if needed
         $availableStaff = array_values($availableStaff);
 
-        $staff = Staff::with('workImages')->with('services')->whereIn('id', $availableStaff)->get();
+        // check user if loyal
+        $userStatus = User::where('id', $userId)->pluck('is_loyal')->first();
 
-        return response()->json([
-            'staff' => $staff
-        ]);
+        if ($userStatus == 1) {
+            $staff = Staff::with('workImages')
+                ->with('services')
+                ->whereIn('id', $availableStaff)
+                ->whereHas('services', function ($query) use ($majorServiceId) {
+                    $query->where('id', $majorServiceId);
+                })
+                ->get();
+
+            return response()->json([
+                'staff' => $staff
+            ]);
+        } else if ($userStatus == NULL) {
+            $staff = Staff::with('workImages')
+                ->with('services')
+                ->whereIn('id', $availableStaff)
+                ->whereHas('services', function ($query) use ($majorServiceId) {
+                    $query->where('id', $majorServiceId);
+                })
+                ->inRandomOrder() // Randomly order the results
+                ->first(); // Get the first result
+
+            return response()->json([
+                'staff' => [$staff]
+            ]);
+        }
     }
 }

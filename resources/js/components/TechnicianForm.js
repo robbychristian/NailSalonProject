@@ -40,7 +40,11 @@ const TechnicianForm = ({ onStaffChange, ...props }) => {
         axios.get('/api/getAvailableStaff', {
             params: {
                 time_in: time_in,
-                time_out: time_out
+                time_out: time_out,
+                serviceType1: props.serviceType1Value,
+                serviceType2: props.serviceType2Value,
+                serviceType3: props.serviceType3Value,
+                userId: props.userIdValue
             }
         })
             .then((response) => {
@@ -67,7 +71,7 @@ const TechnicianForm = ({ onStaffChange, ...props }) => {
                 >
                     <Grid container spacing={2}>
                         {staff.map((item, index) => (
-                            <Grid item xs={3}>
+                            <Grid item xs>
                                 <Card sx={{ maxWidth: 345, height: "100%" }} key={index}>
 
                                     <img src={`/img/profile_pictures/${item.id}/${item.staff_image}`} />
