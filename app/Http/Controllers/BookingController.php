@@ -120,22 +120,25 @@ class BookingController extends Controller
             }
         }
 
-        $payment = Payments::create([
-            'booking_id' => $bookingDetails->id,
-            'total_price' => $booking['total_price'],
-            'payment_status' => 0,
-        ]);
-
         $numberOfBookings = Bookings::where('user_id', $booking['user_id'])->count();
+        $totalPrice = 0;
         if ($numberOfBookings >= 5) {
             User::where('id', $booking['user_id'])->update([
                 'is_loyal' => 1
             ]);
+            $totalPrice = $booking['total_price'] * 0.9;
         } else {
             User::where('id', $booking['user_id'])->update([
                 'is_loyal' => NULL
             ]);
+            $totalPrice = $booking['total_price'];
         }
+
+        $payment = Payments::create([
+            'booking_id' => $bookingDetails->id,
+            'total_price' => $totalPrice,
+            'payment_status' => 0,
+        ]);
         // return $numberOfBookings;
     }
 
@@ -338,9 +341,15 @@ class BookingController extends Controller
                 ->inRandomOrder() // Randomly order the results
                 ->first(); // Get the first result
 
-            return response()->json([
-                'staff' => [$staff]
-            ]);
+            if ($staff) {
+                return response()->json([
+                    'staff' => [$staff]
+                ]);
+            } else {
+                return response()->json([
+                    'staff' => []
+                ]);
+            }
         }
     }
 }

@@ -783,6 +783,9 @@ video {
 .justify-start {
   justify-content: flex-start;
 }
+.justify-end {
+  justify-content: flex-end;
+}
 .justify-center {
   justify-content: center;
 }
@@ -1189,6 +1192,9 @@ video {
 }
 .underline {
   text-decoration-line: underline;
+}
+.overline {
+  text-decoration-line: overline;
 }
 .antialiased {
   -webkit-font-smoothing: antialiased;

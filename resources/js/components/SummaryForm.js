@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Fragment } from "react"
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+import Chip from '@mui/material/Chip';
 
 const SummaryForm = (props) => {
     const [staffName, setStaffName] = useState([]);
@@ -10,6 +11,7 @@ const SummaryForm = (props) => {
     const [lname, setLname] = useState("");
     const [number, setNumber] = useState("");
     const [email, setEmail] = useState("");
+    const [isLoyal, setIsLoyal] = useState("");
 
     const [addOns1, setAddOn1] = useState("");
     const [addOns2, setAddOn2] = useState("");
@@ -36,6 +38,7 @@ const SummaryForm = (props) => {
                 setLname(response.data.selectedUser.last_name);
                 setEmail(response.data.selectedUser.email);
                 setNumber(response.data.selectedUserProfile[0].contact_no);
+                setIsLoyal(response.data.selectedUser.is_loyal);
             })
     }, [props.userValue]);
 
@@ -262,26 +265,43 @@ const SummaryForm = (props) => {
                     <Typography variant="subtitle1">
                         <b>Payment Details</b>
                     </Typography>
-                    <TextField
-                        sx={{ mt: 1.5 }}
-                        id="input-with-icon-textfield"
-                        label="Total Price"
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    ₱
-                                </InputAdornment>
-                            ),
-                            readOnly: true
-                        }}
-                        variant="filled"
-                        value={props.priceValue}
-                        fullWidth
-                    />
+
+                    <div className="flex justify-between mb-3">
+                        <Typography variant="subtitle1">
+                            Total:
+                        </Typography>
+                        <Typography variant="subtitle1">
+                            <b>₱ {props.priceValue}</b>
+                        </Typography>
+                    </div>
+
+                    <div className="flex justify-between mb-3">
+                        <Typography variant="subtitle1">
+                            Discount:
+                        </Typography>
+                        {isLoyal == 1 ? <Chip
+                            color="success"
+                            label="10% Discount"
+                            disabled={false}
+                            size="small"
+                        /> :
+                            <Chip
+                                label="0% Discount"
+                                disabled={false}
+                                size="small"
+                            />
+                        }
+                    </div>
+
+                    <hr></hr>
+                    <div className="flex justify-end mt-3">
+                        <Typography variant="h4">
+                            {isLoyal == 1 ? <b>₱ {Number(props.priceValue) * Number(0.9)}</b> : <b>₱ {props.priceValue}</b>}
+                        </Typography>
+                    </div>
                 </Grid>
             </Grid>
-
-        </Fragment>
+        </Fragment >
     )
 }
 

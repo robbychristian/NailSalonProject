@@ -5,6 +5,8 @@ import Paper from "@mui/material/Paper";
 import axios from "axios";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import moment from "moment";
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 const TechnicianForm = ({ onStaffChange, ...props }) => {
     const [staff, setStaff] = useState([]);
@@ -63,42 +65,51 @@ const TechnicianForm = ({ onStaffChange, ...props }) => {
     }
     return (
         <Fragment>
-            <FormControl>
-                <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    name="radio-buttons-group"
-                    onChange={(e) => onStaffChange(e.target.value)}
-                >
-                    <Grid container spacing={2}>
-                        {staff.map((item, index) => (
-                            <Grid item xs>
-                                <Card sx={{ maxWidth: 345, height: "100%" }} key={index}>
+            {staff.length > 0 ? (
+                <FormControl>
+                    <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        name="radio-buttons-group"
+                        onChange={(e) => onStaffChange(e.target.value)}
+                    >
+                        <Grid container spacing={2}>
+                            {staff.map((item, index) => (
+                                <Grid item xs>
+                                    <Card sx={{ maxWidth: 345, height: "100%" }} key={index}>
 
-                                    <img src={`/img/profile_pictures/${item.id}/${item.staff_image}`} />
-                                    <CardContent>
-                                        <FormControlLabel
-                                            value={item.id}
-                                            control={<Radio />}
-                                            name="staff"
-                                            label={item.staff_name} />
-                                        {item.services.map((data, index) => {
-                                            return (
-                                                <ul className="list-disc list-inside">
-                                                    <li key={index}>{data.service_name}</li>
-                                                </ul>
-                                            )
-                                        })}
+                                        <img src={`/img/profile_pictures/${item.id}/${item.staff_image}`} />
+                                        <CardContent>
+                                            <FormControlLabel
+                                                value={item.id}
+                                                control={<Radio />}
+                                                name="staff"
+                                                label={item.staff_name} />
+                                            {item.services.map((data, index) => {
+                                                return (
+                                                    <ul className="list-disc list-inside">
+                                                        <li key={index}>{data.service_name}</li>
+                                                    </ul>
+                                                )
+                                            })}
 
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button size="small" onClick={() => handleOpenModal(item.id)}>Show Work Images</Button>
-                                    </CardActions>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </RadioGroup>
-            </FormControl>
+                                        </CardContent>
+                                        <CardActions>
+                                            <Button size="small" onClick={() => handleOpenModal(item.id)}>Show Work Images</Button>
+                                        </CardActions>
+                                    </Card>
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </RadioGroup>
+                </FormControl>
+            ) :
+
+                <Alert severity="error">
+                    <AlertTitle>Error</AlertTitle>
+                    There are no available staff at your desired schedule. Try reserving for another time and schedule. Thank you.
+
+                </Alert>
+            }
 
             {/* MODAL */}
 
