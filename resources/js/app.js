@@ -14,4 +14,6 @@ require('./bootstrap');
 
 require('./components/Example');
 require('./components/Booking');
-require('./components/DashboardCalendar')
+require('./components/DashboardCalendar');
+require('./components/Review');
+require('./components/ViewReview');

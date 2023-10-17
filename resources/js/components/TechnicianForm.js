@@ -4,8 +4,11 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import axios from "axios";
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import moment from "moment";
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
-const TechnicianForm = ({ onStaffChange }) => {
+const TechnicianForm = ({ onStaffChange, ...props }) => {
     const [staff, setStaff] = useState([]);
     const [openedStaff, setOpenedStaff] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,7 +34,21 @@ const TechnicianForm = ({ onStaffChange }) => {
     };
 
     useEffect(() => {
-        axios.get('/api/getStaff')
+        let time_in = moment(`${props.dateValue} ${props.timeValue}`, 'YYYY-MM-DD h:mm A').format('YYYY-MM-DD h:mm A')
+        let time_out = moment(`${props.dateValue} ${props.timeValue}`, 'YYYY-MM-DD h:mm A').add(1, 'hour').add(30, 'minutes').format('YYYY-MM-DD h:mm A')
+
+        console.log(time_in);
+        console.log(time_out);
+        axios.get('/api/getAvailableStaff', {
+            params: {
+                time_in: time_in,
+                time_out: time_out,
+                serviceType1: props.serviceType1Value,
+                serviceType2: props.serviceType2Value,
+                serviceType3: props.serviceType3Value,
+                userId: props.userIdValue
+            }
+        })
             .then((response) => {
                 setStaff(response.data.staff)
                 console.log(response.data.staff)
@@ -48,42 +65,51 @@ const TechnicianForm = ({ onStaffChange }) => {
     }
     return (
         <Fragment>
-            <FormControl>
-                <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    name="radio-buttons-group"
-                    onChange={(e) => onStaffChange(e.target.value)}
-                >
-                    <Grid container spacing={2}>
-                        {staff.map((item, index) => (
-                            <Grid item xs={3}>
-                                <Card sx={{ maxWidth: 345, height: "100%" }} key={index}>
+            {staff.length > 0 ? (
+                <FormControl>
+                    <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        name="radio-buttons-group"
+                        onChange={(e) => onStaffChange(e.target.value)}
+                    >
+                        <Grid container spacing={2}>
+                            {staff.map((item, index) => (
+                                <Grid item xs>
+                                    <Card sx={{ maxWidth: 345, height: "100%" }} key={index}>
 
-                                    <img src={`/img/profile_pictures/${item.id}/${item.staff_image}`} />
-                                    <CardContent>
-                                        <FormControlLabel
-                                            value={item.id}
-                                            control={<Radio />}
-                                            name="staff"
-                                            label={item.staff_name} />
-                                        {item.services.map((data, index) => {
-                                            return (
-                                                <ul className="list-disc list-inside">
-                                                    <li key={index}>{data.service_name}</li>
-                                                </ul>
-                                            )
-                                        })}
+                                        <img src={`/img/profile_pictures/${item.id}/${item.staff_image}`} />
+                                        <CardContent>
+                                            <FormControlLabel
+                                                value={item.id}
+                                                control={<Radio />}
+                                                name="staff"
+                                                label={item.staff_name} />
+                                            {item.services.map((data, index) => {
+                                                return (
+                                                    <ul className="list-disc list-inside">
+                                                        <li key={index}>{data.service_name}</li>
+                                                    </ul>
+                                                )
+                                            })}
 
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button size="small" onClick={() => handleOpenModal(item.id)}>Show Work Images</Button>
-                                    </CardActions>
-                                </Card>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </RadioGroup>
-            </FormControl>
+                                        </CardContent>
+                                        <CardActions>
+                                            <Button size="small" onClick={() => handleOpenModal(item.id)}>Show Work Images</Button>
+                                        </CardActions>
+                                    </Card>
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </RadioGroup>
+                </FormControl>
+            ) :
+
+                <Alert severity="error">
+                    <AlertTitle>Error</AlertTitle>
+                    There are no available staff at your desired schedule. Try reserving for another time and schedule. Thank you.
+
+                </Alert>
+            }
 
             {/* MODAL */}
 

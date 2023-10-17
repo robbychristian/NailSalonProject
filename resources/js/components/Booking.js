@@ -56,6 +56,10 @@ const Booking = (props) => {
   const [selectedService2, setSelectedService2] = useState(null);
   const [selectedService3, setSelectedService3] = useState(null);
 
+  const [serviceTypeId1, setServiceTypeId1] = useState("");
+  const [serviceTypeId2, setServiceTypeId2] = useState("");
+  const [serviceTypeId3, setServiceTypeId3] = useState("");
+
   const [selectedAddonId1, setSelectedAddonId1] = useState("");
   const [selectedAddonId2, setSelectedAddonId2] = useState("");
   const [selectedAddonId3, setSelectedAddonId3] = useState("");
@@ -72,6 +76,18 @@ const Booking = (props) => {
 
   const handleService3Change = (s3) => {
     setSelectedService3(s3);
+  }
+
+  const handleServiceTypeId1Change = (id1) => {
+    setServiceTypeId1(id1)
+  }
+
+  const handleServiceTypeId2Change = (id2) => {
+    setServiceTypeId2(id2)
+  }
+
+  const handleServiceTypeId3Change = (id3) => {
+    setServiceTypeId3(id3)
   }
 
   const handleAddOn1Change = (addon1) => {
@@ -275,6 +291,9 @@ const Booking = (props) => {
                   onService1Change={handleService1Change}
                   onService2Change={handleService2Change}
                   onService3Change={handleService3Change}
+                  onServiceTypeId1Change={handleServiceTypeId1Change}
+                  onServiceTypeId2Change={handleServiceTypeId2Change}
+                  onServiceTypeId3Change={handleServiceTypeId3Change}
                   onAddOn1Change={handleAddOn1Change}
                   onAddOn2Change={handleAddOn2Change}
                   onAddOn3Change={handleAddOn3Change}
@@ -284,6 +303,12 @@ const Booking = (props) => {
               {activeStep === 3 &&
                 <TechnicianForm
                   onStaffChange={handleSelectedStaff}
+                  userIdValue={selectedUser}
+                  dateValue={selectedDate}
+                  timeValue={selectedTime}
+                  serviceType1Value={serviceTypeId1}
+                  serviceType2Value={serviceTypeId2}
+                  serviceType3Value={serviceTypeId3}
                 />}
               {activeStep === 4 &&
                 <SummaryForm
@@ -307,15 +332,17 @@ const Booking = (props) => {
                   justifyContent: "flex-end",
                 }}
               >
-                {activeStep !== 0 && (
-                  <Button
-                    onClick={handleBack}
-                    sx={{ mt: 3, ml: 1 }}
-                  >
-                    Back
-                  </Button>
-                )}
-
+                {(JSON.parse(props.auth).user_role === 1 && activeStep === 0) ||
+                  (JSON.parse(props.auth).user_role === 2 && activeStep === 1)
+                  ? null
+                  : (
+                    <Button
+                      onClick={handleBack}
+                      sx={{ mt: 3, ml: 1 }}
+                    >
+                      Back
+                    </Button>
+                  )}
                 <Button
                   variant="contained"
                   onClick={handleNext}
@@ -332,11 +359,15 @@ const Booking = (props) => {
       </Container>
       {/* {console.log(moment().add(1, 'days').format('YYYY-MM-DD'))}
       {console.log(moment('10:00 AM', 'h:mm A').format('LT'))} */}
-      {console.log(selectedDate, selectedTime, selectedBranch)}
+      {/* {console.log(selectedDate, selectedTime, selectedBranch)}
       {console.log(selectedService1)}
       {console.log(selectedService2)}
       {console.log(selectedService3)}
-      {console.log(selectedStaff)}
+      {console.log(selectedUser)} */}
+
+      {console.log(`Service Id: ${serviceTypeId1}`)}
+      {console.log(`Service Id: ${serviceTypeId2}`)}
+      {console.log(`Service Id: ${serviceTypeId3}`)}
     </React.Fragment>
   );
 };

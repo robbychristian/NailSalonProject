@@ -24,7 +24,7 @@ class CreatePackagesRequest extends FormRequest
     public function rules()
     {
         return [
-            'package_name' => ['required'],
+            'package_name' => ['required', 'unique:packages,package_name', 'unique:products,product_name'],
             'product'  => ['required'],
             'price' => ['required']
         ];

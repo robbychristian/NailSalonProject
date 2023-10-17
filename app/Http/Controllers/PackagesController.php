@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePackagesRequest;
+use App\Http\Requests\UpdatePackagesRequest;
 use App\Models\PackageProducts;
 use App\Models\Packages;
 use App\Models\Products;
@@ -90,7 +91,7 @@ class PackagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreatePackagesRequest $request, $id)
+    public function update(UpdatePackagesRequest $request, $id)
     {
         Packages::where('id', $id)->update([
             'package_name' => $request->package_name,

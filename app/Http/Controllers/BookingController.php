@@ -8,11 +8,13 @@ use App\Models\Packages;
 use App\Models\Payments;
 use App\Models\ProductAddOns;
 use App\Models\Products;
+use App\Models\Reviews;
 use App\Models\Services;
 use App\Models\Staff;
 use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
@@ -80,6 +82,12 @@ class BookingController extends Controller
             return $value !== null;
         });
 
+        $addons = [$booking['addon1'], $booking['addon2'], $booking['addon3']];
+
+        $notNullAddOns = array_filter($addons, function ($value) {
+            return $value !== null;
+        });
+
         $packages = [$package1, $package2, $package3];
 
         $notNullPackages = array_filter($packages, function ($value) {
@@ -101,17 +109,38 @@ class BookingController extends Controller
             }
         }
 
+        if (count($notNullAddOns) != 0) {
+            foreach ($notNullAddOns as $addons) {
+                $bookingDetails->productsAddOns()->attach($addons);
+            }
+        }
+
         if (count($notNullPackages) != 0) {
             foreach ($notNullPackages as $packages) {
                 $bookingDetails->packages()->attach($packages);
             }
         }
 
+        $numberOfBookings = Bookings::where('user_id', $booking['user_id'])->count();
+        $totalPrice = 0;
+        if ($numberOfBookings >= 5) {
+            User::where('id', $booking['user_id'])->update([
+                'is_loyal' => 1
+            ]);
+            $totalPrice = $booking['total_price'] * 0.9;
+        } else {
+            User::where('id', $booking['user_id'])->update([
+                'is_loyal' => NULL
+            ]);
+            $totalPrice = $booking['total_price'];
+        }
+
         $payment = Payments::create([
             'booking_id' => $bookingDetails->id,
-            'total_price' => $booking['total_price'],
+            'total_price' => $totalPrice,
             'payment_status' => 0,
         ]);
+        // return $numberOfBookings;
     }
 
     /**
@@ -122,7 +151,8 @@ class BookingController extends Controller
      */
     public function show($id)
     {
-        $booking = Bookings::with('packages')->with('products')->find($id);
+        $booking = Bookings::with('packages', 'products', 'productsAddOns', 'reviews')->find($id);
+        // return $booking;
         return view('modules.booking.show', compact('booking'));
     }
 
@@ -247,5 +277,108 @@ class BookingController extends Controller
         return response()->json([
             'bookings' => $bookings
         ]);
+    }
+
+    public function getAvailableStaff(Request $request)
+    {
+        $requestedTimeIn = $request->time_in;
+        $requestedTimeOut = $request->time_out;
+        $serviceTypes = [
+            $request->serviceType1,
+            $request->serviceType2,
+            $request->serviceType3,
+        ];
+        $userId = $request->userId;
+
+        // get the major service type for staff
+        $serviceTypeCollection = new Collection($serviceTypes);
+        $majorValue = $serviceTypeCollection->mode();
+
+        $majorServiceId = implode(',', $majorValue);
+
+        // Retrieve staff members with bookings that overlap with the requested time
+        $bookedStaff = Bookings::where(function ($query) use ($requestedTimeIn, $requestedTimeOut) {
+            $query->where(function ($query) use ($requestedTimeIn, $requestedTimeOut) {
+                $query->where('time_in', '<=', $requestedTimeIn)
+                    ->where('time_out', '>=', $requestedTimeIn);
+            })->orWhere(function ($query) use ($requestedTimeIn, $requestedTimeOut) {
+                $query->where('time_in', '<', $requestedTimeOut)
+                    ->where('time_out', '>=', $requestedTimeOut);
+            })->orWhere(function ($query) use ($requestedTimeIn, $requestedTimeOut) {
+                $query->where('time_in', '>=', $requestedTimeIn)
+                    ->where('time_out', '<=', $requestedTimeOut);
+            });
+        })->pluck('staff_id')->toArray();
+
+        $allStaff = Staff::with('workImages')->with('services')->pluck('id')->toArray();
+
+        // Use array_diff to remove values in $bookedStaff from $allStaff
+        $availableStaff = array_diff($allStaff, $bookedStaff);
+
+        // Convert the result back to an indexed array if needed
+        $availableStaff = array_values($availableStaff);
+
+        // check user if loyal
+        $userStatus = User::where('id', $userId)->pluck('is_loyal')->first();
+
+        if ($userStatus == 1) {
+            $staff = Staff::with('workImages')
+                ->with('services')
+                ->whereIn('id', $availableStaff)
+                ->whereHas('services', function ($query) use ($majorServiceId) {
+                    $query->where('id', $majorServiceId);
+                })
+                ->get();
+
+            return response()->json([
+                'staff' => $staff
+            ]);
+        } else if ($userStatus == NULL) {
+            $staff = Staff::with('workImages')
+                ->with('services')
+                ->whereIn('id', $availableStaff)
+                ->whereHas('services', function ($query) use ($majorServiceId) {
+                    $query->where('id', $majorServiceId);
+                })
+                ->inRandomOrder() // Randomly order the results
+                ->first(); // Get the first result
+
+            if ($staff) {
+                return response()->json([
+                    'staff' => [$staff]
+                ]);
+            } else {
+                return response()->json([
+                    'staff' => []
+                ]);
+            }
+        }
+    }
+
+    public function giveReviews($id)
+    {
+        $booking = Bookings::find($id);
+        return view('modules.reviews.create', compact('booking'));
+    }
+
+    public function saveReviews(Request $request)
+    {
+        $review = [
+            'user_id' => $request->user_id,
+            'booking_id' => $request->booking_id,
+            'review_score' => $request->review_score,
+            'review_desc' => $request->review_desc,
+        ];
+
+        Reviews::create([
+            'user_id' => $review['user_id'],
+            'booking_id' => $review['booking_id'],
+            'review_score' => $review['review_score'],
+            'review_desc' => $review['review_desc'],
+        ]);
+
+        return response()->json(
+            ['redirect' => route('booking.show', $review['booking_id'])]
+        );
     }
 }
