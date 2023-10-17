@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -108,7 +109,14 @@ class UserController extends Controller
             'address' => $request['address']
         ]);
         if ($request->isMobile) {
-            return "true";
+            $updatedUser = DB::table('users')
+                ->where('id', $id)
+                ->first();
+            $updatedUserProfile = DB::table('user_profiles')
+                ->where('user_id', $id)
+                ->first();
+
+            return response(["success" => "true", "user" => $updatedUser, 'user_profile' => $updatedUserProfile]);
         } else {
 
             return redirect()->back()->with('success', 'You have successfully edited your profile!');
