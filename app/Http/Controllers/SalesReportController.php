@@ -22,7 +22,7 @@ class SalesReportController extends Controller
         $bookings = Bookings::all();
         $today = Carbon::now()->format('Y-m-d');
         $bookingsTodayCount = Bookings::whereDate('date', $today)->count();
-        $totalSales = number_format(Payments::sum('total_price'), 2);
+        $totalSales = number_format(Payments::where('payment_status', 1)->sum('total_price'), 2);
         $totalProducts = Products::all()->count();
         $totalPackages = Packages::all()->count();
 

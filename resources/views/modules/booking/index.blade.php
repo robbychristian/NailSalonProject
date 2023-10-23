@@ -76,7 +76,7 @@
                                             Paid</span>
                                     @endif
                                 </td>
-                                <td class="px-6 py-4" colspan="3">
+                                <td class="px-6 py-4" colspan="4">
                                     <div class="flex">
                                         <a href="{{ route('booking.show', $booking->id) }}"
                                             class="font-medium text-darker-pink hover:underline mr-2">View</a>
@@ -84,9 +84,18 @@
                                         <a href="{{ route('booking.edit', $booking->id) }}"
                                             class="font-medium text-darker-pink hover:underline">Edit</a>
 
+                                        @if ($booking->payment->payment_status != 1)
+                                            <form action="{{ route('bookings.approve', $booking->id) }}" method="POST">
+                                                @csrf
+                                                {{-- @method('DELETE') --}}
+                                                <button type="submit"
+                                                    class="ml-2 font-medium text-darker-pink hover:underline">Approve</button>
+                                            </form>
+                                        @endif
+
                                         <form action="{{ route('booking.destroy', $booking->id) }}" method="POST">
                                             @csrf
-                                            @method('DELETE')
+                                            @method('PUT')
                                             <button type="submit"
                                                 class="ml-2 font-medium text-red-600 hover:underline">Delete</button>
                                         </form>

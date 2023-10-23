@@ -61,6 +61,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('booking', BookingController::class);
     Route::resource('dashboard', DashboardController::class);
     Route::get('/{id}/reviews', [BookingController::class, 'giveReviews'])->name('reviews.create');
+    Route::post('/approve-booking/{id}', [BookingController::class, 'approveBooking'])->name('bookings.approve');
     Route::post('/saveReviews', [BookingController::class, 'saveReviews'])->name('reviews.store');
     Route::resource('reports', SalesReportController::class);
     Route::resource('sms', SmsController::class);

@@ -381,4 +381,13 @@ class BookingController extends Controller
             ['redirect' => route('booking.show', $review['booking_id'])]
         );
     }
+
+    public function approveBooking($id)
+    {
+        Payments::where('booking_id', $id)->update([
+            'payment_status' => 1
+        ]);
+
+        return redirect('/booking')->with('success', 'You have successfully approved this booking!');
+    }
 }
