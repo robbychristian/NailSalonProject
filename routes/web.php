@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\SalesReportController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\SmsController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -62,4 +63,5 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/{id}/reviews', [BookingController::class, 'giveReviews'])->name('reviews.create');
     Route::post('/saveReviews', [BookingController::class, 'saveReviews'])->name('reviews.store');
     Route::resource('reports', SalesReportController::class);
+    Route::resource('sms', SmsController::class);
 });

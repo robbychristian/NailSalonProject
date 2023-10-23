@@ -563,17 +563,23 @@ video {
 .col-span-12 {
   grid-column: span 12 / span 12;
 }
-.col-span-4 {
-  grid-column: span 4 / span 4;
+.col-span-3 {
+  grid-column: span 3 / span 3;
 }
-.col-span-8 {
-  grid-column: span 8 / span 8;
+.col-span-9 {
+  grid-column: span 9 / span 9;
 }
-.col-span-6 {
-  grid-column: span 6 / span 6;
+.col-span-1 {
+  grid-column: span 1 / span 1;
 }
-.col-auto {
-  grid-column: auto;
+.col-span-11 {
+  grid-column: span 11 / span 11;
+}
+.col-span-10 {
+  grid-column: span 10 / span 10;
+}
+.col-span-2 {
+  grid-column: span 2 / span 2;
 }
 .m-0 {
   margin: 0px;
@@ -833,6 +839,9 @@ video {
 .gap-6 {
   gap: 1.5rem;
 }
+.gap-2 {
+  gap: 0.5rem;
+}
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -967,6 +976,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(79 70 229 / var(--tw-bg-opacity));
 }
+.bg-orange-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 88 12 / var(--tw-bg-opacity));
+}
 .bg-pink {
   --tw-bg-opacity: 1;
   background-color: rgb(249 226 225 / var(--tw-bg-opacity));
@@ -986,10 +999,6 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-.bg-orange-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(234 88 12 / var(--tw-bg-opacity));
 }
 .bg-opacity-75 {
   --tw-bg-opacity: 0.75;
@@ -1095,6 +1104,14 @@ video {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+.px-1\.5 {
+  padding-left: 0.375rem;
+  padding-right: 0.375rem;
 }
 .pl-10 {
   padding-left: 2.5rem;
@@ -1573,12 +1590,12 @@ video {
 }
 @media (min-width: 1280px) {
 
-  .xl\:col-span-6 {
-    grid-column: span 6 / span 6;
-  }
-
   .xl\:col-span-4 {
     grid-column: span 4 / span 4;
+  }
+
+  .xl\:col-span-6 {
+    grid-column: span 6 / span 6;
   }
 
   .xl\:col-span-8 {
@@ -1595,14 +1612,6 @@ video {
 
   .xl\:w-1\/4 {
     width: 25%;
-  }
-
-  .xl\:w-1\/2 {
-    width: 50%;
-  }
-
-  .xl\:w-auto {
-    width: auto;
   }
 
   .xl\:grid-cols-3 {
