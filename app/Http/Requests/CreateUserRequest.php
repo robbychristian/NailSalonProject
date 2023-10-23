@@ -29,7 +29,7 @@ class CreateUserRequest extends FormRequest
             'middle_name' => ['required', 'regex:/^[\pL\s\-]+$/u'],
             'last_name' => ['required', 'regex:/^[\pL\s\-]+$/u'],
             'birthday' => ['required'],
-            'contact_no' => ['required', 'min:11'],
+            'contact_no' => ['required', 'min:10'],
             'email' => ['required', 'email', 'unique:users'],
             'username' => ['required', 'unique:users'],
             'password' => ['required', Password::min(6)

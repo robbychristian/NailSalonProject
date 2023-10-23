@@ -8,6 +8,12 @@
             var ASCIICode = (evt.which) ? evt.which : evt.keyCode
             if (ASCIICode < 48 || ASCIICode > 57)
                 return false;
+            var inputValue = evt.target.value;
+
+            // Check if the first character is '0' and if the input is longer than 1 character
+            if (inputValue.length === 0 && ASCIICode === 48) {
+                return false; // Disallow leading '0'
+            }
             return true;
         }
     </script>
@@ -86,9 +92,18 @@
                         <div>
                             <label for="contact_no" class="block mb-2 text-sm font-medium text-gray-900">Contact
                                 Number</label>
-                            <input type="text" value="{{ old('contact_no') }}" name="contact_no" id="contact_no"
-                                onkeypress="return onlyNumberKey(event)" maxlength="11"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                            <div class="grid grid-cols-12 gap-2">
+                                <div class="col-span-1">
+                                    <input type="text" value="+63" readonly disabled
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full py-2.5">
+                                </div>
+                                <div class="col-span-11">
+                                    <input type="text" value="{{ old('contact_no') }}" name="contact_no" id="contact_no"
+                                        onkeypress="return onlyNumberKey(event)" maxlength="10"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                                </div>
+                            </div>
+
                             @error('contact_no')
                                 <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                     {{ $message }}</p>

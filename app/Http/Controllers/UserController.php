@@ -57,7 +57,7 @@ class UserController extends Controller
             'user_id' => $user->id,
             'middle_name' => $request['middle_name'],
             'birthday' => $request['birthday'],
-            'contact_no' => $request['contact_no'],
+            'contact_no' => '+63' . $request['contact_no'],
             'address' => $request['address']
         ]);
 
@@ -105,7 +105,7 @@ class UserController extends Controller
         $userProfile = UserProfile::where('user_id', $id)->update([
             'middle_name' => $request['middle_name'],
             'birthday' => $request['birthday'],
-            'contact_no' => $request['contact_no'],
+            'contact_no' => '+63' . $request['contact_no'],
             'address' => $request['address']
         ]);
         if ($request->isMobile) {

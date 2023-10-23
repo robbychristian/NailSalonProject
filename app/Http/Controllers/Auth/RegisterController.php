@@ -56,7 +56,7 @@ class RegisterController extends Controller
             'middle_name' => ['required', 'regex:/^[\pL\s\-]+$/u'],
             'last_name' => ['required', 'regex:/^[\pL\s\-]+$/u'],
             'birthday' => ['required'],
-            'contact_no' => ['required', 'min:11'],
+            'contact_no' => ['required', 'min:10'],
             'email' => ['required', 'email', 'unique:users'],
             'username' => ['required', 'unique:users'],
             'password' => ['required', Password::min(6)
@@ -91,7 +91,7 @@ class RegisterController extends Controller
             'user_id' => $user->id,
             'middle_name' => $data['middle_name'],
             'birthday' => $data['birthday'],
-            'contact_no' => $data['contact_no'],
+            'contact_no' => '+63' . $data['contact_no'],
             'address' => $data['address'],
         ]);
         return $user;
