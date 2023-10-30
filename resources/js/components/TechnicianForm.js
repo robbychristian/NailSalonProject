@@ -34,8 +34,8 @@ const TechnicianForm = ({ onStaffChange, ...props }) => {
     };
 
     useEffect(() => {
-        let time_in = moment(`${props.dateValue} ${props.timeValue}`, 'YYYY-MM-DD h:mm A').format('YYYY-MM-DD h:mm A')
-        let time_out = moment(`${props.dateValue} ${props.timeValue}`, 'YYYY-MM-DD h:mm A').add(1, 'hour').add(30, 'minutes').format('YYYY-MM-DD h:mm A')
+        let time_in = moment(`${props.dateValue} ${props.timeValue}`, 'YYYY-MM-DD hh:mm A').format('YYYY-MM-DD hh:mm A')
+        let time_out = moment(`${props.dateValue} ${props.timeValue}`, 'YYYY-MM-DD hh:mm A').add(1, 'hour').add(30, 'minutes').format('YYYY-MM-DD hh:mm A')
 
         console.log(time_in);
         console.log(time_out);
