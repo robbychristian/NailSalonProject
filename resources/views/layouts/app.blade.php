@@ -31,7 +31,7 @@
                 <a href="/" class="flex items-center">
                     <img class="h-28" src="{{ asset('img/logo2.png') }}" alt="Large avatar">
                 </a>
-                <div class="flex md:order-2">
+                {{-- <div class="flex md:order-2">
                     <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search"
                         aria-expanded="false"
                         class="md:hidden text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-20 rounded-lg text-sm p-2.5 mr-1">
@@ -65,7 +65,7 @@
                                 d="M1 1h15M1 7h15M1 13h15" />
                         </svg>
                     </button>
-                </div>
+                </div> --}}
                 <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
                     <div class="relative mt-3 md:hidden">
                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">

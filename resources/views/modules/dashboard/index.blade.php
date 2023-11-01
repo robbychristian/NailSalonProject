@@ -4,6 +4,11 @@
 @section('content')
     <section>
         <div class="px-6 py-8 mx-auto lg:py-0">
+            @if (Session::get('status'))
+                <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+                    <span class="font-medium">Success!</span> {{ Session::get('status') }}
+                </div>
+            @endif
             <div class="flex items-center justify-between mb-5 mt-3">
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                     Dashboard

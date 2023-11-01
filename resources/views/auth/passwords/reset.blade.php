@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+    {{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -61,5 +61,57 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
+
+    <section class="bg-pink">
+        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-[85vh] lg:py-0">
+            <div class="w-full bg-white rounded-lg shadow md:mt-5 sm:max-w-md mb-10 xl:p-0">
+                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                        Reset Password
+                    </h1>
+
+                    <form method="POST" action="{{ route('password.update') }}">
+                        @csrf
+
+                        <input type="hidden" name="token" value="{{ $token }}">
+
+                        <div class="mb-6">
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                            <input type="email" value="{{ $email ?? old('email') }}" name="email" id="email"
+                                required autocomplete="email" autofocus
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                            @error('email')
+                                <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
+                                    {{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+                            <input type="password" value="{{ old('password') }}" name="password" id="password" required
+                                autocomplete="password" autofocus
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                            @error('password')
+                                <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
+                                    {{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="password-cofirm" class="block mb-2 text-sm font-medium text-gray-900">Confirm
+                                Password</label>
+                            <input type="password" name="password_confirmation" id="password-confirm" required
+                                autocomplete="password" autofocus
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                        </div>
+
+                        <button type="submit"
+                            class="text-white bg-darker-pink hover:bg-darker-pink-90 focus:ring-1 focus:outline-none focus:ring-darker-pink-90 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection

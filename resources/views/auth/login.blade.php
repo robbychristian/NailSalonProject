@@ -27,7 +27,7 @@
                             @endif
                         </div>
 
-                        <div class="mb-6">
+                        <div class="mb-2">
                             <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
                             <input type="password" name="password" id="password"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
@@ -38,8 +38,11 @@
 
                         </div>
 
+                        <p class="flex justify-end mb-5 text-sm font-semibold text-darker-pink"><a
+                                href="{{ route('password.request') }}" class="underline">Forgot your password?</a></p>
+
                         <button type="submit"
-                            class="text-white bg-darker-pink hover:bg-darker-pink-90 focus:ring-1 focus:outline-none focus:ring-darker-pink-90 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                            class="text-white bg-darker-pink hover:bg-darker-pink-90 focus:ring-1 focus:outline-none focus:ring-darker-pink-90 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center">Submit</button>
 
                         <p class="mt-5 text-sm font-semibold text-darker-pink">Don't have an account yet? <a
                                 href="{{ route('register') }}" class="underline">Register</a></p>
