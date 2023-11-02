@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NailColorController;
 use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\ProductAddOnsController;
 use App\Http\Controllers\ProductsController;
@@ -66,4 +67,5 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('reports', SalesReportController::class);
     Route::resource('sms', SmsController::class);
     Route::get('/nail-customization', [BookingController::class, 'showNailCustomization'])->name('nail-custom.index');
+    Route::resource('nail-colors', NailColorController::class);
 });

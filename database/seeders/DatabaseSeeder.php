@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Branches;
+use App\Models\NailColors;
 use App\Models\Packages;
 use App\Models\ProductAddOns;
 use App\Models\Products;
@@ -396,5 +397,301 @@ class DatabaseSeeder extends Seeder
             'filename' => 'sample-img.jpg'
         ]);
         $staff5->workImages()->attach([$image5->id]);
+
+        // NAIL COLORS
+        // CHINA BRAND
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#b4768a',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#e1a791',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#e9bdcc',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#a8a0d3',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#e5b839',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#e7c669',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#b1d688',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#93c7dc',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#d8c7b5',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#a7867f',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#5a5f97',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#636557',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#96a77b',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#55605c',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#776c74',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#9b8c8c',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#94a3ba',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#bdc2bb',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#bdb994',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#995c59',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#736565',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#6a737a',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#bd813b',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#bf7d5b',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#845d4e',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#bc9e86',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#8c5153',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#b44a45',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#bc4450',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#d23a39',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#a34a5e',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#b33f4a',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#715157',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#77709c',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#6b6e77',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#696876',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#706992',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#73737d',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#74788d',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#6e707d',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#b3b1bf',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#5e7690',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#62a0bf',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#85aac4',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#b5d0f0',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#86a9bf',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#f7783a',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#836c7e',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#f0a48a',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#aa8c96',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#7b6d6d',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#f68984',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#f6d6c9',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#eaaea6',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#c1747c',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#524d53',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#c3404b',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#f1f5f8',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#71666f',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#dfdee3',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#d5d8e1',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#c6b3af',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#d9a6ab',
+        ]);
+        NailColors::create([
+            'brand' => 'China',
+            'color' => '#bdbfcc',
+        ]);
+
+        // END OF CHINA
+
+        // ORLY
+        NailColors::create([
+            'brand' => 'Orly',
+            'color' => '#9d1521',
+        ]);
+        NailColors::create([
+            'brand' => 'Orly',
+            'color' => '#c46159',
+        ]);
+        NailColors::create([
+            'brand' => 'Orly',
+            'color' => '#a50f18',
+        ]);
+        NailColors::create([
+            'brand' => 'Orly',
+            'color' => '#2e1f24',
+        ]);
+        NailColors::create([
+            'brand' => 'Orly',
+            'color' => '#ba4152',
+        ]);
+        NailColors::create([
+            'brand' => 'Orly',
+            'color' => '#292526',
+        ]);
+        NailColors::create([
+            'brand' => 'Orly',
+            'color' => '#64717a',
+        ]);
+        NailColors::create([
+            'brand' => 'Orly',
+            'color' => '#39232f',
+        ]);
+        // END OF ORLY
     }
 }
