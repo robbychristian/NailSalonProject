@@ -78,9 +78,7 @@
             </h1>
 
 
-            <div id="nail-customization"></div>
-
-
+            <div id="nail-customization" class="py-10"></div>
         </div>
     </section>
 

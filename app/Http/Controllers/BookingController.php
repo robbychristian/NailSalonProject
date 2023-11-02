@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Bookings;
 use App\Models\Branches;
+use App\Models\NailColors;
+use App\Models\NailCustomization;
 use App\Models\Packages;
 use App\Models\Payments;
 use App\Models\ProductAddOns;
@@ -391,8 +393,39 @@ class BookingController extends Controller
         return redirect('/booking')->with('success', 'You have successfully approved this booking!');
     }
 
+    // NAIL CUSTOMIZATION 
+
     public function showNailCustomization()
     {
         return view('modules.booking.nail-custom');
+    }
+
+    public function getColorByBrand(Request $request)
+    {
+        $colors = NailColors::where('brand', $request->brand)->get();
+        return response()->json([
+            'colors' => $colors
+        ]);
+    }
+
+    public function storeCustomization(Request $request)
+    {
+        $customization = [
+            'user_id' => $request->user_id,
+            'service_type' => $request->service_type,
+            'nail_polish_brand' => $request->nail_polish_brand,
+            'nail_size' => $request->nail_size,
+            'has_extensions' => $request->has_extensions,
+            'color' => $request->color
+        ];
+
+        NailCustomization::create([
+            'user_id' => $customization['user_id'],
+            'service_type' => $customization['service_type'],
+            'nail_polish_brand' => $customization['nail_polish_brand'],
+            'nail_size' => $customization['nail_size'],
+            'has_extensions' => $customization['has_extensions'],
+            'color' => $customization['color'],
+        ]);
     }
 }

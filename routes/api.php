@@ -55,3 +55,6 @@ Route::get('getProductAddOns/{id}', [BookingController::class, 'getAddOns']);
 Route::get('getAllServices', [BookingController::class, 'getAllServices']);
 Route::get('getAllBookings', [BookingController::class, 'getAllBookings']);
 Route::get('getAvailableStaff', [BookingController::class, 'getAvailableStaff']);
+
+Route::get('getColorByBrand', [BookingController::class, 'getColorByBrand']);
+Route::post('storeCustomization', [BookingController::class, 'storeCustomization']);

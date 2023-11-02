@@ -12,7 +12,9 @@ import { Container, Grid, IconButton, Paper, Stack, Typography, Card, CardAction
 import SendIcon from '@mui/icons-material/Send';
 import SaveIcon from '@mui/icons-material/Save';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-const steps = ["Nail Customization", "Pick Schedule and Branch", "Assigned Technician", "Summary Form"];
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const types = [
     {
@@ -25,72 +27,25 @@ const types = [
     },
 ];
 
-const colors = [
-    {
-        label: "Black",
-        value: "#000"
-    },
-    {
-        label: "Red",
-        value: "#FF0000"
-    },
-    {
-        label: "Green",
-        value: "#00FF00"
-    },
-    {
-        label: "Blue",
-        value: "#0000FF"
-    },
-    {
-        label: "Yellow",
-        value: "#FFFF00"
-    },
-    {
-        label: "Cyan",
-        value: "#00FFFF"
-    },
-    {
-        label: "Magenta",
-        value: "#FF00FF"
-    },
-    {
-        label: "White",
-        value: "#FFFFFF"
-    },
-    {
-        label: "Magenta",
-        value: "#FF00FF"
-    },
-];
-
 const brands = [
-    {
-        label: "Orly",
-        value: "Orly",
-    },
     {
         label: "China",
         value: "China",
     },
     {
-        label: "Coucou",
-        value: "Coucou",
+        label: "Orly",
+        value: "Orly",
     },
 ];
 
-const length = [
+const size = [
     {
-        label: "Short",
-        value: "Short",
+        label: "Small",
+        value: "Small",
     },
     {
-        label: "Medium",
-        value: "Medium",
-    },
-    {
-        label: "Long",
-        value: "Long",
+        label: "Big",
+        value: "Big",
     },
 ];
 
@@ -111,13 +66,64 @@ const NailCustomization = (props) => {
     // NAIL CUSTOMIZATION
     const [typeOfService, setTypeOfService] = useState("Manicure");
     const [colorNail, setColorNail] = useState("#FFFFFF");
-    const [nailPolish, setNailPolish] = useState(null);
-    const [nailLength, setNailLength] = useState(null);
-    const [isNailExtension, setIsNailExtension] = useState(null);
+    const [nailPolishBrand, setNailPolishBrand] = useState("China");
+    const [nailSize, setNailSize] = useState("Small");
+    const [isNailExtension, setIsNailExtension] = useState("Yes");
+    const [colors, setColors] = useState([]);
+    const [userId, setUserId] = useState(null);
     // END OF NAIL CUSTOMIZATION
+
+    useEffect(() => {
+        axios.get('/api/getColorByBrand', {
+            params: {
+                brand: nailPolishBrand
+            }
+        })
+            .then((response) => {
+                setColors(response.data.colors);
+            })
+    }, [nailPolishBrand]);
+
+    useEffect(() => {
+        if (window.location.pathname !== '/services-page') {
+            setUserId(JSON.parse(props.auth).id)
+        } else {
+            setUserId(null);
+        }
+    }, [props.auth])
+
+    const handleSave = () => {
+        const formdata = new FormData();
+        formdata.append('user_id', userId);
+        formdata.append('service_type', typeOfService);
+        formdata.append('nail_polish_brand', nailPolishBrand);
+        formdata.append('nail_size', nailSize);
+        formdata.append('has_extensions', isNailExtension);
+        formdata.append('color', colorNail);
+
+        axios.post('/api/storeCustomization', formdata)
+            .then((response) => {
+                console.log(response);
+                toast.success('Your customization has been saved!');
+            })
+    };
 
     return (
         <Fragment>
+            <div>
+                <ToastContainer
+                    position='top-right'
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme='light'
+                />
+            </div>
             {/* NAIL CUSTOMIZATION */}
             <div className="bg-white border border-gray-200 rounded-lg shadow w-full mt-5">
                 <div className="grid grid-cols-12 gap-4 ">
@@ -143,8 +149,10 @@ const NailCustomization = (props) => {
                                 select
                                 fullWidth
                                 label="Nail Polish Brand"
-                                defaultValue="Orly"
-                                onChange={(e) => setNailPolish(e.target.value)}
+                                defaultValue="China"
+                                onChange={(e) => {
+                                    setNailPolishBrand(e.target.value)
+                                }}
                                 helperText="Please select the brand of nail polish"
                             >
                                 {brands.map((option) => (
@@ -158,12 +166,12 @@ const NailCustomization = (props) => {
                                 variant="standard"
                                 select
                                 fullWidth
-                                label="Nail Length"
-                                defaultValue="Short"
-                                onChange={(e) => setNailLength(e.target.value)}
-                                helperText="Please select the nail length"
+                                label="Nail Size"
+                                defaultValue="Small"
+                                onChange={(e) => setNailSize(e.target.value)}
+                                helperText="Please select the nail size"
                             >
-                                {length.map((option) => (
+                                {size.map((option) => (
                                     <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
                                 ))}
                             </TextField>
@@ -670,16 +678,15 @@ const NailCustomization = (props) => {
                                 <div className="flex flex-wrap justify-center items-center p-4">
                                     {colors.map((option) => (
                                         <IconButton variant="outlined"
-                                            key={option.value}
-                                            aria-label={option.label}
+                                            key={option.id}
                                             style={{
-                                                color: `${option.value}`,
+                                                color: `${option.color}`,
                                                 height: "4rem",
                                                 width: "4rem",
                                                 fontSize: "4rem",
-                                                border: option.value === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
+                                                border: option.color === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
                                             }}
-                                            onClick={() => setColorNail(option.value)}>
+                                            onClick={() => setColorNail(option.color)}>
                                             <CircleIcon fontSize="inherit" />
                                         </IconButton>
                                     ))}
@@ -690,16 +697,18 @@ const NailCustomization = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="flex justify-end gap-3 mt-4">
-                <Button variant="contained" endIcon={<SaveIcon />}>
-                    Save
-                </Button>
-                <Button variant="contained" endIcon={<FavoriteBorderIcon />} color="success">
-                    Book this customization
-                </Button>
-            </div>
+            {userId !== null &&
+                <div className="flex justify-end gap-3 mt-4">
+                    <Button variant="contained" endIcon={<SaveIcon />} onClick={handleSave}>
+                        Save
+                    </Button>
+                    <Button variant="contained" endIcon={<FavoriteBorderIcon />} color="success">
+                        Book this customization
+                    </Button>
+                </div>
+            }
             {/* END OF NAIL CUSTOMIZATION */}
-        </Fragment>
+        </Fragment >
     );
 }
 
