@@ -390,4 +390,9 @@ class BookingController extends Controller
 
         return redirect('/booking')->with('success', 'You have successfully approved this booking!');
     }
+
+    public function showNailCustomization()
+    {
+        return view('modules.booking.nail-custom');
+    }
 }

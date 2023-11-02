@@ -58,11 +58,6 @@
                 </div>
             </div>
 
-
-
-
-
-
             <h1
                 class="text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl uppercase mt-10 mb-10">
                 Services Reviews
@@ -76,6 +71,16 @@
                     <img class="h-full w-full object-cover" src="{{ asset('img/homepage/review2.png') }}" alt="">
                 </div>
             </div>
+
+            <h1
+                class="text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl uppercase mt-10">
+                Self-Personalization Digital Catalogue
+            </h1>
+
+
+            <div id="nail-customization"></div>
+
+
         </div>
     </section>
 

@@ -65,4 +65,5 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/saveReviews', [BookingController::class, 'saveReviews'])->name('reviews.store');
     Route::resource('reports', SalesReportController::class);
     Route::resource('sms', SmsController::class);
+    Route::get('/nail-customization', [BookingController::class, 'showNailCustomization'])->name('nail-custom.index');
 });

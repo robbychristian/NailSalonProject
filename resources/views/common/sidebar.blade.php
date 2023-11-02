@@ -23,6 +23,17 @@
                     <span class="ml-3">Bookings</span>
                 </a>
             </li>
+            @if (Auth::user()->user_role == 2)
+                <li>
+                    <a href="{{ route('nail-custom.index') }}"
+                        class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg hover:bg-gray-100 group">
+                        <span class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900">
+                            <i class="fa-solid fa-palette"></i>
+                        </span>
+                        <span class="ml-3">Nail Customization</span>
+                    </a>
+                </li>
+            @endif
             @if (Auth::user()->user_role == 1)
                 <li>
                     <a href="{{ route('users.index') }}"
