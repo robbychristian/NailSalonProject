@@ -64,4 +64,9 @@ class Bookings extends Model
     {
         return $this->belongsTo(Reviews::class, 'id', 'booking_id');
     }
+
+    public function hasCustomization()
+    {
+        return $this->belongsTo(BookingHasCustomization::class, 'id', 'booking_id');
+    }
 }

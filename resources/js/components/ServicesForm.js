@@ -130,7 +130,7 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
             onService2Change(null)
             setSelectedPrice2("")
             onServiceTypeId2Change("")
-
+            onNailCustomization("")
             setIsDisabled(false);
         }
     }, [isChecked])

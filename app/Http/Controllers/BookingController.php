@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BookingHasCustomization;
 use App\Models\Bookings;
 use App\Models\Branches;
 use App\Models\NailColors;
@@ -97,8 +98,8 @@ class BookingController extends Controller
             return $value !== null;
         });
 
-        // $nailCustomization = NailCustomization::where('id', $booking['nail_customization_id'])->first();
-        // return $nailCustomization;
+        $nailCustomization = NailCustomization::where('id', $booking['nail_customization_id'])->first();
+
         $bookingDetails = Bookings::create([
             'user_id' => $booking['user_id'],
             'date' => $booking['date'],
@@ -145,6 +146,17 @@ class BookingController extends Controller
             'total_price' => $totalPrice,
             'payment_status' => 0,
         ]);
+
+        if ($nailCustomization) {
+            BookingHasCustomization::create([
+                'booking_id' => $bookingDetails->id,
+                'service_type' => $nailCustomization->service_type,
+                'nail_polish_brand' => $nailCustomization->nail_polish_brand,
+                'nail_size' => $nailCustomization->nail_size,
+                'has_extensions' => $nailCustomization->has_extensions,
+                'color' => $nailCustomization->color
+            ]);
+        }
         // return $numberOfBookings;
     }
 

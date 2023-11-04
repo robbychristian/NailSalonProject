@@ -16,8 +16,8 @@
                         <label for="brand" class="block mb-2 text-sm font-medium text-gray-900">Nail Polish Brand</label>
                         <select id="brand" name="brand"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                            <option value="Gel polish (China brand)">China</option>
-                            <option value="Gel polish (Orly brand)">Orly</option>
+                            <option value="Gel polish (China brand)">Gel polish (China brand)</option>
+                            <option value="Gel polish (Orly brand)">Gel polish (Orly brand)</option>
                         </select>
                         @error('brand')
                             <p id="outlined_error_help" class="mt-2 text-xs text-red-600">

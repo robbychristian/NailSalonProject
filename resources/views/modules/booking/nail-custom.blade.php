@@ -12,6 +12,13 @@
             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                 Self-Personalization Digital Catalogue
             </h1>
+            @guest
+                <small>In order to your personalized nail design, <a href="{{ route('login') }}">Login</a> or <a
+                        href="{{ route('register') }}">Sign up</a> to schedule a booking.</small>
+            @endguest
+            @auth
+                <small>Note: Once you have saved your personalized nail design, this will be used on the booking module.</small>
+            @endauth
             <div id="nail-customization" data-auth="{{ Auth::user() }}"></div>
         </div>
 

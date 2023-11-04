@@ -8,13 +8,15 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import CircleIcon from '@mui/icons-material/Circle';
-import { Container, Grid, IconButton, Paper, Stack, Typography, Card, CardActions, CardContent, CardMedia, FormControl, FormControlLabel, ImageList, ImageListItem, Modal, Radio, RadioGroup } from "@mui/material";
+import { Container, Grid, IconButton, Paper, Stack, Typography, Card, CardActions, CardContent, CardMedia, FormControl, FormControlLabel, ImageList, ImageListItem, Modal, Radio, RadioGroup, Chip } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import SaveIcon from '@mui/icons-material/Save';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import EditCalendarIcon from '@mui/icons-material/EditCalendar';
+import moment from "moment";
 
 const types = [
     {
@@ -69,6 +71,7 @@ const NailCustomization = (props) => {
     const [nailPolishBrand, setNailPolishBrand] = useState("Gel polish (China brand)");
     const [nailSize, setNailSize] = useState("Small");
     const [isNailExtension, setIsNailExtension] = useState("Yes");
+    const [updatedAt, setUpdatedAt] = useState("");
     const [colors, setColors] = useState([]);
     const [userId, setUserId] = useState(null);
     // END OF NAIL CUSTOMIZATION
@@ -91,11 +94,13 @@ const NailCustomization = (props) => {
             axios.get(`/api/getNailCustomizationPerUser/${JSON.parse(props.auth).id}`)
                 .then((response) => {
                     const data = response.data.user.nail_customization
+                    console.log(data)
                     setTypeOfService(data.service_type);
                     setNailPolishBrand(data.nail_polish_brand);
                     setNailSize(data.nail_size);
                     setIsNailExtension(data.has_extensions)
                     setColorNail(data.color);
+                    setUpdatedAt(data.updated_at)
                 })
         } else {
             setUserId(null);
@@ -162,6 +167,7 @@ const NailCustomization = (props) => {
                                 value={nailPolishBrand}
                                 onChange={(e) => {
                                     setNailPolishBrand(e.target.value)
+                                    setColorNail("#FFFFFF"); // Reset the colorNail state
                                 }}
                                 helperText="Please select the brand of nail polish"
                             >
@@ -203,6 +209,11 @@ const NailCustomization = (props) => {
                         </Paper>
                     </div>
                     <div className="col-span-12 lg:col-span-8 p-6">
+                        {userId !== null && updatedAt != null &&
+                            <div className="flex justify-end">
+                                <Chip icon={<EditCalendarIcon />} label={`${moment(updatedAt).format('LL')} | ${moment(updatedAt).from(moment())}`} variant="outlined" />
+                            </div>
+                        }
                         <div className="flex justify-center items-center mb-5">
                             {typeOfService == 'Manicure' &&
                                 <svg height="500px" width="500px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
@@ -711,9 +722,6 @@ const NailCustomization = (props) => {
                 <div className="flex justify-end gap-3 mt-4">
                     <Button variant="contained" endIcon={<SaveIcon />} onClick={handleSave}>
                         Save
-                    </Button>
-                    <Button variant="contained" endIcon={<FavoriteBorderIcon />} color="success">
-                        Book this customization
                     </Button>
                 </div>
             }

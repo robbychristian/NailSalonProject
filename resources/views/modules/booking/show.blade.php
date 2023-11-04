@@ -112,6 +112,32 @@
 
                 </div>
 
+                @if ($booking->hasCustomization)
+                    <h4 class="text-lg font-semibold text-gray-900 md:text-xl mb-3">Nail Customization</h4>
+
+                    <div class="grid gap-6 mb-6 md:grid-cols-2">
+                        <div>
+                            <label for="svgImage" class="block mb-2 text-sm font-medium text-gray-900">Image</label>
+                            @include('modules.booking.svgimage')
+                        </div>
+                        <div>
+                            <label for="time" class="block mb-2 text-sm font-medium text-gray-900">Nail Size</label>
+                            <span
+                                class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">{{ $booking->hasCustomization->nail_size }}</span>
+
+                            <label for="time" class="block mb-2 text-sm font-medium text-gray-900 mt-4">Has
+                                Extensions</label>
+                            @if ($booking->hasCustomization->has_extensions == 'Yes')
+                                <span
+                                    class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Yes</span>
+                            @else
+                                <span
+                                    class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">No</span>
+                            @endif
+                        </div>
+                    </div>
+                @endif
+
                 <h4 class="text-lg font-semibold text-gray-900 md:text-xl mb-3">Payment Details</h4>
                 <div class="grid gap-6 mb-6 md:grid-cols-2">
                     <div>
