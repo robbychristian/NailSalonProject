@@ -66,6 +66,8 @@ const Booking = (props) => {
 
   const [price, setPrice] = useState(null);
 
+  const [nailCustomizationId, setNailCustomizationId] = useState("");
+
   const handleService1Change = (s1) => {
     setSelectedService1(s1);
   }
@@ -106,6 +108,10 @@ const Booking = (props) => {
 
   const handlePrice = (price) => {
     setPrice(price);
+  }
+
+  const handleNailCustomization = (id) => {
+    setNailCustomizationId(id);
   }
 
   //TECHNICIAN FORM
@@ -205,8 +211,9 @@ const Booking = (props) => {
       formdata.append('addon3', selectedAddonId3);
 
       formdata.append('total_price', price);
+      formdata.append('nail_customization_id', nailCustomizationId)
 
-      // console.log([...formdata]);
+      console.log([...formdata]);
       axios.post('/booking', formdata)
         .then((response) => {
           console.log(response)
@@ -298,7 +305,8 @@ const Booking = (props) => {
                   onAddOn2Change={handleAddOn2Change}
                   onAddOn3Change={handleAddOn3Change}
                   onPriceChange={handlePrice}
-
+                  userIdValue={selectedUser}
+                  onNailCustomization={handleNailCustomization}
                 />)}
               {activeStep === 3 &&
                 <TechnicianForm
@@ -364,10 +372,13 @@ const Booking = (props) => {
       {console.log(selectedService2)}
       {console.log(selectedService3)}
       {console.log(selectedUser)} */}
-
-      {console.log(`Service Id: ${serviceTypeId1}`)}
+      {/* {console.log(selectedService1)}
+      {console.log(selectedService2)}
+      {console.log(selectedService3)} */}
+      {/* {console.log(`Service Id: ${serviceTypeId1}`)}
       {console.log(`Service Id: ${serviceTypeId2}`)}
-      {console.log(`Service Id: ${serviceTypeId3}`)}
+      {console.log(`Service Id: ${serviceTypeId3}`)} */}
+      {console.log(nailCustomizationId)}
     </React.Fragment>
   );
 };

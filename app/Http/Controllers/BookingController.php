@@ -67,7 +67,8 @@ class BookingController extends Controller
             'addon2' => $request->addon2,
             'service3' => $request->service3,
             'addon3' => $request->addon3,
-            'total_price' => $request->total_price
+            'total_price' => $request->total_price,
+            'nail_customization_id' => $request->nail_customization_id
         ];
 
         $branchId = Branches::where('branch_address', $booking['branch'])->pluck('id')->first();
@@ -96,6 +97,8 @@ class BookingController extends Controller
             return $value !== null;
         });
 
+        // $nailCustomization = NailCustomization::where('id', $booking['nail_customization_id'])->first();
+        // return $nailCustomization;
         $bookingDetails = Bookings::create([
             'user_id' => $booking['user_id'],
             'date' => $booking['date'],

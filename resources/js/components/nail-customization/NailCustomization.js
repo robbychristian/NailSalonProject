@@ -29,12 +29,12 @@ const types = [
 
 const brands = [
     {
-        label: "China",
-        value: "China",
+        label: "Gel polish (China brand)",
+        value: "Gel polish (China brand)",
     },
     {
-        label: "Orly",
-        value: "Orly",
+        label: "Gel polish (Orly brand)",
+        value: "Gel polish (Orly brand)",
     },
 ];
 
@@ -66,7 +66,7 @@ const NailCustomization = (props) => {
     // NAIL CUSTOMIZATION
     const [typeOfService, setTypeOfService] = useState("Manicure");
     const [colorNail, setColorNail] = useState("#FFFFFF");
-    const [nailPolishBrand, setNailPolishBrand] = useState("China");
+    const [nailPolishBrand, setNailPolishBrand] = useState("Gel polish (China brand)");
     const [nailSize, setNailSize] = useState("Small");
     const [isNailExtension, setIsNailExtension] = useState("Yes");
     const [colors, setColors] = useState([]);

@@ -401,259 +401,259 @@ class DatabaseSeeder extends Seeder
         // NAIL COLORS
         // CHINA BRAND
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#b4768a',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#e1a791',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#e9bdcc',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#a8a0d3',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#e5b839',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#e7c669',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#b1d688',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#93c7dc',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#d8c7b5',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#a7867f',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#5a5f97',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#636557',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#96a77b',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#55605c',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#776c74',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#9b8c8c',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#94a3ba',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#bdc2bb',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#bdb994',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#995c59',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#736565',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#6a737a',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#bd813b',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#bf7d5b',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#845d4e',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#bc9e86',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#8c5153',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#b44a45',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#bc4450',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#d23a39',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#a34a5e',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#b33f4a',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#715157',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#77709c',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#6b6e77',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#696876',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#706992',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#73737d',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#74788d',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#6e707d',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#b3b1bf',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#5e7690',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#62a0bf',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#85aac4',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#b5d0f0',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#86a9bf',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#f7783a',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#836c7e',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#f0a48a',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#aa8c96',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#7b6d6d',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#f68984',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#f6d6c9',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#eaaea6',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#c1747c',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#524d53',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#c3404b',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#f1f5f8',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#71666f',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#dfdee3',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#d5d8e1',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#c6b3af',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#d9a6ab',
         ]);
         NailColors::create([
-            'brand' => 'China',
+            'brand' => 'Gel polish (China brand)',
             'color' => '#bdbfcc',
         ]);
 
@@ -661,35 +661,35 @@ class DatabaseSeeder extends Seeder
 
         // ORLY
         NailColors::create([
-            'brand' => 'Orly',
+            'brand' => 'Gel polish (Orly brand)',
             'color' => '#9d1521',
         ]);
         NailColors::create([
-            'brand' => 'Orly',
+            'brand' => 'Gel polish (Orly brand)',
             'color' => '#c46159',
         ]);
         NailColors::create([
-            'brand' => 'Orly',
+            'brand' => 'Gel polish (Orly brand)',
             'color' => '#a50f18',
         ]);
         NailColors::create([
-            'brand' => 'Orly',
+            'brand' => 'Gel polish (Orly brand)',
             'color' => '#2e1f24',
         ]);
         NailColors::create([
-            'brand' => 'Orly',
+            'brand' => 'Gel polish (Orly brand)',
             'color' => '#ba4152',
         ]);
         NailColors::create([
-            'brand' => 'Orly',
+            'brand' => 'Gel polish (Orly brand)',
             'color' => '#292526',
         ]);
         NailColors::create([
-            'brand' => 'Orly',
+            'brand' => 'Gel polish (Orly brand)',
             'color' => '#64717a',
         ]);
         NailColors::create([
-            'brand' => 'Orly',
+            'brand' => 'Gel polish (Orly brand)',
             'color' => '#39232f',
         ]);
         // END OF ORLY
