@@ -87,6 +87,16 @@ const NailCustomization = (props) => {
     useEffect(() => {
         if (window.location.pathname !== '/services-page') {
             setUserId(JSON.parse(props.auth).id)
+
+            axios.get(`/api/getNailCustomizationPerUser/${JSON.parse(props.auth).id}`)
+                .then((response) => {
+                    const data = response.data.user.nail_customization
+                    setTypeOfService(data.service_type);
+                    setNailPolishBrand(data.nail_polish_brand);
+                    setNailSize(data.nail_size);
+                    setIsNailExtension(data.has_extensions)
+                    setColorNail(data.color);
+                })
         } else {
             setUserId(null);
         }
@@ -134,7 +144,7 @@ const NailCustomization = (props) => {
                                 select
                                 fullWidth
                                 label="Type of Service"
-                                defaultValue="Manicure"
+                                value={typeOfService}
                                 onChange={(e) => setTypeOfService(e.target.value)}
                                 helperText="Please select the type of service"
                             >
@@ -149,7 +159,7 @@ const NailCustomization = (props) => {
                                 select
                                 fullWidth
                                 label="Nail Polish Brand"
-                                defaultValue="China"
+                                value={nailPolishBrand}
                                 onChange={(e) => {
                                     setNailPolishBrand(e.target.value)
                                 }}
@@ -167,7 +177,7 @@ const NailCustomization = (props) => {
                                 select
                                 fullWidth
                                 label="Nail Size"
-                                defaultValue="Small"
+                                value={nailSize}
                                 onChange={(e) => setNailSize(e.target.value)}
                                 helperText="Please select the nail size"
                             >
@@ -182,7 +192,7 @@ const NailCustomization = (props) => {
                                 select
                                 fullWidth
                                 label="With Extensions?"
-                                defaultValue="Yes"
+                                value={isNailExtension}
                                 onChange={(e) => setIsNailExtension(e.target.value)}
                                 helperText="Please select a choice if you want an extension"
                             >

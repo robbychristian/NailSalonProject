@@ -410,7 +410,7 @@ class BookingController extends Controller
 
     public function storeCustomization(Request $request)
     {
-        $customization = [
+        $data = [
             'user_id' => $request->user_id,
             'service_type' => $request->service_type,
             'nail_polish_brand' => $request->nail_polish_brand,
@@ -419,13 +419,34 @@ class BookingController extends Controller
             'color' => $request->color
         ];
 
-        NailCustomization::create([
-            'user_id' => $customization['user_id'],
-            'service_type' => $customization['service_type'],
-            'nail_polish_brand' => $customization['nail_polish_brand'],
-            'nail_size' => $customization['nail_size'],
-            'has_extensions' => $customization['has_extensions'],
-            'color' => $customization['color'],
+        $existingCustomization = NailCustomization::where('user_id', $data['user_id'])->first();
+
+        if ($existingCustomization) {
+            NailCustomization::where('user_id', $data['user_id'])->update([
+                'user_id' => $data['user_id'],
+                'service_type' => $data['service_type'],
+                'nail_polish_brand' => $data['nail_polish_brand'],
+                'nail_size' => $data['nail_size'],
+                'has_extensions' => $data['has_extensions'],
+                'color' => $data['color'],
+            ]);
+        } else {
+            NailCustomization::create([
+                'user_id' => $data['user_id'],
+                'service_type' => $data['service_type'],
+                'nail_polish_brand' => $data['nail_polish_brand'],
+                'nail_size' => $data['nail_size'],
+                'has_extensions' => $data['has_extensions'],
+                'color' => $data['color'],
+            ]);
+        }
+    }
+
+    public function getNailCustomizationPerUser($id)
+    {
+        $user = User::with('nailCustomization')->find($id);
+        return response()->json([
+            'user' => $user
         ]);
     }
 }

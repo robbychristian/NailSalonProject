@@ -51,4 +51,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(UserProfile::class, 'id', 'user_id');
     }
+
+    public function nailCustomization()
+    {
+        return $this->belongsTo(NailCustomization::class, 'id', 'user_id');
+    }
 }

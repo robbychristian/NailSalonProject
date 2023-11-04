@@ -58,3 +58,4 @@ Route::get('getAvailableStaff', [BookingController::class, 'getAvailableStaff'])
 
 Route::get('getColorByBrand', [BookingController::class, 'getColorByBrand']);
 Route::post('storeCustomization', [BookingController::class, 'storeCustomization']);
+Route::get('getNailCustomizationPerUser/{id}', [BookingController::class, 'getNailCustomizationPerUser']);
