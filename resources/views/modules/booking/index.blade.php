@@ -89,7 +89,7 @@
                                         <a href="{{ route('booking.edit', $booking->id) }}"
                                             class="font-medium text-darker-pink hover:underline">Edit</a>
 
-                                        @if ($booking->payment->payment_status != 1)
+                                        @if ($booking->payment->payment_status != 1 && Auth::user()->user_role == 1)
                                             <form action="{{ route('bookings.approve', $booking->id) }}" method="POST">
                                                 @csrf
                                                 {{-- @method('DELETE') --}}
