@@ -38,6 +38,10 @@ const brands = [
         label: "Gel polish (Orly brand)",
         value: "Gel polish (Orly brand)",
     },
+    {
+        label: "Gel polish (Coucou brand)",
+        value: "Gel polish (Coucou brand)",
+    },
 ];
 
 const size = [

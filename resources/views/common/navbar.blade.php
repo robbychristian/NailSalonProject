@@ -18,8 +18,8 @@
                 </svg>
                 <span class="sr-only">Toggle sidebar</span>
             </button>
-            <a href="https://flowbite.com" class="flex items-center justify-between mr-4">
-                <img class="h-8" src="{{ asset('img/logo2.png') }}" alt="Large avatar">
+            <a href="{{ route('home') }}" class="flex items-center justify-between mr-4">
+                <img class="h-11" src="{{ asset('img/logo-icon.png') }}" alt="Large avatar">
                 {{-- <img src="https://flowbite.s3.amazonaws.com/logo.svg" class="mr-3 h-8" alt="Flowbite Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap">Flowbite</span> --}}
             </a>

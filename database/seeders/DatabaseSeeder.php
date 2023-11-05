@@ -693,5 +693,40 @@ class DatabaseSeeder extends Seeder
             'color' => '#39232f',
         ]);
         // END OF ORLY
+
+        // COUCOU
+
+        NailColors::create([
+            'brand' => 'Gel polish (Coucou brand)',
+            'color' => '#2f80b5'
+        ]);
+        NailColors::create([
+            'brand' => 'Gel polish (Coucou brand)',
+            'color' => '#b491b9'
+        ]);
+        NailColors::create([
+            'brand' => 'Gel polish (Coucou brand)',
+            'color' => '#ac6871'
+        ]);
+        NailColors::create([
+            'brand' => 'Gel polish (Coucou brand)',
+            'color' => '#a38c85'
+        ]);
+        NailColors::create([
+            'brand' => 'Gel polish (Coucou brand)',
+            'color' => '#bc9c8f'
+        ]);
+        NailColors::create([
+            'brand' => 'Gel polish (Coucou brand)',
+            'color' => '#b2a094'
+        ]);
+        NailColors::create([
+            'brand' => 'Gel polish (Coucou brand)',
+            'color' => '#51756d'
+        ]);
+        NailColors::create([
+            'brand' => 'Gel polish (Coucou brand)',
+            'color' => '#084041'
+        ]);
     }
 }
