@@ -47,6 +47,10 @@ Route::get('/services-page', function () {
     return view('static.services', compact('services', 'products', 'product_add_ons', 'packages'));
 })->name('services-static');
 
+Route::get('/contact-us', function () {
+    return view('static.contact-us');
+})->name('contact-us');
+
 Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
