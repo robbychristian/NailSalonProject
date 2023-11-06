@@ -122,6 +122,16 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
             onServiceTypeId2Change(nailPolishBrand.service_id)
             onNailCustomization(customizationValue.id)
             setIsDisabled(true);
+
+            setHasAddons1(false);
+            setSelectedProduct1(null);
+            setSelectedAddonPrice1(0);
+            onAddOn1Change("");
+
+            setHasAddons2(false);
+            setSelectedProduct2(null);
+            setSelectedAddonPrice2(0);
+            onAddOn2Change("");
         } else {
             onService1Change(null)
             setSelectedPrice1("")
@@ -132,6 +142,9 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
             onServiceTypeId2Change("")
             onNailCustomization("")
             setIsDisabled(false);
+
+            setServiceChoice1("")
+            setServiceChoice2("")
         }
     }, [isChecked])
 
@@ -149,7 +162,7 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
         }
 
         if (!hasAddons3 || !selectedProduct3) {
-            setSelectedAddonPrice2(0)
+            setSelectedAddonPrice3(0)
         }
 
         const addonPrice1 = parseFloat(selectedAddonPrice1) || 0;
@@ -291,9 +304,13 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
                                 onChange={(e) => {
                                     const addonId = e.target.value;
                                     onAddOn1Change(addonId);
-                                    const selectedAddOn1 = addOns.find((item) => item.id == addonId);
-                                    const addonPrice1 = selectedAddOn1.additional_price
-                                    setSelectedAddonPrice1(addonPrice1);
+                                    if (addonId != "") {
+                                        const selectedAddOn1 = addOns.find((item) => item.id == addonId);
+                                        const addonPrice1 = selectedAddOn1.additional_price
+                                        setSelectedAddonPrice1(addonPrice1);
+                                    } else {
+                                        setSelectedAddonPrice1(0);
+                                    }
                                     // console.log(`ito yung addon ${addonPrice1}`)
                                 }}
                             >
@@ -308,6 +325,13 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
                                             label={`${addon.additional} - ₱${addon.additional_price}`}
                                         />
                                     ))}
+                                <FormControlLabel
+                                    name="productAddOns"
+                                    value=""
+                                    control={<Radio />}
+                                    label='None'
+                                />
+
                             </RadioGroup>
                         </FormControl>
                     )}
@@ -353,10 +377,13 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
                                 onChange={(e) => {
                                     const addonId = e.target.value;
                                     onAddOn2Change(addonId);
-
-                                    const selectedAddOn2 = addOns.find((item) => item.id == addonId);
-                                    const addonPrice2 = selectedAddOn2.additional_price
-                                    setSelectedAddonPrice2(addonPrice2);
+                                    if (addonId != "") {
+                                        const selectedAddOn2 = addOns.find((item) => item.id == addonId);
+                                        const addonPrice2 = selectedAddOn2.additional_price
+                                        setSelectedAddonPrice2(addonPrice2);
+                                    } else {
+                                        setSelectedAddonPrice2(0)
+                                    }
                                 }}
                             >
                                 {addOns
@@ -370,6 +397,12 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
                                             label={`${addon.additional} - ₱${addon.additional_price}`}
                                         />
                                     ))}
+                                <FormControlLabel
+                                    name="productAddOns"
+                                    value=""
+                                    control={<Radio />}
+                                    label='None'
+                                />
                             </RadioGroup>
                         </FormControl>
                     )}
@@ -412,9 +445,13 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
                                 onChange={(e) => {
                                     const addonId = e.target.value;
                                     onAddOn3Change(addonId);
-                                    const selectedAddOn3 = addOns.find((item) => item.id == addonId);
-                                    const addonPrice3 = selectedAddOn3.additional_price
-                                    setSelectedAddonPrice3(addonPrice3);
+                                    if (addonId != "") {
+                                        const selectedAddOn3 = addOns.find((item) => item.id == addonId);
+                                        const addonPrice3 = selectedAddOn3.additional_price
+                                        setSelectedAddonPrice3(addonPrice3);
+                                    } else {
+                                        setSelectedAddonPrice3(0);
+                                    }
                                 }}
                             >
                                 {addOns
@@ -428,6 +465,12 @@ const ServicesForm = ({ onService1Change, onService2Change, onService3Change, on
                                             label={`${addon.additional} - ₱${addon.additional_price}`}
                                         />
                                     ))}
+                                <FormControlLabel
+                                    name="productAddOns"
+                                    value=""
+                                    control={<Radio />}
+                                    label='None'
+                                />
                             </RadioGroup>
                         </FormControl>
                     )}
