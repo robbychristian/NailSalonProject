@@ -83,9 +83,9 @@ const DateForm = ({ onDateChange, onTimeChange, onBranchChange, errors }) => {
                                 name="time"
                                 className="w-full"
                                 onChange={(e) => onTimeChange(moment(e._d).format('h:mm A'))}
-                                minTime={moment('10:00 AM', 'h:mm A')}
+                                minTime={moment('11:00 AM', 'h:mm A')}
                                 maxTime={moment('10:00 PM', 'h:mm A')}
-                                defaultValue={moment('10:00 AM', 'h:mm A')}
+                                defaultValue={moment('11:00 AM', 'h:mm A')}
                             />
                         </DemoContainer>
                     </LocalizationProvider>

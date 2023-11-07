@@ -29,7 +29,7 @@ const Booking = (props) => {
 
   // DATE FORM
   const [selectedDate, setSelectedDate] = useState(moment().add(1, 'days').format('YYYY-MM-DD'));
-  const [selectedTime, setSelectedTime] = useState(moment('10:00 AM', 'h:mm A').format('LT'));
+  const [selectedTime, setSelectedTime] = useState(moment('11:00 AM', 'h:mm A').format('LT'));
   const [selectedBranch, setSelectedBranch] = useState("None");
 
   const handleDateChange = (date) => {
@@ -136,7 +136,7 @@ const Booking = (props) => {
         selectedTime === null ||
         selectedBranch == "None" ||
         moment(selectedDate).isBefore(moment().startOf('day')) ||
-        moment(selectedTime, 'h:mm A').isBefore(moment('10:00 AM', 'h:mm A')) ||
+        moment(selectedTime, 'h:mm A').isBefore(moment('11:00 AM', 'h:mm A')) ||
         moment(selectedTime, 'h:mm A').isAfter(moment('10:00 PM', 'h:mm A'))
       ) {
         let tempError = {};
@@ -150,8 +150,8 @@ const Booking = (props) => {
         if (selectedTime === null) {
           toast.error('Time Field is required!');
         }
-        if (moment(selectedTime, 'h:mm A').isBefore(moment('10:00 AM', 'h:mm A')) || moment(selectedTime, 'h:mm A').isAfter(moment('10:00 PM', 'h:mm A'))) {
-          toast.error('Selected time is outside the allowed range (10:00 AM - 10:00 PM).');
+        if (moment(selectedTime, 'h:mm A').isBefore(moment('11:00 AM', 'h:mm A')) || moment(selectedTime, 'h:mm A').isAfter(moment('10:00 PM', 'h:mm A'))) {
+          toast.error('Selected time is outside the allowed range (11:00 AM - 10:00 PM).');
         }
         if (selectedBranch == "None") {
           tempError = { ...tempError, branchError: true };
