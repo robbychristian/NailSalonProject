@@ -60,8 +60,27 @@ class DatabaseSeeder extends Seeder
             'user_id' => 2,
             'middle_name' => 'Garcia',
             'birthday' => '1999-01-01',
-            'contact_no' => '09123456789',
+            'contact_no' => '+639123456789',
             'address' => 'Quezon City'
+        ]);
+
+        User::create([
+            'first_name' => 'Tyler',
+            'last_name' => 'Creator',
+            'email' => 'waynelaya08@gmail.com',
+            'email_verified_at' => now(),
+            'username' => 'TylerC',
+            'password' => Hash::make('password'),
+            'user_role' => 2,
+            'is_notify' => 0
+        ]);
+
+        UserProfile::create([
+            'user_id' => 3,
+            'middle_name' => 'Santos',
+            'birthday' => '1999-09-22',
+            'contact_no' => '+639951540553',
+            'address' => 'Pasig'
         ]);
 
         // SERVICES
