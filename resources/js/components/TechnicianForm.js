@@ -74,7 +74,7 @@ const TechnicianForm = ({ onStaffChange, ...props }) => {
                     >
                         <Grid container spacing={2}>
                             {staff.map((item, index) => (
-                                <Grid item xs={4}>
+                                <Grid item xs>
                                     <Card sx={{ maxWidth: 345 }} key={index}>
 
                                         <img src={`/img/profile_pictures/${item.id}/${item.staff_image}`} style={{ height: "300px", width: "100%" }} />
