@@ -74,10 +74,10 @@ const TechnicianForm = ({ onStaffChange, ...props }) => {
                     >
                         <Grid container spacing={2}>
                             {staff.map((item, index) => (
-                                <Grid item xs>
-                                    <Card sx={{ maxWidth: 345, height: "100%" }} key={index}>
+                                <Grid item xs={4}>
+                                    <Card sx={{ maxWidth: 345 }} key={index}>
 
-                                        <img src={`/img/profile_pictures/${item.id}/${item.staff_image}`} />
+                                        <img src={`/img/profile_pictures/${item.id}/${item.staff_image}`} style={{ height: "300px", width: "100%" }} />
                                         <CardContent>
                                             <FormControlLabel
                                                 value={item.id}

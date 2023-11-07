@@ -345,10 +345,10 @@ class DatabaseSeeder extends Seeder
         //STAFF
         //STAFF 1
         $staff1 = Staff::create([
-            'staff_name' => 'Marvie Japilla',
+            'staff_name' => 'Marie Laureta',
             'staff_image' => 'sample-profile.jpg'
         ]);
-        $staff1->services()->attach([$service1->id, $service2->id]);
+        $staff1->services()->attach([$service1->id, $service2->id, $service3->id]);
         $image1 = WorkImages::create([
             'filename' => 'sample-img.jpg'
         ]);
@@ -356,10 +356,10 @@ class DatabaseSeeder extends Seeder
 
         //STAFF 2
         $staff2 = Staff::create([
-            'staff_name' => 'Princess Glori',
+            'staff_name' => 'Marivic Daroy',
             'staff_image' => 'sample-profile.jpg'
         ]);
-        $staff2->services()->attach([$service4->id, $service5->id]);
+        $staff2->services()->attach([$service1->id, $service2->id, $service3->id, $service4->id, $service5->id]);
         $image2 = WorkImages::create([
             'filename' => 'sample-img.jpg'
         ]);
@@ -367,7 +367,7 @@ class DatabaseSeeder extends Seeder
 
         //STAFF 3
         $staff3 = Staff::create([
-            'staff_name' => 'Marie Laureta',
+            'staff_name' => 'Princess Glori',
             'staff_image' => 'sample-profile.jpg'
         ]);
         $staff3->services()->attach([$service1->id, $service2->id, $service3->id]);
@@ -378,10 +378,10 @@ class DatabaseSeeder extends Seeder
 
         //STAFF 4
         $staff4 = Staff::create([
-            'staff_name' => 'Heverly Dela Cruz',
+            'staff_name' => 'Pearl Segarra',
             'staff_image' => 'sample-profile.jpg'
         ]);
-        $staff4->services()->attach([$service1->id, $service2->id, $service3->id]);
+        $staff4->services()->attach([$service1->id, $service2->id, $service3->id, $service4->id, $service5->id]);
         $image4 = WorkImages::create([
             'filename' => 'sample-img.jpg'
         ]);
@@ -389,14 +389,25 @@ class DatabaseSeeder extends Seeder
 
         //STAFF 5
         $staff5 = Staff::create([
-            'staff_name' => 'Marivic Daroy',
+            'staff_name' => 'Charlyn Segarra',
             'staff_image' => 'sample-profile.jpg'
         ]);
-        $staff5->services()->attach([$service1->id, $service2->id, $service3->id]);
+        $staff5->services()->attach([$service1->id, $service2->id, $service4->id, $service5->id]);
         $image5 = WorkImages::create([
             'filename' => 'sample-img.jpg'
         ]);
         $staff5->workImages()->attach([$image5->id]);
+
+        //STAFF 6
+        $staff6 = Staff::create([
+            'staff_name' => 'Jazrell Fabianess',
+            'staff_image' => 'sample-profile.jpg'
+        ]);
+        $staff6->services()->attach([$service1->id, $service2->id, $service4->id, $service5->id]);
+        $image6 = WorkImages::create([
+            'filename' => 'sample-img.jpg'
+        ]);
+        $staff6->workImages()->attach([$image6->id]);
 
         // NAIL COLORS
         // CHINA BRAND

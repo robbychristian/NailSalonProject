@@ -3,7 +3,7 @@
 
 @section('content')
     <section id="about-us" class="bg-pink">
-        <div class="container mx-auto md:px-20 px-4">
+        <div class="container mx-auto md:px-20 px-4 py-10">
             <h1
                 class="text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl uppercase text-center mb-10">
                 Who we are. What we do.
@@ -85,46 +85,26 @@
             </div>
 
             <div class="py-10 grid grid-cols-1 md:grid-cols-3 gap-10 justify-items-stretch mt-10">
+                @foreach ($staffs as $staff)
+                    <div class="mb-20">
+                        <div class="h-full">
+                            <div class="h-full flex justify-center items-center bg-darker-pink">
+                                <img class="h-40 w-40 rounded-full"
+                                    src="{{ asset('img/profile_pictures/' . $staff->id . '/' . $staff->staff_image) }}"
+                                    alt="">
+                            </div>
 
-                <div class="h-full">
-                    <div class="h-full flex justify-center items-center bg-darker-pink">
-                        <img class="h-40 w-40 rounded-full" src="{{ asset('img/homepage/founder.jpg') }}" alt="">
+                            <p class="font-bold text-center mb-2 mt-2">{{ $staff->staff_name }}</p>
+                            <div class="flex justify-center items-center flex-wrap">
+                                @foreach ($staff->services as $service)
+                                    <span
+                                        class="bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded mb-2">{{ $service->service_name }}</span>
+                                @endforeach
+
+                            </div>
+                        </div>
                     </div>
-
-                    <p class="font-bold text-center">Marvie Japilla</p>
-                </div>
-
-                <div class="h-full">
-                    <div class="h-full flex justify-center items-center bg-darker-pink">
-                        <img class="h-40 w-40 rounded-full" src="{{ asset('img/homepage/founder.jpg') }}" alt="">
-                    </div>
-
-                    <p class="font-bold text-center">Marvie Japilla</p>
-                </div>
-
-                <div class="h-full">
-                    <div class="h-full flex justify-center items-center bg-darker-pink">
-                        <img class="h-40 w-40 rounded-full" src="{{ asset('img/homepage/founder.jpg') }}" alt="">
-                    </div>
-
-                    <p class="font-bold text-center">Marvie Japilla</p>
-                </div>
-
-                <div class="h-full">
-                    <div class="h-full flex justify-center items-center bg-darker-pink">
-                        <img class="h-40 w-40 rounded-full" src="{{ asset('img/homepage/founder.jpg') }}" alt="">
-                    </div>
-
-                    <p class="font-bold text-center">Marvie Japilla</p>
-                </div>
-
-                <div class="h-full">
-                    <div class="h-full flex justify-center items-center bg-darker-pink">
-                        <img class="h-40 w-40 rounded-full" src="{{ asset('img/homepage/founder.jpg') }}" alt="">
-                    </div>
-
-                    <p class="font-bold text-center">Marvie Japilla</p>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

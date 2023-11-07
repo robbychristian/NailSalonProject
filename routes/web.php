@@ -18,6 +18,7 @@ use App\Models\Packages;
 use App\Models\ProductAddOns;
 use App\Models\Products;
 use App\Models\Services;
+use App\Models\Staff;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,8 @@ Route::get('/', function () {
 })->name('index');
 
 Route::get('/about-us', function () {
-    return view('static.about-us');
+    $staffs = Staff::all();
+    return view('static.about-us', compact('staffs'));
 })->name('about-us');
 
 Route::get('/services-page', function () {
