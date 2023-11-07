@@ -25,7 +25,7 @@
 
                                 <span class="ml-3">
                                     <h2 class="text-md font-semibold text-gray-900">Location</h2>
-                                    <p class="text-sm">Insert Address Here</p>
+                                    <p class="text-sm">177 M. Dela Fuente St, Sampaloc, Manila, Manila, Philippines</p>
                                 </span>
                             </div>
 
@@ -37,7 +37,7 @@
 
                                 <span class="ml-3">
                                     <h2 class="text-md font-semibold text-gray-900">Opening Hours</h2>
-                                    <p class="text-sm">Insert Time Here</p>
+                                    <p class="text-sm">11:00AM - 10:00PM</p>
                                 </span>
                             </div>
 
@@ -49,7 +49,7 @@
 
                                 <span class="ml-3">
                                     <h2 class="text-md font-semibold text-gray-900">Contact Number</h2>
-                                    <p class="text-sm">Insert Contact Number Here</p>
+                                    <p class="text-sm">0945 843 6936</p>
                                 </span>
                             </div>
 
@@ -62,7 +62,7 @@
 
                                 <span class="ml-3">
                                     <h2 class="text-md font-semibold text-gray-900">Email Address</h2>
-                                    <p class="text-sm">Insert Email Address Here</p>
+                                    <p class="text-sm">glgdepollo@gmail.com</p>
                                 </span>
                             </div>
                         </div>
