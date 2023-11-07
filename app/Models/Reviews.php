@@ -15,4 +15,9 @@ class Reviews extends Model
         'review_score',
         'review_desc',
     ];
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

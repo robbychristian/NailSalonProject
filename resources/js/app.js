@@ -18,3 +18,4 @@ require('./components/DashboardCalendar');
 require('./components/Review');
 require('./components/ViewReview');
 require('./components/nail-customization/NailCustomization');
+require('./components/ServicePageReviews');

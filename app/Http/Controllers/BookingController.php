@@ -464,4 +464,12 @@ class BookingController extends Controller
             'user' => $user
         ]);
     }
+
+    public function getReviewsForServicePage()
+    {
+        $reviews = Reviews::with('createdBy')->latest()->take(10)->get();
+        return response()->json([
+            'reviews' => $reviews
+        ]);
+    }
 }
