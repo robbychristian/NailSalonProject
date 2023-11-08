@@ -467,7 +467,7 @@ class BookingController extends Controller
 
     public function getReviewsForServicePage()
     {
-        $reviews = Reviews::with('createdBy')->latest()->take(10)->get();
+        $reviews = Reviews::with('createdBy', 'booking.staffReview')->latest()->take(10)->get();
         return response()->json([
             'reviews' => $reviews
         ]);

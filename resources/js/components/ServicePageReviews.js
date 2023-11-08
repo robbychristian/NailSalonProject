@@ -12,9 +12,10 @@ function ServicePageReviews(props) {
     useEffect(() => {
         axios.get('/api/getReviewsForServicePage')
             .then((response) => {
+                console.log(response.data.reviews);
                 setReviews(response.data.reviews)
             })
-    }, [reviews])
+    }, [])
 
     console.log(reviews);
 
@@ -53,11 +54,12 @@ function ServicePageReviews(props) {
                                     <blockquote>
                                         <p className="text-2xl font-medium text-gray-900 dark:text-white">{review.review_desc}</p>
                                     </blockquote>
-                                    <figcaption className="flex items-center justify-center mt-6 space-x-3">
+                                    <figcaption className="flex items-center justify-center mt-6 space-x-3 flex-col">
 
                                         <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
-                                            <div className="pr-3 font-medium text-gray-900 dark:text-white">{review.created_by.first_name} {review.created_by.last_name}</div>
+                                            <div className="pr-3 text-md font-medium text-gray-900 dark:text-white">{review.created_by.first_name} {review.created_by.last_name}</div>
                                         </div>
+                                        <small>{`Technician: ${review.booking.staff_review.staff_name}`}</small>
                                     </figcaption>
                                 </figure>
                             </div>
