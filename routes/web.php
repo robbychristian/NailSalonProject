@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AdminController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\DashboardController;
@@ -53,6 +55,8 @@ Route::get('/contact-us', function () {
     return view('static.contact-us');
 })->name('contact-us');
 
+Route::get('/login/admin', [AdminController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/login/admin', [AdminController::class, 'login'])->name('admin.submit-login');
 Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth', 'verified']], function () {

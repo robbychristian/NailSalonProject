@@ -8,6 +8,7 @@ use App\Models\UserProfile;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -74,7 +75,13 @@ class LoginController extends Controller
             return response($response, 201);
         } else {
             if (auth()->attempt(array($fieldType => $input['email'], 'password' => $input['password']))) {
-                return redirect()->route('home');
+                $user = auth()->user();
+                if ($user->user_role == 2) {
+                    return redirect()->route('home');
+                } else {
+                    auth()->logout();
+                    return redirect()->route('login')->with('error', 'These credentials do not match our records.');
+                }
             } else {
                 return redirect()->route('login')->with('error', 'These credentials do not match our records.');
             }
