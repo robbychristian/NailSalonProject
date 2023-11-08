@@ -78,4 +78,5 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('sms', SmsController::class);
     Route::get('/nail-customization', [BookingController::class, 'showNailCustomization'])->name('nail-custom.index');
     Route::resource('nail-colors', NailColorController::class);
+    Route::get('/print/reports', [SalesReportController::class, 'print'])->name('reports.print');
 });

@@ -532,6 +532,9 @@ video {
 .pointer-events-none {
   pointer-events: none;
 }
+.collapse {
+  visibility: collapse;
+}
 .fixed {
   position: fixed;
 }
@@ -768,6 +771,12 @@ video {
 }
 .flex-1 {
   flex: 1 1 0%;
+}
+.flex-shrink {
+  flex-shrink: 1;
+}
+.border-collapse {
+  border-collapse: collapse;
 }
 .-translate-x-full {
   --tw-translate-x: -100%;

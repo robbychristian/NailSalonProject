@@ -135,4 +135,57 @@ class SalesReportController extends Controller
     {
         //
     }
+
+    public function print()
+    {
+        $bookings = Bookings::all();
+        $today = Carbon::now()->format('Y-m-d');
+        $bookingsTodayCount = Bookings::whereDate('date', $today)->count();
+        $totalSales = number_format(Payments::where('payment_status', 1)->sum('total_price'), 2);
+        $totalProducts = Products::all()->count();
+        $totalPackages = Packages::all()->count();
+
+        $months = [
+            'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+            'October', 'November', 'December'
+        ];
+
+        $months = [
+            'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+            'October', 'November', 'December'
+        ];
+
+        $numberOfBookings = [];
+
+        foreach ($months as $value) {
+            $yearMonth = date('Y-m', strtotime("1 $value")); // Year and month
+            $count = Bookings::whereRaw('DATE_FORMAT(date, "%Y-%m") = ?', [$yearMonth])->count();
+            $numberOfBookings[] = $count;
+        }
+
+        $typeOfCustomer = [1, null];
+        $totalTypeOfCustomer = [];
+
+        foreach ($typeOfCustomer as $key => $value) {
+            $totalTypeOfCustomer[] = User::where('is_loyal', $value)
+                ->where('user_role', 2)
+                ->count();
+        }
+
+        $topProducts = Products::withCount('bookings') // Count the number of bookings for each product
+            ->having('bookings_count', '>', 0) // Filter products with bookings_count > 0
+            ->orderBy('bookings_count', 'desc') // Order by the booking count in descending order
+            ->take(10) // Limit the result to the top 10 products
+            ->get(); // Get the products
+
+        $topPackages = Packages::withCount('bookings')
+            ->having('bookings_count', '>', 0)
+            ->orderBy('bookings_count', 'desc')
+            ->take(10)
+            ->get();
+
+        // return $topPackages;
+
+        return view('modules.reports.table-print', compact('bookingsTodayCount', 'totalSales', 'totalProducts', 'totalPackages', 'months', 'numberOfBookings', 'totalTypeOfCustomer', 'topProducts', 'topPackages'));
+    }
 }

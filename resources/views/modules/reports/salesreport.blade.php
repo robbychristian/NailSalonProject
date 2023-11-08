@@ -8,6 +8,7 @@
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                     Sales Report
                 </h1>
+                <a href="{{ route('reports.print') }}" target="_blank" rel="noopener noreferrer">Print</a>
             </div>
             <div class="mt-4">
                 <div class="flex flex-wrap -mx-6">
