@@ -52,7 +52,7 @@
             <div class="mt-6 grid grid-cols-12 justify-items-center items-center gap-10">
                 <div class="col-span-12 md:col-span-3 bg-darker-pink h-full w-full">
                     <div class="h-full flex justify-center items-center">
-                        <img class="h-64 w-64 rounded-full" src="{{ asset('img/homepage/founder.jpg') }}" alt="">
+                        <img class="h-48 w-48 rounded-full" src="{{ asset('img/homepage/founder.jpg') }}" alt="">
                     </div>
                 </div>
                 <div class="col-span-12 md:col-span-9 h-full w-full">
@@ -61,23 +61,19 @@
                             <h3 class="text-center p-3 text-3xl font-bold uppercase">Founder, Gladys Depollo</h3>
                         </div>
                         <div class="rows-span-12 md:rows-span-9 bg-dark-pink">
-                            <p class="p-5 text-justify"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam,
-                                eaque excepturi officiis perspiciatis iste quae quod! Libero laudantium recusandae quis quo,
-                                porro similique facilis! Aliquid repudiandae at totam odit qui. Lorem ipsum dolor sit amet
-                                consectetur adipisicing elit. Fugiat porro perferendis sapiente tempore! Unde, quis! Quod
-                                obcaecati vitae quos eos natus modi, sed excepturi fuga eligendi facere ratione cum iste?
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate ex quisquam rem sed
-                                asperiores odio, facilis iure cumque illum quos ea optio itaque expedita atque inventore
-                                nobis provident ipsam magni.
-                            </p>
-                            <p class="p-5 text-justify"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam,
-                                eaque excepturi officiis perspiciatis iste quae quod! Libero laudantium recusandae quis quo,
-                                porro similique facilis! Aliquid repudiandae at totam odit qui. Lorem ipsum dolor sit amet
-                                consectetur adipisicing elit. Fugiat porro perferendis sapiente tempore! Unde, quis! Quod
-                                obcaecati vitae quos eos natus modi, sed excepturi fuga eligendi facere ratione cum iste?
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate ex quisquam rem sed
-                                asperiores odio, facilis iure cumque illum quos ea optio itaque expedita atque inventore
-                                nobis provident ipsam magni.
+                            <p class="p-5 text-justify">
+
+                                Gracey Nails and Lashes Services is a salon that specializes in providing aesthetic
+                                enhancements for nails and eyelashes.
+                                Founded on the year 2022 by Gladys Galapin, Gracey Nails and Lashes Services strives to be
+                                on-par with its competitors and customer’s needs.
+                                Through their vast selection of services and offers readily made available to the clients,
+                                the salon makes sure that the accommodation and providing of service would be of quality and
+                                without the risk of compromising in bringing your true beauty.
+                                Located at Sampaloc, Manila, Gracey Nails and Lashes Services proves to thrive and further
+                                their reputation and capability to adapt and enhance on making your very own nails and
+                                lashes aesthetically pleasing.
+                                See what lies ahead by paying us a visit!
                             </p>
                         </div>
                     </div>

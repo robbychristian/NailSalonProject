@@ -9,12 +9,11 @@
                     <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
                         Beauty starts with nails.
                     </h1>
-                    <p class="mb-8 text-lg font-normal text-white lg:text-xl sm:px-16 lg:px-64">Lorem ipsum dolor sit,
-                        amet
-                        consectetur adipisicing elit. Eaque veritatis nulla ullam
+                    <p class="mb-8 text-lg font-normal text-white lg:text-xl sm:px-16 lg:px-64">
+                        The right color can captivate an individual's elegance
                     </p>
 
-                    <a href="#"
+                    <a href="{{ route('login') }}"
                         class="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400">
                         Book Now
                     </a>
