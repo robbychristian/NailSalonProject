@@ -72,6 +72,15 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('activity.index') }}"
+                        class="flex items-center p-2 text-base font-medium text-gray-900 rounded-lg hover:bg-gray-100 group">
+                        <span class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                        </span>
+                        <span class="ml-3">Activity Log</span>
+                    </a>
+                </li>
+                <li>
                     <button type="button"
                         class="flex items-center p-2 w-full text-base font-medium text-gray-900 rounded-lg group hover:bg-gray-100"
                         aria-controls="dropdown-pages" data-collapse-toggle="dropdown-pages">

@@ -55,6 +55,7 @@ class PackagesController extends Controller
             $package->products()->attach($product);
         }
 
+        $package->newActivity("Package Created", "created");
         return redirect('/packages')->with('success', 'You have successfully added a package!');
     }
 
@@ -101,6 +102,7 @@ class PackagesController extends Controller
 
         $package = Packages::find($id);
         $package->products()->sync($request->product);
+        $package->newActivity("Package Edited", "edited");
         return redirect('/packages')->with('success', 'You have successfully edited a package!');
     }
 
@@ -115,6 +117,7 @@ class PackagesController extends Controller
         $package = Packages::find($id);
         $package->delete();
         $package->products()->detach();
+        $package->newActivity("Package Deleted", "deleted");
 
         return redirect('/packages')->with('success', 'You have successfully deleted the package!');
     }

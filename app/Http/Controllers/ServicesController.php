@@ -39,11 +39,12 @@ class ServicesController extends Controller
      */
     public function store(CreateServiceRequest $request)
     {
-        Services::create([
+        $service = Services::create([
             'service_name' => $request['service_name'],
             'service_description' => $request->service_description,
         ]);
 
+        $service->newActivity("Service Created", "created");
         return redirect('/services')->with('success', 'You have successfully added a service!');
     }
 
@@ -79,11 +80,13 @@ class ServicesController extends Controller
      */
     public function update(UpdateServiceRequest $request, $id)
     {
+        $service = Services::find($id);
+
         Services::where('id', $id)->update([
             'service_name' => $request['service_name'],
             'service_description' => $request['service_description'],
         ]);
-
+        $service->newActivity("Service Edited", "edited");
         return redirect('/services')->with('success', 'You have successfully edited the service!');
     }
 
@@ -95,8 +98,11 @@ class ServicesController extends Controller
      */
     public function destroy($id)
     {
-        Services::find($id)->delete();
+        $service = Services::find($id);
+        $service->delete();
         Products::where('service_id', $id)->delete();
+
+        $service->newActivity("Service Deleted", "deleted");
         return redirect('/services')->with('success', 'You have successfully deleted the service!');
     }
 }

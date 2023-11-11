@@ -65,6 +65,7 @@ class StaffController extends Controller
             }
         }
 
+        $staff->newActivity("Staff Created", "created");
         return redirect('/staff')->with('success', 'You have successfully added a staff!');
     }
 
@@ -135,6 +136,7 @@ class StaffController extends Controller
                 $staff->workImages()->detach($removeImg);
             }
         }
+        $staff->newActivity("Staff Edited", "edited");
 
         return redirect('/staff')->with('success', 'You have successfully edited a staff!');
     }
@@ -152,6 +154,7 @@ class StaffController extends Controller
         $staff->services()->detach();
         $staff->workImages()->detach();
 
+        $staff->newActivity("Staff Deleted", "deleted");
         return redirect('/staff')->with('success', 'You have successfully deleted a staff!');
     }
 }

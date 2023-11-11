@@ -24,4 +24,18 @@ class Staff extends Model
     {
         return $this->belongsToMany(WorkImages::class);
     }
+
+    public function newActivity($activity, $type, $include_id = true)
+    {
+        if ($include_id) {
+            $activity .= " : " . '<a class="text-blue-600 hover:underline" href="' . route('staff.index') . '">' . $this->staff_name . "</a>";
+        }
+
+
+        Activity::create([
+            'activity' => $activity,
+            'type' => $type,
+            'user_id' => \Auth::id(),
+        ]);
+    }
 }

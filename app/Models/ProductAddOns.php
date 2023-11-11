@@ -25,4 +25,17 @@ class ProductAddOns extends Model
     {
         return $this->belongsToMany(Bookings::class);
     }
+
+    public function newActivity($activity, $type, $include_id = true)
+    {
+        if ($include_id) {
+            $activity .= " : " . '<a class="text-blue-600 hover:underline" href="' . route('product-add-ons.index') . '">' . $this->additional . "</a>";
+        }
+
+        Activity::create([
+            'activity' => $activity,
+            'type' => $type,
+            'user_id' => \Auth::id(),
+        ]);
+    }
 }

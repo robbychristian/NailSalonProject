@@ -39,12 +39,13 @@ class ProductAddOnsController extends Controller
      */
     public function store(CreateProductAddOnsRequest $request)
     {
-        ProductAddOns::create([
+        $addons = ProductAddOns::create([
             'product_id' => $request['product_id'],
             'additional' => $request['additional'],
             'additional_price' => $request['additional_price'],
         ]);
 
+        $addons->newActivity("Product Add Ons Created", "created");
         return redirect('/product-add-ons')->with('success', 'You have successfully added a product add ons!');
     }
 
@@ -81,12 +82,15 @@ class ProductAddOnsController extends Controller
      */
     public function update(CreateProductAddOnsRequest $request, $id)
     {
+        $addons = ProductAddOns::find($id);
+
         ProductAddOns::where('id', $id)->update([
             'product_id' => $request['product_id'],
             'additional' => $request['additional'],
             'additional_price' => $request['additional_price'],
         ]);
 
+        $addons->newActivity("Product Add Ons Edited", "Edited");
         return redirect('/product-add-ons')->with('success', 'You have successfully edited a product add ons!');
     }
 
@@ -98,7 +102,9 @@ class ProductAddOnsController extends Controller
      */
     public function destroy($id)
     {
-        ProductAddOns::find($id)->delete();
+        $addons = ProductAddOns::find($id);
+        $addons->delete();
+        $addons->newActivity("Product Add Ons Deleted", "deleted");
         return redirect('/product-add-ons')->with('success', 'You have successfully deleted a product add ons!');
     }
 }

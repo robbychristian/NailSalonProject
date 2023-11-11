@@ -37,10 +37,11 @@ class NailColorController extends Controller
      */
     public function store(CreateNailColorRequest $request)
     {
-        NailColors::create([
+        $color = NailColors::create([
             'brand' => $request->brand,
             'color' => $request->color
         ]);
+        $color->newActivity("Nail Color Created", "created");
 
         return redirect('/nail-colors')->with('success', 'You have successfully added a nail color!');
     }
@@ -89,6 +90,7 @@ class NailColorController extends Controller
     {
         $color = NailColors::find($id);
         $color->delete();
+        $color->newActivity("Nail Color Deleted", "deleted");
 
         return redirect('/nail-colors')->with('success', 'You have successfully deleted a color!');
     }

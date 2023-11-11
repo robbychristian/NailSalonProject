@@ -40,13 +40,14 @@ class ProductsController extends Controller
      */
     public function store(CreateProductRequest $request)
     {
-        Products::create([
+        $product = Products::create([
             'product_name' => $request['product_name'],
             'product_description' => $request->product_description,
             'service_id' => $request['service_type'],
             'price' => $request['price'],
         ]);
 
+        $product->newActivity("Product Created", "created");
         return redirect('/products')->with('success', 'You have successfully added a product!');
     }
 
@@ -83,6 +84,7 @@ class ProductsController extends Controller
      */
     public function update(UpdateProductRequest $request, $id)
     {
+        $product = Products::find($id);
         Products::where('id', $id)->update([
             'product_name' => $request['product_name'],
             'product_description' => $request['product_description'],
@@ -90,6 +92,7 @@ class ProductsController extends Controller
             'price' => $request['price'],
         ]);
 
+        $product->newActivity("Product Edited", "edited");
         return redirect('/products')->with('success', 'You have successfully added a product!');
     }
 
@@ -104,6 +107,8 @@ class ProductsController extends Controller
         $products = Products::find($id);
         $products->delete();
         $products->package()->detach();
+
+        $products->newActivity("Product Deleted", "deleted");
         return redirect('/products')->with('success', 'You have successfully deleted the product and has been removed from the associated packages!');
     }
 }

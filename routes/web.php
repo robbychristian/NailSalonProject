@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Auth\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BookingController;
@@ -79,4 +80,5 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/nail-customization', [BookingController::class, 'showNailCustomization'])->name('nail-custom.index');
     Route::resource('nail-colors', NailColorController::class);
     Route::get('/print/reports', [SalesReportController::class, 'print'])->name('reports.print');
+    Route::resource('activity', ActivityController::class);
 });

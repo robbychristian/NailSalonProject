@@ -61,6 +61,7 @@ class UserController extends Controller
             'address' => $request['address']
         ]);
 
+        $user->newActivity('User Created', "created");
         return redirect('/users')->with('success', 'You have successfully added a user!');
     }
 

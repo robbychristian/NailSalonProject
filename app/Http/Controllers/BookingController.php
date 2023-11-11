@@ -401,10 +401,12 @@ class BookingController extends Controller
 
     public function approveBooking($id)
     {
+        $payment = Payments::find($id);
         Payments::where('booking_id', $id)->update([
             'payment_status' => 1
         ]);
 
+        $payment->newActivity("Booking Approved", "edited");
         return redirect('/booking')->with('success', 'You have successfully approved this booking!');
     }
 

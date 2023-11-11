@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateBranchRequest;
-use App\Models\Branches;
+use App\Models\Activity;
 use Illuminate\Http\Request;
 
-class BranchController extends Controller
+class ActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class BranchController extends Controller
      */
     public function index()
     {
-        $branches = Branches::all();
-        return view('modules.branch.index', compact('branches'));
+        $activities = Activity::all();
+        return view('modules.activity.index', compact('activities'));
     }
 
     /**
@@ -26,7 +25,7 @@ class BranchController extends Controller
      */
     public function create()
     {
-        return view('modules.branch.create');
+        //
     }
 
     /**
@@ -35,14 +34,9 @@ class BranchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateBranchRequest $request)
+    public function store(Request $request)
     {
-        $branch = Branches::create([
-            'branch_address' => $request['branch_address']
-        ]);
-        $branch->newActivity("Branch Created", "created");
-
-        return redirect('/branches')->with('success', 'You have successfully added a branch!');
+        //
     }
 
     /**
@@ -64,8 +58,7 @@ class BranchController extends Controller
      */
     public function edit($id)
     {
-        $branch = Branches::find($id);
-        return view('modules.branch.edit', compact('branch'));
+        //
     }
 
     /**
@@ -75,15 +68,9 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateBranchRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $branch = Branches::find($id);
-        Branches::where('id', $id)->update([
-            'branch_address' => $request['branch_address']
-        ]);
-        $branch->newActivity("Branch Edited", "edited");
-
-        return redirect('/branches')->with('success', 'You have successfully edited a branch!');
+        //
     }
 
     /**
@@ -94,10 +81,6 @@ class BranchController extends Controller
      */
     public function destroy($id)
     {
-        $branch = Branches::find($id);
-        $branch->delete();
-        $branch->newActivity("Branch Deleted", "deleted");
-
-        return redirect('/branches')->with('success', 'You have successfully deleted a branch!');
+        //
     }
 }

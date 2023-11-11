@@ -56,4 +56,17 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(NailCustomization::class, 'id', 'user_id');
     }
+
+    public function newActivity($activity, $type, $include_id = true)
+    {
+        if ($include_id) {
+            $activity .= " : " . '<a class="text-blue-600 hover:underline" href="' . route('users.show', $this->id) . '">' . $this->first_name . " " . $this->last_name . "</a>";
+        }
+
+        Activity::create([
+            'activity' => $activity,
+            'type' => $type,
+            'user_id' => \Auth::id(),
+        ]);
+    }
 }

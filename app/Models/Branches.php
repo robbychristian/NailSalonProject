@@ -13,4 +13,17 @@ class Branches extends Model
     protected $fillable = [
         'branch_address'
     ];
+
+    public function newActivity($activity, $type, $include_id = true)
+    {
+        if ($include_id) {
+            $activity .= " : " . '<a class="text-blue-600 hover:underline" href="' . route('branches.index') . '">' . $this->branch_address . "</a>";
+        }
+
+        Activity::create([
+            'activity' => $activity,
+            'type' => $type,
+            'user_id' => \Auth::id(),
+        ]);
+    }
 }
