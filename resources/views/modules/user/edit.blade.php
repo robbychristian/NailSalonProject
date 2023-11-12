@@ -22,7 +22,7 @@
         <div class="w-full bg-white rounded-lg shadow md:mt-5 mb-10 md xl:p-0">
 
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <a href="{{ route('users.index') }}"
+                <a href="{{ route('home') }}"
                     class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mr-1">Back</a>
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                     Edit your profile

@@ -19,28 +19,37 @@
             </div>
 
             <div class="bg-dark-pink mt-6">
-                <p class="text-justify p-5"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quas
-                    dignissimos beatae laboriosam deleniti maiores nobis fugiat facere, nostrum tempora omnis debitis? Nihil
-                    ut temporibus nobis nulla vitae nam consequatur. Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit. Totam in, neque est minima pariatur dignissimos fugiat id minus odio voluptatibus accusantium
-                    error temporibus hic illo porro beatae magnam iste tempora! Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Cum reprehenderit dolores ab ad consequuntur, enim corporis, autem sapiente molestias
-                    nesciunt ducimus neque exercitationem, vero nulla est. Velit molestiae laborum enim? Lorem ipsum dolor
-                    sit amet consectetur adipisicing elit. Repudiandae non inventore mollitia laudantium ipsum autem odio
-                    vitae possimus odit omnis ducimus praesentium reprehenderit distinctio officiis, maxime facere
-                    assumenda? Natus, illum?
+                <p class="text-justify p-5">
+                    Gracey Nails and Lashes Services is a salon that specializes in providing aesthetic enhancements for
+                    nails
+                    and eyelashes. Founded on the year 2022 by Gladys Galapin, Gracey Nails and Lashes Services strives to
+                    be
+                    on-par with its competitors and customer’s needs. Through their vast and affordable selection of
+                    services
+                    and offers readily made available to the clients, the salon makes sure that the accommodation and
+                    providing
+                    of service would be of quality and without the risk of compromising in bringing your true beauty.
+                    Located at
+                    Sampaloc, Manila, Gracey Nails and Lashes Services proves to thrive and further their reputation and
+                    capability to adapt and enhance on making your very own nails and lashes aesthetically pleasing. We are
+                    open
+                    from Monday to Sunday - 10:00 AM to 10:00 PM. We also accept advance bookings and walk-ins. See what
+                    lies
+                    ahead by paying us a visit!
                 </p>
 
-                <p class="text-justify p-5"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quas
-                    dignissimos beatae laboriosam deleniti maiores nobis fugiat facere, nostrum tempora omnis debitis? Nihil
-                    ut temporibus nobis nulla vitae nam consequatur. Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit. Totam in, neque est minima pariatur dignissimos fugiat id minus odio voluptatibus accusantium
-                    error temporibus hic illo porro beatae magnam iste tempora! Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Cum reprehenderit dolores ab ad consequuntur, enim corporis, autem sapiente molestias
-                    nesciunt ducimus neque exercitationem, vero nulla est. Velit molestiae laborum enim? Lorem ipsum dolor
-                    sit amet consectetur adipisicing elit. Repudiandae non inventore mollitia laudantium ipsum autem odio
-                    vitae possimus odit omnis ducimus praesentium reprehenderit distinctio officiis, maxime facere
-                    assumenda? Natus, illum?
+                <p class="text-justify p-5">
+                    Then for the one on the owner: <br>
+                    Gladys Galapin is the founder of Gracey Nails and Lashes Services. On the year 2022, she established the
+                    salon which aims to provide maintenance and enhancement to its customers’ nails and lashes such as
+                    manicure,
+                    pedicure, foot spa, threading, and waxing. Gracey Nails and Lashes Services was a dream business now
+                    made
+                    true fueled by Gladys’ vision and consistent drive for a competitive yet efficient strategies on
+                    bringing
+                    the salon to its customers. Being charismatic with her overseeing the salon, it is then highly
+                    anticipated
+                    that our customers are in for a quality experience with our services.
                 </p>
             </div>
 

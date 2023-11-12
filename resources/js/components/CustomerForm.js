@@ -50,7 +50,7 @@ const CustomerForm = ({ onUserChange, authUser }) => {
                 <MenuItem value="None">-- Choose a User --</MenuItem>
                 {users.map((item, index) => (
                     <MenuItem key={index} value={item.id}>
-                        {`${item.first_name} ${item.last_name} - ${item.email}`}
+                        {`${item.first_name} ${item.last_name} - ${item.email} - ${item.is_loyal == 1 ? 'Loyal Customer' : 'Non-Loyal Customer'}`}
                     </MenuItem>
                 ))}
             </TextField>
