@@ -67,7 +67,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'first_name' => 'Tyler',
             'last_name' => 'Creator',
-            'email' => 'waynelaya08@gmail.com',
+            'email' => 'tylerc08@gmail.com',
             'email_verified_at' => now(),
             'username' => 'TylerC',
             'password' => Hash::make('password'),
@@ -81,6 +81,206 @@ class DatabaseSeeder extends Seeder
             'birthday' => '1999-09-22',
             'contact_no' => '+639951540553',
             'address' => 'Pasig'
+        ]);
+
+        User::create([
+            'first_name' => 'Marq',
+            'last_name' => 'Dela Cruz',
+            'email' => 'marq_anku@hotmail.com',
+            'email_verified_at' => now(),
+            'username' => 'marqanku123',
+            'password' => Hash::make('Password2!'),
+            'user_role' => 2,
+            'is_notify' => 0,
+            'is_loyal' => NULL
+        ]);
+
+        UserProfile::create([
+            'user_id' => 4,
+            'middle_name' => 'Isean',
+            'birthday' => '1997-03-11',
+            'contact_no' => '+639123456780',
+            'address' => 'Quezon, City'
+        ]);
+
+        User::create([
+            'first_name' => 'Tren',
+            'last_name' => 'Est',
+            'email' => 'tren_est123@gmail.com',
+            'email_verified_at' => now(),
+            'username' => 'TrenEst21',
+            'password' => Hash::make('Password3!'),
+            'user_role' => 2,
+            'is_notify' => 1,
+            'is_loyal' => 1
+        ]);
+
+        UserProfile::create([
+            'user_id' => 5,
+            'middle_name' => 'Tonfe',
+            'birthday' => '1996-02-09',
+            'contact_no' => '+639123456799',
+            'address' => 'Sampaloc, Manila'
+        ]);
+
+        User::create([
+            'first_name' => 'Shirley',
+            'last_name' => 'Dela Cruz',
+            'email' => 'shir.ley832@gmail.com',
+            'email_verified_at' => now(),
+            'username' => 'MsShirley',
+            'password' => Hash::make('Password4!'),
+            'user_role' => 2,
+            'is_notify' => 1,
+            'is_loyal' => NULL
+        ]);
+
+        UserProfile::create([
+            'user_id' => 6,
+            'middle_name' => 'Lim',
+            'birthday' => '2000-04-21',
+            'contact_no' => '+639123456705',
+            'address' => '123-H Leyte Street, Sampaloc, Manila'
+        ]);
+
+        User::create([
+            'first_name' => 'Lay',
+            'last_name' => 'Loma',
+            'email' => 'lay_loma321@hotmail.com',
+            'email_verified_at' => now(),
+            'username' => 'LayTest24',
+            'password' => Hash::make('Password5!'),
+            'user_role' => 2,
+            'is_notify' => 0,
+            'is_loyal' => 1
+        ]);
+
+        UserProfile::create([
+            'user_id' => 7,
+            'middle_name' => 'Rima',
+            'birthday' => '1996-01-09',
+            'contact_no' => '+639123456123',
+            'address' => '126 Panay Avenue, Quezon City'
+        ]);
+
+        User::create([
+            'first_name' => 'Casper',
+            'last_name' => 'Miguel',
+            'email' => 'casper_mig262@gmail.com',
+            'email_verified_at' => now(),
+            'username' => 'CasperTries6',
+            'password' => Hash::make('Password6!'),
+            'user_role' => 2,
+            'is_notify' => 1,
+            'is_loyal' => NULL
+        ]);
+
+        UserProfile::create([
+            'user_id' => 8,
+            'middle_name' => 'Gumban',
+            'birthday' => '1999-02-01',
+            'contact_no' => '+639123421789',
+            'address' => '201-F Craig Street, Sampaloc, Manila'
+        ]);
+
+        User::create([
+            'first_name' => 'Naomi',
+            'last_name' => 'Suarez',
+            'email' => 'naomi.suarez423@yahoo.com',
+            'email_verified_at' => now(),
+            'username' => 'Naomi24',
+            'password' => Hash::make('Password7!'),
+            'user_role' => 2,
+            'is_notify' => 1,
+            'is_loyal' => NULL
+        ]);
+
+        UserProfile::create([
+            'user_id' => 9,
+            'middle_name' => 'No',
+            'birthday' => '1993-07-12',
+            'contact_no' => '+639129556789',
+            'address' => 'Quezon, City'
+        ]);
+
+        User::create([
+            'first_name' => 'Joy',
+            'last_name' => 'De Vera',
+            'email' => 'jouyouz.dv42@gmail.com',
+            'email_verified_at' => now(),
+            'username' => 'YojDV42',
+            'password' => Hash::make('Password8!'),
+            'user_role' => 2,
+            'is_notify' => 0,
+            'is_loyal' => NULL
+        ]);
+
+        UserProfile::create([
+            'user_id' => 10,
+            'middle_name' => 'Garcia',
+            'birthday' => '1997-06-21',
+            'contact_no' => '+639123416489',
+            'address' => 'Cavite, City'
+        ]);
+
+        User::create([
+            'first_name' => 'Mae',
+            'last_name' => 'Sinto',
+            'email' => 'mae.sinto291@yahoo.com',
+            'email_verified_at' => now(),
+            'username' => 'SintoMae23',
+            'password' => Hash::make('Password9!'),
+            'user_role' => 2,
+            'is_notify' => 1,
+            'is_loyal' => 1
+        ]);
+
+        UserProfile::create([
+            'user_id' => 11,
+            'middle_name' => 'Marquez',
+            'birthday' => '1994-01-01',
+            'contact_no' => '+639423455789',
+            'address' => 'Quezon City'
+        ]);
+
+        User::create([
+            'first_name' => 'Sandra',
+            'last_name' => 'Co',
+            'email' => 's.co.mei42@hotmail.com',
+            'email_verified_at' => now(),
+            'username' => 'Sandrey42',
+            'password' => Hash::make('Password10!'),
+            'user_role' => 2,
+            'is_notify' => 1,
+            'is_loyal' => 1
+        ]);
+
+        UserProfile::create([
+            'user_id' => 12,
+            'middle_name' => 'Mei',
+            'birthday' => '1999-01-01',
+            'contact_no' => '+639123456789',
+            'address' => 'Quezon, City'
+        ]);
+
+        User::create([
+            'first_name' => 'Lorenz',
+            'last_name' => 'Men',
+            'email' => 'nikkinny9@gmail.com',
+            'email_verified_at' => now(),
+            'username' => 'Sample123',
+            'password' => Hash::make('Password11!'),
+            'user_role' => 2,
+            'is_notify' => 1,
+            'is_loyal' => NULL
+        ]);
+
+        UserProfile::create([
+            'user_id' => 13,
+            'middle_name' => 'Try',
+            'birthday' => '2002-04-24',
+            'contact_no' => '+639954626736',
+            'address' => '123-C Leyte Street, Sampaloc, Manila'
         ]);
 
         // SERVICES
