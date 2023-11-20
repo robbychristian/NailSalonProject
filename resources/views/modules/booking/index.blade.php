@@ -30,7 +30,7 @@
                     <thead class="text-xs text-gray-700 uppercase bg-dark-pink">
                         <tr>
                             <th scope="col" class="px-6 py-3">
-                                Booking ID
+                                Ref #
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Customer Name
@@ -48,6 +48,12 @@
                                 Payment Status
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Created At
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Approved At
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Actions
                             </th>
                         </tr>
@@ -56,7 +62,7 @@
                         @forelse ($bookings as $booking)
                             <tr class="bg-white border-b">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                    {{ $booking->id }}
+                                    {{ $booking->ref_no }}
                                 </th>
                                 <td class="px-6 py-4">
                                     {{ $booking->user->first_name }} {{ $booking->user->last_name }}
@@ -70,7 +76,7 @@
                                 <td class="px-6 py-4">
                                     {{ $booking->branch->branch_address }}
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-6 py-4" width="170">
                                     @if ($booking->payment->payment_status == 1)
                                         <span
                                             class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Paid</span>
@@ -79,6 +85,14 @@
                                             class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Not
                                             Yet
                                             Paid</span>
+                                    @endif
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $booking->created_at }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    @if ($booking->payment->updated_at != $booking->created_at)
+                                        {{ $booking->payment->updated_at }}
                                     @endif
                                 </td>
                                 <td class="px-6 py-4" colspan="4">
@@ -97,21 +111,21 @@
                                                     class="ml-2 font-medium text-darker-pink hover:underline">Approve</button>
                                             </form>
                                         @endif
-                                        
-                                        @if($booking->payment->payment_status != 1)
-                                        <form action="{{ route('booking.destroy', $booking->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="ml-2 font-medium text-red-600 hover:underline">Delete</button>
-                                        </form>
+
+                                        @if ($booking->payment->payment_status != 1)
+                                            <form action="{{ route('booking.destroy', $booking->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="ml-2 font-medium text-red-600 hover:underline">Delete</button>
+                                            </form>
                                         @endif
                                     </div>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td class="px-6 py-4 text-center" colspan="6">There are no data available.</td>
+                                <td class="px-6 py-4 text-center" colspan="10">There are no data available.</td>
                             </tr>
                         @endforelse
                     </tbody>

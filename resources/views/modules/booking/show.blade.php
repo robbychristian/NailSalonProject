@@ -61,7 +61,12 @@
                 </div>
 
                 <h4 class="text-lg font-semibold text-gray-900 md:text-xl mb-3">Booking Details</h4>
-                <div class="grid gap-6 mb-6 md:grid-cols-3">
+                <div class="grid gap-6 mb-6 md:grid-cols-4">
+                    <div>
+                        <label for="ref_no" class="block mb-2 text-sm font-medium text-gray-900">Reference Number</label>
+                        <input type="text" disabled value="{{ $booking->ref_no }}" name="ref_no" id="ref_no"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                    </div>
                     <div>
                         <label for="date" class="block mb-2 text-sm font-medium text-gray-900"> Date</label>
                         <input type="text" disabled value="{{ \Carbon\Carbon::parse($booking->date)->format('m-d-Y') }}"
@@ -164,6 +169,24 @@
                         <div id="view-review" data-review="{{ $booking->reviews }}"></div>
                     </div>
                 @endif
+
+                <h4 class="text-lg font-semibold text-gray-900 md:text-xl mb-3">Date Details</h4>
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <div>
+                        <label for="ref_no" class="block mb-2 text-sm font-medium text-gray-900">Created At</label>
+                        <input type="text" disabled value="{{ $booking->created_at }}" name="ref_no" id="ref_no"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                    </div>
+                    @if ($booking->created_at != $booking->payment->updated_at)
+                        <div>
+                            <label for="ref_no" class="block mb-2 text-sm font-medium text-gray-900">Approved At</label>
+                            <input type="text" disabled value="{{ $booking->payment->updated_at }}" name="ref_no"
+                                id="ref_no"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                        </div>
+                    @endif
+                </div>
+
 
                 <div class="mb-6">
                     <a href="{{ route('booking.index') }}"

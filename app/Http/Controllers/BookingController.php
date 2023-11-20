@@ -100,7 +100,10 @@ class BookingController extends Controller
 
         $nailCustomization = NailCustomization::where('id', $booking['nail_customization_id'])->first();
 
+        $bookingId = Bookings::withTrashed()->count() + 1;
+
         $bookingDetails = Bookings::create([
+            'ref_no' => sprintf("GN-%04d", $bookingId),
             'user_id' => $booking['user_id'],
             'date' => $booking['date'],
             'time_in' => $booking['time_in'],
@@ -402,7 +405,8 @@ class BookingController extends Controller
 
     public function approveBooking($id)
     {
-        $payment = Payments::find($id);
+        $bookId = Payments::where('booking_id', $id)->value('id');
+        $payment = Payments::find($bookId);
         Payments::where('booking_id', $id)->update([
             'payment_status' => 1
         ]);
