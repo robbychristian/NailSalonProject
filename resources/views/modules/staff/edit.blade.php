@@ -34,6 +34,9 @@
                                 <input
                                     class="block w-full text-sm text-gray-900 border border-gray-300 cursor-pointer bg-gray-50"
                                     id="multiple_files" type="file" name="staff_image">
+                                <small class="mt-1 text-gray-500" id="file_input_help">Size Limit: 2MB |
+                                    Allowed Extensions:
+                                    .jpg, .jpeg, .png, .gif. </small>
                                 @error('staff_image')
                                     <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                         {{ $message }}</p>
@@ -78,7 +81,10 @@
                             <input
                                 class="block w-full text-sm text-gray-900 border border-gray-300 cursor-pointer bg-gray-50"
                                 id="multiple_files" type="file" name="work_images[]" multiple>
-                            @error('work_images')
+                            <small class="mt-1 text-gray-500" id="file_input_help">Size Limit: 2MB |
+                                Allowed Extensions:
+                                .jpg, .jpeg, .png, .gif. </small>
+                            @error('work_images.*')
                                 <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                     {{ $message }}</p>
                             @enderror
