@@ -154,7 +154,8 @@ class BookingController extends Controller
                 'nail_polish_brand' => $nailCustomization->nail_polish_brand,
                 'nail_size' => $nailCustomization->nail_size,
                 'has_extensions' => $nailCustomization->has_extensions,
-                'color' => $nailCustomization->color
+                'color' => $nailCustomization->color,
+                'skin' => $nailCustomization->skin
             ]);
         }
         // return $numberOfBookings;
@@ -433,7 +434,8 @@ class BookingController extends Controller
             'nail_polish_brand' => $request->nail_polish_brand,
             'nail_size' => $request->nail_size,
             'has_extensions' => $request->has_extensions,
-            'color' => $request->color
+            'color' => $request->color,
+            'skin' => $request->skin
         ];
 
         $existingCustomization = NailCustomization::where('user_id', $data['user_id'])->first();
@@ -446,6 +448,7 @@ class BookingController extends Controller
                 'nail_size' => $data['nail_size'],
                 'has_extensions' => $data['has_extensions'],
                 'color' => $data['color'],
+                'skin' => $data['skin'],
             ]);
         } else {
             NailCustomization::create([
@@ -455,6 +458,7 @@ class BookingController extends Controller
                 'nail_size' => $data['nail_size'],
                 'has_extensions' => $data['has_extensions'],
                 'color' => $data['color'],
+                'skin' => $data['skin']
             ]);
         }
     }
@@ -474,18 +478,18 @@ class BookingController extends Controller
             'reviews' => $reviews
         ]);
     }
-    
+
     public function getAllBookingsByUser($id)
     {
-        $bookings = Bookings::with('packages', 'products', 'productsAddOns', 'reviews', 'branch', 'staff','payment','user')->where('user_id', $id)->get();
+        $bookings = Bookings::with('packages', 'products', 'productsAddOns', 'reviews', 'branch', 'staff', 'payment', 'user')->where('user_id', $id)->get();
         return response()->json([
             'bookings' => $bookings
         ]);
     }
-    
+
     public function getIndividualBooking($id)
     {
-        $bookings = Bookings::with('packages', 'products', 'productsAddOns', 'reviews', 'branch', 'staff','payment','user', 'userProfile')->where('id', $id)->get();
+        $bookings = Bookings::with('packages', 'products', 'productsAddOns', 'reviews', 'branch', 'staff', 'payment', 'user', 'userProfile')->where('id', $id)->get();
         return response()->json([
             'bookings' => $bookings
         ]);

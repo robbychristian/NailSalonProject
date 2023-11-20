@@ -727,6 +727,15 @@ video {
 .h-screen {
   height: 100vh;
 }
+.h-24 {
+  height: 6rem;
+}
+.h-20 {
+  height: 5rem;
+}
+.h-14 {
+  height: 3.5rem;
+}
 .w-10 {
   width: 2.5rem;
 }
@@ -1075,6 +1084,9 @@ video {
 }
 .p-6 {
   padding: 1.5rem;
+}
+.p-48 {
+  padding: 12rem;
 }
 .px-1 {
   padding-left: 0.25rem;

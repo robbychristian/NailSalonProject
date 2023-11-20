@@ -21,6 +21,7 @@ class CreateBookingHasCustomizationsTable extends Migration
             $table->string('nail_size');
             $table->string('has_extensions');
             $table->string('color');
+            $table->string('skin')->nullable();
             $table->timestamps();
 
             $table->foreign('booking_id')->references('id')->on('bookings');

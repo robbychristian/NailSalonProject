@@ -21,6 +21,7 @@ class CreateNailCustomizationsTable extends Migration
             $table->string('nail_size');
             $table->string('has_extensions');
             $table->string('color');
+            $table->string('skin')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

@@ -16,5 +16,6 @@ class BookingHasCustomization extends Model
         'nail_size',
         'has_extensions',
         'color',
+        'skin'
     ];
 }
