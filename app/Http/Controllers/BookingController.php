@@ -474,4 +474,20 @@ class BookingController extends Controller
             'reviews' => $reviews
         ]);
     }
+    
+    public function getAllBookingsByUser($id)
+    {
+        $bookings = Bookings::with('packages', 'products', 'productsAddOns', 'reviews', 'branch', 'staff','payment','user')->where('user_id', $id)->get();
+        return response()->json([
+            'bookings' => $bookings
+        ]);
+    }
+    
+    public function getIndividualBooking($id)
+    {
+        $bookings = Bookings::with('packages', 'products', 'productsAddOns', 'reviews', 'branch', 'staff','payment','user', 'userProfile')->where('id', $id)->get();
+        return response()->json([
+            'bookings' => $bookings
+        ]);
+    }
 }

@@ -569,9 +569,12 @@ class DatabaseSeeder extends Seeder
         ]);
         $staff1->services()->attach([$service1->id, $service2->id, $service3->id]);
         $image1 = WorkImages::create([
-            'filename' => 'sample-img.jpg'
+            'filename' => 'sample-img.PNG'
         ]);
-        $staff1->workImages()->attach([$image1->id]);
+        $image11 = WorkImages::create([
+            'filename' => 'sample-img2.PNG'
+        ]);
+        $staff1->workImages()->attach([$image1->id, $image11->id]);
 
         //STAFF 2
         $staff2 = Staff::create([
@@ -580,9 +583,12 @@ class DatabaseSeeder extends Seeder
         ]);
         $staff2->services()->attach([$service1->id, $service2->id, $service3->id, $service4->id, $service5->id]);
         $image2 = WorkImages::create([
-            'filename' => 'sample-img.jpg'
+            'filename' => 'sample-img.PNG'
         ]);
-        $staff2->workImages()->attach([$image2->id]);
+        $image22 = WorkImages::create([
+            'filename' => 'sample-img2.PNG'
+        ]);
+        $staff2->workImages()->attach([$image2->id, $image22->id]);
 
         //STAFF 3
         $staff3 = Staff::create([
@@ -591,7 +597,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $staff3->services()->attach([$service1->id, $service2->id, $service3->id]);
         $image3 = WorkImages::create([
-            'filename' => 'sample-img.jpg'
+            'filename' => 'sample-img.PNG'
         ]);
         $staff3->workImages()->attach([$image3->id]);
 
@@ -602,7 +608,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $staff4->services()->attach([$service1->id, $service2->id, $service3->id, $service4->id, $service5->id]);
         $image4 = WorkImages::create([
-            'filename' => 'sample-img.jpg'
+            'filename' => 'sample-img.PNG'
         ]);
         $staff4->workImages()->attach([$image4->id]);
 
@@ -613,7 +619,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $staff5->services()->attach([$service1->id, $service2->id, $service4->id, $service5->id]);
         $image5 = WorkImages::create([
-            'filename' => 'sample-img.jpg'
+            'filename' => 'sample-img.PNG'
         ]);
         $staff5->workImages()->attach([$image5->id]);
 
@@ -624,7 +630,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $staff6->services()->attach([$service1->id, $service2->id, $service4->id, $service5->id]);
         $image6 = WorkImages::create([
-            'filename' => 'sample-img.jpg'
+            'filename' => 'sample-img.PNG'
         ]);
         $staff6->workImages()->attach([$image6->id]);
 

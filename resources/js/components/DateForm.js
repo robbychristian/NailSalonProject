@@ -13,7 +13,7 @@ import moment from "moment";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from '@fullcalendar/timegrid';
 
-const DateForm = ({ onDateChange, onTimeChange, onBranchChange, errors }) => {
+const DateForm = ({ onDateChange, onTimeChange, onBranchChange, errors, ...props }) => {
     const [branches, setBranches] = useState([]);
     const [dateError, setDateError] = useState(null);
     const [timeError, setTimeError] = useState(null);
@@ -72,8 +72,8 @@ const DateForm = ({ onDateChange, onTimeChange, onBranchChange, errors }) => {
                                 name="date"
                                 className="w-full"
                                 onChange={(e) => onDateChange(moment(e._d).format('YYYY-MM-DD'))}
-                                minDate={moment().add(1, 'day')}
-                                defaultValue={moment().add(1, 'day')}
+                                minDate={props.userRole == 2 ? moment().add(1, 'day') : moment()}
+                                defaultValue={props.userRole == 2 ? moment().add(1, 'day') : moment()}
                             />
                         </DemoContainer>
 

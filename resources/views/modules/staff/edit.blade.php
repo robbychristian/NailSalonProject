@@ -28,7 +28,7 @@
                             Staff Image</label>
                         <div class="grid grid-cols-1 lg:grid-cols-2">
                             <img class="h-auto max-w-xs"
-                                src="{{ asset('img/profile_pictures/' . $staff->id . '/' . $staff->staff_image) }}"
+                                src="{{ asset('NailSalonProject-main/public/img/profile_pictures/' . $staff->id . '/' . $staff->staff_image) }}"
                                 alt="">
                             <div>
                                 <input
@@ -91,7 +91,7 @@
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                                         name="selected_images[]" value="{{ $img->id }}">
                                     <img class="h-auto max-w-xs"
-                                        src="{{ asset('img/work_images/' . $staff->id . '/' . $img->filename) }}"
+                                        src="{{ asset('NailSalonProject-main/public/img/work_images/' . $staff->id . '/' . $img->filename) }}"
                                         alt="">
                                 </div>
                             @empty

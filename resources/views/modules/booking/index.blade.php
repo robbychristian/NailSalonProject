@@ -97,13 +97,15 @@
                                                     class="ml-2 font-medium text-darker-pink hover:underline">Approve</button>
                                             </form>
                                         @endif
-
+                                        
+                                        @if($booking->payment->payment_status != 1)
                                         <form action="{{ route('booking.destroy', $booking->id) }}" method="POST">
                                             @csrf
-                                            @method('PUT')
+                                            @method('DELETE')
                                             <button type="submit"
                                                 class="ml-2 font-medium text-red-600 hover:underline">Delete</button>
                                         </form>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

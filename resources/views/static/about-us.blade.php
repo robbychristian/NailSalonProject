@@ -38,19 +38,7 @@
                     ahead by paying us a visit!
                 </p>
 
-                <p class="text-justify p-5">
-                    Then for the one on the owner: <br>
-                    Gladys Galapin is the founder of Gracey Nails and Lashes Services. On the year 2022, she established the
-                    salon which aims to provide maintenance and enhancement to its customers’ nails and lashes such as
-                    manicure,
-                    pedicure, foot spa, threading, and waxing. Gracey Nails and Lashes Services was a dream business now
-                    made
-                    true fueled by Gladys’ vision and consistent drive for a competitive yet efficient strategies on
-                    bringing
-                    the salon to its customers. Being charismatic with her overseeing the salon, it is then highly
-                    anticipated
-                    that our customers are in for a quality experience with our services.
-                </p>
+              
             </div>
 
             <h1
@@ -70,6 +58,18 @@
                             <h3 class="text-center p-3 text-3xl font-bold uppercase">Founder, Gladys Depollo</h3>
                         </div>
                         <div class="rows-span-12 md:rows-span-9 bg-dark-pink">
+                              <p class="text-justify p-5">
+                    Gladys Galapin is the founder of Gracey Nails and Lashes Services. On the year 2022, she established the
+                    salon which aims to provide maintenance and enhancement to its customers’ nails and lashes such as
+                    manicure,
+                    pedicure, foot spa, threading, and waxing. Gracey Nails and Lashes Services was a dream business now
+                    made
+                    true fueled by Gladys’ vision and consistent drive for a competitive yet efficient strategies on
+                    bringing
+                    the salon to its customers. Being charismatic with her overseeing the salon, it is then highly
+                    anticipated
+                    that our customers are in for a quality experience with our services.
+                </p>
                             <p class="p-5 text-justify">
 
                                 Gracey Nails and Lashes Services is a salon that specializes in providing aesthetic

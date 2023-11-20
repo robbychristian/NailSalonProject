@@ -61,3 +61,7 @@ Route::post('storeCustomization', [BookingController::class, 'storeCustomization
 Route::get('getNailCustomizationPerUser/{id}', [BookingController::class, 'getNailCustomizationPerUser']);
 Route::get('getReviewsForServicePage', [BookingController::class, 'getReviewsForServicePage']);
 Route::resource('booking', BookingController::class);
+Route::get('getAllBookingsByUser/{id}', [BookingController::class, 'getAllBookingsByUser']);
+Route::get('getIndividualBooking/{id}', [BookingController::class, 'getIndividualBooking']);
+Route::post('/saveReviews', [BookingController::class, 'saveReviews']);
+

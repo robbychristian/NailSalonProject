@@ -28,7 +28,7 @@ const Booking = (props) => {
   }
 
   // DATE FORM
-  const [selectedDate, setSelectedDate] = useState(moment().add(1, 'days').format('YYYY-MM-DD'));
+  const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState(moment('11:00 AM', 'h:mm A').format('LT'));
   const [selectedBranch, setSelectedBranch] = useState("None");
 
@@ -232,7 +232,9 @@ const Booking = (props) => {
     if (JSON.parse(props.auth).user_role == 2) {
       setActiveStep(1)
       setSelectedUser(JSON.parse(props.auth).id)
+      setSelectedDate(moment().add(1, 'days').format('YYYY-MM-DD'))
     } else {
+      setSelectedDate(moment().format('YYYY-MM-DD'))
       setActiveStep(0)
     }
   }, [])
@@ -287,6 +289,7 @@ const Booking = (props) => {
               )}
               {activeStep === 1 && (
                 <DateForm
+                  userRole={JSON.parse(props.auth).user_role}
                   onDateChange={handleDateChange}
                   onTimeChange={handleTimeChange}
                   onBranchChange={handleBranchChange}

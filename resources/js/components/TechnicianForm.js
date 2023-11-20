@@ -77,7 +77,7 @@ const TechnicianForm = ({ onStaffChange, ...props }) => {
                                 <Grid item xs>
                                     <Card sx={{ maxWidth: 345 }} key={index}>
 
-                                        <img src={`/img/profile_pictures/${item.id}/${item.staff_image}`} style={{ height: "300px", width: "100%" }} />
+                                        <img src={`/NailSalonProject-main/public/img/profile_pictures/${item.id}/${item.staff_image}`} style={{ height: "300px", width: "100%" }} />
                                         <CardContent>
                                             <FormControlLabel
                                                 value={item.id}
@@ -134,8 +134,8 @@ const TechnicianForm = ({ onStaffChange, ...props }) => {
                                             return (
                                                 <ImageListItem key={item.img}>
                                                     <img
-                                                        srcSet={`/img/work_images/${item.id}/${img.filename}`}
-                                                        src={`/img/work_images/${item.id}/${img.filename}`}
+                                                        srcSet={`/NailSalonProject-main/public/img/work_images/${item.id}/${img.filename}`}
+                                                        src={`/NailSalonProject-main/public/img/work_images/${item.id}/${img.filename}`}
                                                         alt={item.filename}
                                                         loading="lazy"
                                                     />
