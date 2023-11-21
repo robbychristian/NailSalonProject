@@ -68,23 +68,18 @@ const choices = [
 
 const skinPalette = [
     {
+        value: "#FFF0E0"
+    },
+    {
         value: "#fdc99f"
     },
     {
-        value: "#ECD6C8"
+        value: "#D8B289"
     },
     {
-        value: "#c68642"
+        value: "#8A653E"
     },
-    {
-        value: "#e0ac69"
-    },
-    {
-        value: "#f1c27d"
-    },
-    {
-        value: "#ffdbac"
-    }
+
 ];
 
 
