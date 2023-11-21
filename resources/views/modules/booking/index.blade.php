@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('title', '| List of Staff')
 @section('content')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <section>
         <div class="px-6 py-8 mx-auto lg:py-0">
             @if (Session::get('success'))
@@ -25,8 +26,8 @@
 
             </div>
 
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left text-gray-900">
+            <div class="relative overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-900 py-5" id="booking-table">
                     <thead class="text-xs text-gray-700 uppercase bg-dark-pink">
                         <tr>
                             <th scope="col" class="px-6 py-3">
@@ -135,5 +136,9 @@
         </div>
 
     </section>
-
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script>
+        new DataTable('#booking-table');
+    </script>
 @endsection
