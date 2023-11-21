@@ -125,9 +125,6 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr>
-                                <td class="px-6 py-4 text-center" colspan="10">There are no data available.</td>
-                            </tr>
                         @endforelse
                     </tbody>
                 </table>
