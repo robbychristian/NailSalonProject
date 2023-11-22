@@ -22,6 +22,7 @@ class CreateBookingsTable extends Migration
             $table->string('time_out');
             $table->unsignedBigInteger('branch_id');
             $table->unsignedBigInteger('staff_id');
+            $table->string('booking_status')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

@@ -74,6 +74,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('dashboard', DashboardController::class);
     Route::get('/{id}/reviews', [BookingController::class, 'giveReviews'])->name('reviews.create');
     Route::post('/approve-booking/{id}', [BookingController::class, 'approveBooking'])->name('bookings.approve');
+    Route::post('/cancel-booking/{id}', [BookingController::class, 'cancelBooking'])->name('bookings.cancel');
     Route::post('/saveReviews', [BookingController::class, 'saveReviews'])->name('reviews.store');
     Route::resource('reports', SalesReportController::class);
     Route::resource('sms', SmsController::class);
@@ -81,4 +82,5 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('nail-colors', NailColorController::class);
     Route::get('/print/reports', [SalesReportController::class, 'print'])->name('reports.print');
     Route::resource('activity', ActivityController::class);
+    Route::get('/getDataByYear/{year}', [SalesReportController::class, 'getDataByYear']);
 });

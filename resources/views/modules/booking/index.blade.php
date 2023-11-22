@@ -46,6 +46,9 @@
                                 Branch
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Booking Status
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Payment Status
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -78,6 +81,15 @@
                                     {{ $booking->branch->branch_address }}
                                 </td>
                                 <td class="px-6 py-4" width="170">
+                                    @if ($booking->booking_status == 1)
+                                        <span
+                                            class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Reserved</span>
+                                    @else
+                                        <span
+                                            class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Cancelled</span>
+                                    @endif
+                                </td>
+                                <td class="px-6 py-4" width="170">
                                     @if ($booking->payment->payment_status == 1)
                                         <span
                                             class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Paid</span>
@@ -101,10 +113,18 @@
                                         <a href="{{ route('booking.show', $booking->id) }}"
                                             class="font-medium text-darker-pink hover:underline mr-2">View</a>
 
-                                        <a href="{{ route('booking.edit', $booking->id) }}"
-                                            class="font-medium text-darker-pink hover:underline">Edit</a>
-
-                                        @if ($booking->payment->payment_status != 1 && Auth::user()->user_role == 1)
+                                        @if ($booking->booking_status == 1)
+                                            <a href="{{ route('booking.edit', $booking->id) }}"
+                                                class="font-medium text-darker-pink hover:underline">Edit</a>
+                                        @endif
+                                        @if ($booking->payment->payment_status != 1 && $booking->booking_status == 1)
+                                            <form action="{{ route('bookings.cancel', $booking->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit"
+                                                    class="ml-2 font-medium text-darker-pink hover:underline">Cancel</button>
+                                            </form>
+                                        @endif
+                                        @if ($booking->payment->payment_status != 1 && Auth::user()->user_role == 1 && $booking->booking_status == 1)
                                             <form action="{{ route('bookings.approve', $booking->id) }}" method="POST">
                                                 @csrf
                                                 {{-- @method('DELETE') --}}
@@ -113,7 +133,7 @@
                                             </form>
                                         @endif
 
-                                        @if ($booking->payment->payment_status != 1)
+                                        @if ($booking->payment->payment_status != 1 && $booking->booking_status == 1)
                                             <form action="{{ route('booking.destroy', $booking->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')

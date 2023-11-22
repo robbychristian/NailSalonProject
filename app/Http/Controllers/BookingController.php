@@ -110,6 +110,7 @@ class BookingController extends Controller
             'time_out' => $booking['time_out'],
             'branch_id' => $branchId,
             'staff_id' => $booking['staff_id'],
+            'booking_status' => 1
         ]);
 
         if (count($notNullProducts) != 0) {
@@ -497,5 +498,14 @@ class BookingController extends Controller
         return response()->json([
             'bookings' => $bookings
         ]);
+    }
+
+    public function cancelBooking($id)
+    {
+        Bookings::where('id', $id)->update([
+            'booking_status' => 0
+        ]);
+
+        return redirect('/booking')->with('success', 'This booking has been successfully cancelled!');
     }
 }

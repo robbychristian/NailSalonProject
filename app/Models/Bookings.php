@@ -19,6 +19,7 @@ class Bookings extends Model
         'time_out',
         'branch_id',
         'staff_id',
+        'booking_status'
     ];
 
     public function packages()
