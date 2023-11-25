@@ -6,8 +6,11 @@ use App\Http\Requests\CreateStaffRequest;
 use App\Http\Requests\UpdateStaffRequest;
 use App\Models\Services;
 use App\Models\Staff;
+use App\Models\User;
+use App\Models\UserProfile;
 use App\Models\WorkImages;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class StaffController extends Controller
 {
@@ -41,10 +44,26 @@ class StaffController extends Controller
      */
     public function store(CreateStaffRequest $request)
     {
+        // dd($request->all());
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'email_verified_at' => now(),
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'user_role' => 3, // staff role
+        ]);
+
+        $userProfile = UserProfile::create([
+            'user_id' => $user->id,
+            'middle_name' => $request->middle_name,
+        ]);
         if ($request->hasFile('staff_image')) {
             $fileName = time() . '-' . $request->staff_image->getClientOriginalName();
             $staff = Staff::create([
-                'staff_name' => $request->staff_name,
+                'staff_name' => $request->first_name . ' ' . $request->middle_name . ' ' . $request->last_name,
+                'user_id' => $user->id,
                 'staff_image' => $fileName
             ]);
             $request->staff_image->move(public_path('img/profile_pictures/' . $staff->id), $fileName);
@@ -89,7 +108,7 @@ class StaffController extends Controller
      */
     public function edit($id)
     {
-        $staff = Staff::with('workImages')->with('services')->find($id);
+        $staff = Staff::with('workImages', 'user', 'userProfile', 'services')->find($id);
         $services = Services::all();
         return view('modules.staff.edit', compact('staff', 'services'));
     }
@@ -103,16 +122,25 @@ class StaffController extends Controller
      */
     public function update(UpdateStaffRequest $request, $id)
     {
+        // dd($request->user_id);
+        $user = User::where('id', $request->user_id)->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+        ]);
+
+        $userProfile = UserProfile::where('user_id', $request->user_id)->update([
+            'middle_name' => $request->middle_name,
+        ]);
         if ($request->hasFile('staff_image')) {
             $fileName = time() . '-' . $request->staff_image->getClientOriginalName();
             $staff = Staff::where('id', $id)->update([
-                'staff_name' => $request->staff_name,
+                'staff_name' => $request->first_name . ' ' . $request->middle_name . ' ' . $request->last_name,
                 'staff_image' => $fileName
             ]);
             $request->staff_image->move(public_path('img/profile_pictures/' . $id), $fileName);
         } else {
             $staff = Staff::where('id', $id)->update([
-                'staff_name' => $request->staff_name,
+                'staff_name' => $request->first_name . ' ' . $request->middle_name . ' ' . $request->last_name,
             ]);
         }
 
@@ -153,6 +181,8 @@ class StaffController extends Controller
         $staff->delete();
         $staff->services()->detach();
         $staff->workImages()->detach();
+        $staff->user()->delete();
+        $staff->userProfile()->delete();
 
         $staff->newActivity("Staff Deleted", "deleted");
         return redirect('/staff')->with('success', 'You have successfully deleted a staff!');

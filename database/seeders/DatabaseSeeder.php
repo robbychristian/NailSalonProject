@@ -563,7 +563,21 @@ class DatabaseSeeder extends Seeder
 
         //STAFF
         //STAFF 1
+        $user1 = User::create([
+            'first_name' => 'Marie',
+            'last_name' => 'Laureta',
+            'email' => 'staff_user1@gmail.com',
+            'email_verified_at' => now(),
+            'username' => 'staff_user1',
+            'password' => Hash::make('password'),
+            'user_role' => 3, // staff role
+        ]);
+        $userProfile = UserProfile::create([
+            'user_id' => $user1->id,
+            'middle_name' => NULL,
+        ]);
         $staff1 = Staff::create([
+            'user_id' => $user1->id,
             'staff_name' => 'Marie Laureta',
             'staff_image' => 'sample-profile.jpg'
         ]);
@@ -577,7 +591,21 @@ class DatabaseSeeder extends Seeder
         $staff1->workImages()->attach([$image1->id, $image11->id]);
 
         //STAFF 2
+        $user2 = User::create([
+            'first_name' => 'Marivic',
+            'last_name' => 'Daroy',
+            'email' => 'staff_user2@gmail.com',
+            'email_verified_at' => now(),
+            'username' => 'staff_user2',
+            'password' => Hash::make('password'),
+            'user_role' => 3, // staff role
+        ]);
+        $userProfile = UserProfile::create([
+            'user_id' => $user2->id,
+            'middle_name' => NULL,
+        ]);
         $staff2 = Staff::create([
+            'user_id' => $user2->id,
             'staff_name' => 'Marivic Daroy',
             'staff_image' => 'sample-profile.jpg'
         ]);
@@ -591,7 +619,21 @@ class DatabaseSeeder extends Seeder
         $staff2->workImages()->attach([$image2->id, $image22->id]);
 
         //STAFF 3
+        $user3 = User::create([
+            'first_name' => 'Princess',
+            'last_name' => 'Glori',
+            'email' => 'staff_user3@gmail.com',
+            'email_verified_at' => now(),
+            'username' => 'staff_user3',
+            'password' => Hash::make('password'),
+            'user_role' => 3, // staff role
+        ]);
+        $userProfile = UserProfile::create([
+            'user_id' => $user3->id,
+            'middle_name' => NULL,
+        ]);
         $staff3 = Staff::create([
+            'user_id' => $user3->id,
             'staff_name' => 'Princess Glori',
             'staff_image' => 'sample-profile.jpg'
         ]);
@@ -602,7 +644,21 @@ class DatabaseSeeder extends Seeder
         $staff3->workImages()->attach([$image3->id]);
 
         //STAFF 4
+        $user4 = User::create([
+            'first_name' => 'Pearl',
+            'last_name' => 'Segarra',
+            'email' => 'staff_user4@gmail.com',
+            'email_verified_at' => now(),
+            'username' => 'staff_user4',
+            'password' => Hash::make('password'),
+            'user_role' => 3, // staff role
+        ]);
+        $userProfile = UserProfile::create([
+            'user_id' => $user4->id,
+            'middle_name' => NULL,
+        ]);
         $staff4 = Staff::create([
+            'user_id' => $user4->id,
             'staff_name' => 'Pearl Segarra',
             'staff_image' => 'sample-profile.jpg'
         ]);
@@ -613,7 +669,21 @@ class DatabaseSeeder extends Seeder
         $staff4->workImages()->attach([$image4->id]);
 
         //STAFF 5
+        $user5 = User::create([
+            'first_name' => 'Charlyn',
+            'last_name' => 'Segarra',
+            'email' => 'staff_user5@gmail.com',
+            'email_verified_at' => now(),
+            'username' => 'staff_user5',
+            'password' => Hash::make('password'),
+            'user_role' => 3, // staff role
+        ]);
+        $userProfile = UserProfile::create([
+            'user_id' => $user5->id,
+            'middle_name' => NULL,
+        ]);
         $staff5 = Staff::create([
+            'user_id' => $user5->id,
             'staff_name' => 'Charlyn Segarra',
             'staff_image' => 'sample-profile.jpg'
         ]);
@@ -624,7 +694,21 @@ class DatabaseSeeder extends Seeder
         $staff5->workImages()->attach([$image5->id]);
 
         //STAFF 6
+        $user6 = User::create([
+            'first_name' => 'Jazrell',
+            'last_name' => 'Fabianess',
+            'email' => 'staff_user6@gmail.com',
+            'email_verified_at' => now(),
+            'username' => 'staff_user6',
+            'password' => Hash::make('password'),
+            'user_role' => 3, // staff role
+        ]);
+        $userProfile = UserProfile::create([
+            'user_id' => $user6->id,
+            'middle_name' => NULL,
+        ]);
         $staff6 = Staff::create([
+            'user_id' => $user6->id,
             'staff_name' => 'Jazrell Fabianess',
             'staff_image' => 'sample-profile.jpg'
         ]);

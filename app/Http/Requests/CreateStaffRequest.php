@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class CreateStaffRequest extends FormRequest
 {
@@ -24,11 +25,21 @@ class CreateStaffRequest extends FormRequest
     public function rules()
     {
         return [
-            'staff_name' => ['required'],
+            // 'staff_name' => ['required'],
             'staff_image' => ['required', 'mimes:png,jpg,jpeg,gif', 'max:2048'],
             'services' => ['required'],
             'work_images.*' => ['mimes:png,jpg,jpeg,gif', 'max:2048'],
-
+            'first_name' => ['required', 'regex:/^[\pL\s\-]+$/u'],
+            'middle_name' => ['regex:/^[\pL\s\-]+$/u'],
+            'last_name' => ['required', 'regex:/^[\pL\s\-]+$/u'],
+            'email' => ['required', 'email', 'unique:users'],
+            'username' => ['required', 'unique:users'],
+            'password' => ['required', Password::min(6)
+                ->letters()
+                ->mixedCase()
+                ->numbers()
+                ->symbols()],
+            'confirm_password' => ['required', 'same:password'],
         ];
     }
 

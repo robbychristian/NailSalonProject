@@ -24,11 +24,13 @@ class UpdateStaffRequest extends FormRequest
     public function rules()
     {
         return [
-            'staff_name' => ['required'],
+            // 'staff_name' => ['required'],
             'staff_image' => ['mimes:png,jpg,jpeg,gif', 'max:2048'],
             'services' => ['required'],
             'work_images.*' => ['mimes:png,jpg,jpeg,gif', 'max:2048'],
-
+            // 'first_name' => ['required', 'regex:/^[\pL\s\-]+$/u'],
+            // 'middle_name' => ['regex:/^[\pL\s\-]+$/u'],
+            // 'last_name' => ['required', 'regex:/^[\pL\s\-]+$/u'],
         ];
     }
 

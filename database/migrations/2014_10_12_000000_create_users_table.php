@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('is_notify')->nullable();
             $table->string('is_loyal')->nullable();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

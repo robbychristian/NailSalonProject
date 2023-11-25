@@ -20,6 +20,7 @@ class CreateUserProfilesTable extends Migration
             $table->string('birthday')->nullable();
             $table->string('contact_no')->nullable();
             $table->string('address')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

@@ -12,8 +12,46 @@
                 <form action="{{ route('staff.update', $staff->id) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+                    <h4 class="text-lg font-semibold text-gray-900 md:text-xl mb-3">Personal
+                        Information</h4>
 
-                    <div class="mb-6">
+                    <input type="hidden" name="user_id" value="{{ $staff->user_id }}">
+                    <div class="grid gap-6 mb-6 md:grid-cols-3">
+                        <div>
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900">First
+                                name</label>
+                            <input type="text" value="{{ $staff->user->first_name }}" name="first_name" id="first_name"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                            @error('first_name')
+                                <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
+                                    {{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label for="middle_name" class="block mb-2 text-sm font-medium text-gray-900">Middle
+                                name</label>
+                            <input type="text" value="{{ $staff->userProfile->middle_name }}" name="middle_name"
+                                id="middle_name"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                            @error('middle_name')
+                                <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
+                                    {{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900">Last
+                                name</label>
+                            <input type="text" value="{{ $staff->user->last_name }}" name="last_name" id="last_name"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                            @error('last_name')
+                                <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
+                                    {{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+                    {{-- <div class="mb-6">
                         <label for="staff_name" class="block mb-2 text-sm font-medium text-gray-900">Name</label>
                         <input type="text" value="{{ $staff->staff_name }}" name="staff_name" id="staff_name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
@@ -21,7 +59,7 @@
                             <p id="outlined_error_help" class="mt-2 text-xs text-red-600">
                                 {{ $message }}</p>
                         @enderror
-                    </div>
+                    </div> --}}
 
                     <div class="mb-6">
                         <label class="block mb-2 text-sm font-medium text-gray-900" for="multiple_files">

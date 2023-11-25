@@ -12,8 +12,19 @@ class Staff extends Model
 
     protected $fillable = [
         'staff_name',
-        'staff_image'
+        'staff_image',
+        'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function userProfile()
+    {
+        return $this->belongsTo(UserProfile::class, 'user_id', 'user_id');
+    }
 
     public function services()
     {
