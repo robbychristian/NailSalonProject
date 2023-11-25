@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Auth\AdminController;
+use App\Http\Controllers\Auth\AuthStaffController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BranchController;
@@ -58,6 +59,8 @@ Route::get('/contact-us', function () {
 
 Route::get('/login/admin', [AdminController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/login/admin', [AdminController::class, 'login'])->name('admin.submit-login');
+Route::get('/login/staff', [AuthStaffController::class, 'showLoginForm'])->name('staff.login');
+Route::post('/login/staff', [AuthStaffController::class, 'login'])->name('staff.submit-login');
 Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth', 'verified']], function () {

@@ -18,11 +18,13 @@
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                     List of Bookings
                 </h1>
-                <a href="{{ route('booking.create') }}"
-                    class="text-white bg-darker-pink hover:bg-darker-pink-90 font-medium rounded-lg text-sm px-4 py-2 inline-flex items-center">
-                    <i class="fa-solid fa-plus mr-2"></i>
-                    Add Booking
-                </a>
+                @if (Auth::user()->user_role == 1 || Auth::user()->user_role == 2)
+                    <a href="{{ route('booking.create') }}"
+                        class="text-white bg-darker-pink hover:bg-darker-pink-90 font-medium rounded-lg text-sm px-4 py-2 inline-flex items-center">
+                        <i class="fa-solid fa-plus mr-2"></i>
+                        Add Booking
+                    </a>
+                @endif
 
             </div>
 
