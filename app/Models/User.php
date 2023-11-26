@@ -70,4 +70,14 @@ class User extends Authenticatable implements MustVerifyEmail
             'user_id' => \Auth::id(),
         ]);
     }
+
+    public function staff()
+    {
+        return $this->hasOne(Staff::class);
+    }
+
+    public function staffServices()
+    {
+        return $this->staff->services;
+    }
 }

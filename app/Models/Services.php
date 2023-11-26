@@ -32,4 +32,9 @@ class Services extends Model
             'user_id' => \Auth::id(),
         ]);
     }
+
+    public function schedule()
+    {
+        return $this->belongsToMany(Schedule::class);
+    }
 }

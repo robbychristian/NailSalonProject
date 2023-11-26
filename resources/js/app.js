@@ -19,3 +19,4 @@ require('./components/Review');
 require('./components/ViewReview');
 require('./components/nail-customization/NailCustomization');
 require('./components/ServicePageReviews');
+require('./components/Schedule');

@@ -16,6 +16,7 @@ use App\Http\Controllers\SalesReportController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SmsController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\StaffSchedule;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Models\Packages;
@@ -86,4 +87,5 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/print/reports', [SalesReportController::class, 'print'])->name('reports.print');
     Route::resource('activity', ActivityController::class);
     Route::get('/getDataByYear/{year}', [SalesReportController::class, 'getDataByYear']);
+    Route::resource('schedule', StaffSchedule::class);
 });
