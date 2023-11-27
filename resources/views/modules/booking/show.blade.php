@@ -177,7 +177,7 @@
                         <input type="text" disabled value="{{ $booking->created_at }}" name="ref_no" id="ref_no"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                     </div>
-                    @if ($booking->created_at != $booking->payment->updated_at)
+                    @if ($booking->payment->payment_status == 1)
                         <div>
                             <label for="ref_no" class="block mb-2 text-sm font-medium text-gray-900">Approved At</label>
                             <input type="text" disabled value="{{ $booking->payment->updated_at }}" name="ref_no"

@@ -106,7 +106,7 @@
                                     {{ $booking->created_at }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    @if ($booking->payment->updated_at != $booking->created_at)
+                                    @if ($booking->payment->payment_status == 1)
                                         {{ $booking->payment->updated_at }}
                                     @endif
                                 </td>
