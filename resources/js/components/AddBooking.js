@@ -553,6 +553,7 @@ const AddBooking = (props) => {
             console.log(time_out);
             axios.get('/api/getAvailableStaff', {
                 params: {
+                    date: date,
                     time_in: time_in,
                     time_out: time_out,
                     serviceType1: formValues.serviceType1,

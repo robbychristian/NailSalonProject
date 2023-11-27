@@ -334,7 +334,7 @@ class BookingController extends Controller
         })->pluck('staff_id')->toArray();
 
         // $serviceId = 1;
-        $selectedDate = '2023-11-27';
+        $selectedDate = $request->date; // inform for mobile
 
         $staffIds = Schedule::where('date', $selectedDate)
             ->whereHas('services', function ($query) use ($majorServiceId) {
