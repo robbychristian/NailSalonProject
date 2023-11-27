@@ -20,3 +20,4 @@ require('./components/ViewReview');
 require('./components/nail-customization/NailCustomization');
 require('./components/ServicePageReviews');
 require('./components/Schedule');
+require('./components/AddBooking');

@@ -12,6 +12,7 @@ use App\Models\Payments;
 use App\Models\ProductAddOns;
 use App\Models\Products;
 use App\Models\Reviews;
+use App\Models\Schedule;
 use App\Models\Services;
 use App\Models\Staff;
 use App\Models\User;
@@ -332,14 +333,26 @@ class BookingController extends Controller
             });
         })->pluck('staff_id')->toArray();
 
-        $allStaff = Staff::with('workImages')->with('services')->pluck('id')->toArray();
+        // $serviceId = 1;
+        $selectedDate = '2023-11-27';
+
+        $staffIds = Schedule::where('date', $selectedDate)
+            ->whereHas('services', function ($query) use ($majorServiceId) {
+                $query->where('services.id', $majorServiceId);
+            })
+            ->pluck('staff_id')
+            ->toArray();
+        // return $staffIds;
+
+        // $allStaff = Staff::with('workImages')->with('services')->pluck('id')->toArray();
 
         // Use array_diff to remove values in $bookedStaff from $allStaff
-        $availableStaff = array_diff($allStaff, $bookedStaff);
+        $availableStaff = array_diff($staffIds, $bookedStaff);
 
         // Convert the result back to an indexed array if needed
         $availableStaff = array_values($availableStaff);
 
+        // return $availableStaff;
         // check user if loyal
         $userStatus = User::where('id', $userId)->pluck('is_loyal')->first();
 
@@ -347,9 +360,9 @@ class BookingController extends Controller
             $staff = Staff::with('workImages')
                 ->with('services')
                 ->whereIn('id', $availableStaff)
-                ->whereHas('services', function ($query) use ($majorServiceId) {
-                    $query->where('id', $majorServiceId);
-                })
+                // ->whereHas('services', function ($query) use ($majorServiceId) {
+                //     $query->where('id', $majorServiceId);
+                // })
                 ->get();
 
             return response()->json([
@@ -359,9 +372,9 @@ class BookingController extends Controller
             $staff = Staff::with('workImages')
                 ->with('services')
                 ->whereIn('id', $availableStaff)
-                ->whereHas('services', function ($query) use ($majorServiceId) {
-                    $query->where('id', $majorServiceId);
-                })
+                // ->whereHas('services', function ($query) use ($majorServiceId) {
+                //     $query->where('id', $majorServiceId);
+                // })
                 ->inRandomOrder() // Randomly order the results
                 ->first(); // Get the first result
 
