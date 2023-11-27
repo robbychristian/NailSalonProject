@@ -563,6 +563,9 @@ video {
 .z-50 {
   z-index: 50;
 }
+.z-10 {
+  z-index: 10;
+}
 .col-span-1 {
   grid-column: span 1 / span 1;
 }
@@ -670,6 +673,9 @@ video {
 .ml-4 {
   margin-left: 1rem;
 }
+.ms-3 {
+  margin-inline-start: 0.75rem;
+}
 .block {
   display: block;
 }
@@ -742,6 +748,9 @@ video {
 .h-3 {
   height: 0.75rem;
 }
+.h-2\.5 {
+  height: 0.625rem;
+}
 .w-10 {
   width: 2.5rem;
 }
@@ -783,6 +792,12 @@ video {
 }
 .w-3 {
   width: 0.75rem;
+}
+.w-2\.5 {
+  width: 0.625rem;
+}
+.w-44 {
+  width: 11rem;
 }
 .max-w-screen-md {
   max-width: 768px;
@@ -1062,6 +1077,10 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+.bg-blue-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(29 78 216 / var(--tw-bg-opacity));
 }
 .bg-opacity-75 {
   --tw-bg-opacity: 0.75;
@@ -1399,6 +1418,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(17 24 39 / var(--tw-bg-opacity));
 }
+.hover\:bg-blue-800:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(30 64 175 / var(--tw-bg-opacity));
+}
 .hover\:text-gray-900:hover {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
@@ -1495,6 +1518,11 @@ video {
     background-color: rgb(55 65 81 / var(--tw-bg-opacity));
   }
 
+  .dark\:bg-blue-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(37 99 235 / var(--tw-bg-opacity));
+  }
+
   .dark\:text-white {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -1505,6 +1533,11 @@ video {
     color: rgb(209 213 219 / var(--tw-text-opacity));
   }
 
+  .dark\:text-gray-200 {
+    --tw-text-opacity: 1;
+    color: rgb(229 231 235 / var(--tw-text-opacity));
+  }
+
   .dark\:ring-offset-gray-700 {
     --tw-ring-offset-color: #374151;
   }
@@ -1513,9 +1546,19 @@ video {
     --tw-ring-offset-color: #1f2937;
   }
 
+  .dark\:hover\:bg-blue-700:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(29 78 216 / var(--tw-bg-opacity));
+  }
+
   .dark\:focus\:ring-blue-600:focus {
     --tw-ring-opacity: 1;
     --tw-ring-color: rgb(37 99 235 / var(--tw-ring-opacity));
+  }
+
+  .dark\:focus\:ring-blue-800:focus {
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(30 64 175 / var(--tw-ring-opacity));
   }
 
   .dark\:focus\:ring-offset-gray-700:focus {

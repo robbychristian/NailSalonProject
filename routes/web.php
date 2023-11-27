@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DiscountsController;
 use App\Http\Controllers\NailColorController;
 use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\ProductAddOnsController;
@@ -88,4 +89,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('activity', ActivityController::class);
     Route::get('/getDataByYear/{year}', [SalesReportController::class, 'getDataByYear']);
     Route::resource('schedule', StaffSchedule::class);
+    Route::resource('discounts', DiscountsController::class);
+    Route::get('/discount/products', [DiscountsController::class, 'createProductDiscounts'])->name('discounts.products');
+    Route::post('/discount/products', [DiscountsController::class, 'storeProductDiscounts'])->name('discounts.products');
 });
