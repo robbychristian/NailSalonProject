@@ -601,6 +601,34 @@ const AddBooking = (props) => {
 
             })
     }, [formValues.selectedUser]);
+
+    const [discounts, setDiscounts] = useState([]);
+    const [filteredDiscounts, setFilteredDiscounts] = useState([]);
+    useEffect(() => {
+        axios.get('/api/getApplicableDiscounts')
+            .then((response) => {
+                setDiscounts(response.data.discounts);
+            })
+    }, [])
+
+    useEffect(() => {
+        const products = [formValues.product1Field, formValues.product2Field, formValues.product3Field];
+        const filteredProducts = products.filter(product => product !== '' && product !== null && product !== undefined);
+
+        // console.log(filteredProducts);
+        console.log(`eto yung products ${filteredProducts}`);
+        const filtered = discounts.filter((discount) => {
+            if (discount.product && filteredProducts.includes(discount.product.product_name)) {
+                return true
+            } else {
+                return false
+            }
+        })
+        console.log(`eto yung filtered list ${JSON.stringify(filtered)}`)
+        setFilteredDiscounts(filtered)
+    }, [formValues.product1Field, formValues.product2Field, formValues.product3Field])
+
+
     return (
         <Fragment>
             <ToastContainer />
@@ -1792,7 +1820,18 @@ const AddBooking = (props) => {
                                                     />
                                                 }
                                             </div>
+                                            <hr></hr>
+                                            <TextField
+                                                select
+                                                label="Choose a Discount"
 
+                                            >
+                                                <MenuItem value="None">--None--</MenuItem>
+                                                {filteredDiscounts.map((item, index) => (
+                                                    <MenuItem value={item.id}>{item.discount_name} - {item.discount_percent}</MenuItem>
+                                                ))}
+                                            </TextField>
+                                            {/* {TODO: GET THE MODE FOR SERVICE TYPE AND ADD THE DISCOUNT AMOUNT ON THE TOTAL PRICE THEN SAVE THE ID OF THE DISCOUNT} */}
                                             <hr></hr>
                                             <div className="flex justify-end mt-3">
                                                 <Typography variant="h4">

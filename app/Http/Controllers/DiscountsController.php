@@ -18,7 +18,7 @@ class DiscountsController extends Controller
      */
     public function index()
     {
-        $discounts = Discounts::with('service')->get();
+        $discounts = Discounts::all();
         // return $discounts;
         return view('modules.discounts.index', compact('discounts'));
     }
@@ -120,5 +120,13 @@ class DiscountsController extends Controller
         $discount->delete();
 
         return redirect('/services')->with('success', 'You have successfully deleted the service!');
+    }
+
+    public function getApplicableDiscounts()
+    {
+        $discounts = Discounts::with('service', 'product')->get();
+        return response()->json([
+            'discounts' => $discounts
+        ]);
     }
 }

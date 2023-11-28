@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\DiscountsController;
 use App\Http\Controllers\StaffSchedule;
 use App\Http\Controllers\UserController;
 use App\Models\Packages;
@@ -68,3 +69,4 @@ Route::post('/saveReviews', [BookingController::class, 'saveReviews']);
 
 Route::get('getStaffSchedule/{id}', [StaffSchedule::class, 'getStaffSchedule']);
 Route::get('getAllStaffSchedule', [StaffSchedule::class, 'getAllStaffSchedule']);
+Route::get('getApplicableDiscounts', [DiscountsController::class, 'getApplicableDiscounts']);
