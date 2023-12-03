@@ -45,7 +45,7 @@
 
     <br>
 
-    <h2>Total Monthly Booking</h2>
+    <h2>Total Reserved Booking</h2>
 
     <div style="display: flex; justify-content:space-between; width: 100%">
 
@@ -63,7 +63,35 @@
             <tr>
                 <th>No of Booking per month</th>
             </tr>
-            @foreach ($numberOfBookings as $booking)
+            @foreach ($reservedBookings as $booking)
+                <tr>
+                    <td>{{ $booking }}</td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
+
+    <br>
+
+    <h2>Total Cancelled Booking</h2>
+
+    <div style="display: flex; justify-content:space-between; width: 100%">
+
+        <table>
+            <tr>
+                <th>Month</th>
+            </tr>
+            @foreach ($months as $month)
+                <tr>
+                    <td>{{ $month }}</td>
+                </tr>
+            @endforeach
+        </table>
+        <table>
+            <tr>
+                <th>No of Booking per month</th>
+            </tr>
+            @foreach ($cancelledBookings as $booking)
                 <tr>
                     <td>{{ $booking }}</td>
                 </tr>
@@ -100,7 +128,7 @@
 
     <div style="display: grid; grid-template-columns: auto auto;">
         <div>
-            <h2>Top Products Availed</h2>
+            <h2>Top 10 Products Availed</h2>
 
             <table>
                 <tr>
@@ -121,7 +149,7 @@
         </div>
 
         <div style="margin-left: 40px">
-            <h2>Top Packages Availed</h2>
+            <h2>Top 10 Packages Availed</h2>
 
             <table>
                 <tr>

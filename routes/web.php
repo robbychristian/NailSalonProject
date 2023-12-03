@@ -87,7 +87,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('nail-colors', NailColorController::class);
     Route::get('/print/reports', [SalesReportController::class, 'print'])->name('reports.print');
     Route::resource('activity', ActivityController::class);
-    Route::get('/getDataByYear/{year}', [SalesReportController::class, 'getDataByYear']);
     Route::resource('schedule', StaffSchedule::class);
     Route::resource('discounts', DiscountsController::class);
     Route::get('/discount/products', [DiscountsController::class, 'createProductDiscounts'])->name('discounts.products');

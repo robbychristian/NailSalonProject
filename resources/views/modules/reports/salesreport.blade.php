@@ -91,16 +91,16 @@
 
                 </div>
             </div>
-
+            
+        
             <div class="mt-4">
                 <div class="grid grid-cols-12 gap-10">
                     <div class="col-span-12 xl:col-span-8">
                         <div class="px-5 py-6 shadow-lg rounded bg-white h-full">
-                            <h4 class="text-2xl font-semibold text-gray-700">Total Monthly Booking</h4>
-
-                            <div>
+                            <div id="sales-report"></div>
+                            {{-- <div>
                                 <canvas id="myChart"></canvas>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="col-span-12 xl:col-span-4">
@@ -114,131 +114,13 @@
                 </div>
             </div>
 
-            <div class="mt-4">
-                <div class="grid grid-cols-12 gap-10">
-                    <div class="col-span-12 xl:col-span-6">
-                        <div class="px-5 py-6 shadow-lg rounded bg-white h-full">
-                            <h4 class="text-2xl font-semibold text-gray-700">Top Products Availed</h4>
-
-                            <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
-                                <table class="w-full text-sm text-left text-gray-900">
-                                    <thead class="text-xs text-gray-700 uppercase bg-dark-pink">
-                                        <tr>
-                                            <th scope="col" class="px-6 py-3">
-                                                #
-                                            </th>
-                                            <th scope="col" class="px-6 py-3">
-                                                Name
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($topProducts as $key => $product)
-                                            <tr class="bg-white border-b">
-                                                <th scope="row"
-                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                                    {{ $key + 1 }}
-                                                </th>
-                                                <td class="px-6 py-4">
-                                                    {{ $product->product_name }}
-                                                </td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td class="px-6 py-4 text-center" colspan="2">There are no data
-                                                    available.</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-span-12 xl:col-span-6">
-                        <div class="px-5 py-6 shadow-lg rounded bg-white h-full">
-                            <h4 class="text-2xl font-semibold text-gray-700">Top Packages Availed</h4>
-
-
-                            <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
-                                <table class="w-full text-sm text-left text-gray-900">
-                                    <thead class="text-xs text-gray-700 uppercase bg-dark-pink">
-                                        <tr>
-                                            <th scope="col" class="px-6 py-3">
-                                                #
-                                            </th>
-                                            <th scope="col" class="px-6 py-3">
-                                                Name
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($topPackages as $key => $package)
-                                            <tr class="bg-white border-b">
-                                                <th scope="row"
-                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                                    {{ $key + 1 }}
-                                                </th>
-                                                <td class="px-6 py-4">
-                                                    {{ $package->package_name }}
-                                                </td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td class="px-6 py-4 text-center" colspan="2">There are no data
-                                                    available.</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <div id="sales-top-product"></div>
 
         </div>
     </section>
 
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const ctx = document.getElementById('myChart');
-        let months = {!! json_encode($months) !!};
-        let numberOfBookings = {!! json_encode($numberOfBookings) !!};
-
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: months,
-                datasets: [{
-                    label: 'No of Booking per month',
-                    data: numberOfBookings,
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                },
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top'
-                    },
-                    // title: {
-                    //     display: true,
-                    //     text: 'Total Monthly Booking'
-                    // }
-                }
-
-            }
-
-        });
-    </script>
 
     <script>
         const ctx2 = document.getElementById('myChart2');

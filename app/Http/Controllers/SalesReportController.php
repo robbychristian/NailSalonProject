@@ -150,17 +150,18 @@ class SalesReportController extends Controller
             'October', 'November', 'December'
         ];
 
-        $months = [
-            'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
-            'October', 'November', 'December'
-        ];
+        $year = Carbon::now()->year;
 
         $numberOfBookings = [];
+        $reservedBookings = [];
+        $cancelledBookings = [];
 
         foreach ($months as $value) {
-            $yearMonth = date('Y-m', strtotime("1 $value")); // Year and month
-            $count = Bookings::whereRaw('DATE_FORMAT(date, "%Y-%m") = ?', [$yearMonth])->count();
-            $numberOfBookings[] = $count;
+            $yearMonth = date('Y-m', strtotime("1 $value $year")); // Year and month
+            $reservedCount = Bookings::whereRaw('DATE_FORMAT(date, "%Y-%m") = ? AND booking_status = ?', [$yearMonth, '1'])->count();
+            $cancelledCount = Bookings::whereRaw('DATE_FORMAT(date, "%Y-%m") = ? AND booking_status = ?', [$yearMonth, '0'])->count();
+            $reservedBookings[] = $reservedCount;
+            $cancelledBookings[] = $cancelledCount;
         }
 
         $typeOfCustomer = [1, null];
@@ -173,12 +174,18 @@ class SalesReportController extends Controller
         }
 
         $topProducts = Products::withCount('bookings') // Count the number of bookings for each product
+            ->whereHas('bookings', function ($query) use ($year) {
+                $query->whereYear('date', $year);
+            })
             ->having('bookings_count', '>', 0) // Filter products with bookings_count > 0
             ->orderBy('bookings_count', 'desc') // Order by the booking count in descending order
             ->take(10) // Limit the result to the top 10 products
             ->get(); // Get the products
 
         $topPackages = Packages::withCount('bookings')
+            ->whereHas('bookings', function ($query) use ($year) {
+                $query->whereYear('date', $year);
+            })
             ->having('bookings_count', '>', 0)
             ->orderBy('bookings_count', 'desc')
             ->take(10)
@@ -186,6 +193,72 @@ class SalesReportController extends Controller
 
         // return $topPackages;
 
-        return view('modules.reports.table-print', compact('bookingsTodayCount', 'totalSales', 'totalProducts', 'totalPackages', 'months', 'numberOfBookings', 'totalTypeOfCustomer', 'topProducts', 'topPackages'));
+        return view('modules.reports.table-print', compact('bookingsTodayCount', 'totalSales', 'totalProducts', 'totalPackages', 'months', 'numberOfBookings', 'totalTypeOfCustomer', 'topProducts', 'topPackages', 'reservedBookings', 'cancelledBookings'));
+    }
+
+    public function getDataByYear($year)
+    {
+        $months = [
+            'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
+            'October', 'November', 'December'
+        ];
+
+        $reservedBookings = [];
+        $cancelledBookings = [];
+
+        foreach ($months as $value) {
+            $yearMonth = date('Y-m', strtotime("1 $value $year")); // Year and month
+            $reservedCount = Bookings::whereRaw('DATE_FORMAT(date, "%Y-%m") = ? AND booking_status = ?', [$yearMonth, '1'])->count();
+            $cancelledCount = Bookings::whereRaw('DATE_FORMAT(date, "%Y-%m") = ? AND booking_status = ?', [$yearMonth, '0'])->count();
+            $reservedBookings[] = $reservedCount;
+            $cancelledBookings[] = $cancelledCount;
+        }
+
+        return response()->json([
+            'reservedBookings' => $reservedBookings,
+            'cancelledBookings' => $cancelledBookings
+        ]);
+    }
+
+    public function getTopAvailedProducts($month, $year)
+    {
+        // Convert month and year to a Carbon instance for easier comparison
+        $date = Carbon::createFromDate($year, $month, 1);
+
+        $topProducts = Products::withCount('bookings')
+            ->whereHas('bookings', function ($query) use ($date) {
+                // Filter bookings for the given month and year
+                $query->whereMonth('date', $date->month)
+                    ->whereYear('date', $date->year);
+            })
+            ->having('bookings_count', '>', 0)
+            ->orderBy('bookings_count', 'desc')
+            ->take(10)
+            ->get();
+
+        return response()->json([
+            'topProducts' => $topProducts
+        ]);
+    }
+
+    public function getTopAvailedPackages($month, $year)
+    {
+        // Convert month and year to a Carbon instance for easier comparison
+        $date = Carbon::createFromDate($year, $month, 1);
+
+        $topPackages = Packages::withCount('bookings')
+            ->whereHas('bookings', function ($query) use ($date) {
+                // Filter bookings for the given month and year
+                $query->whereMonth('date', $date->month)
+                    ->whereYear('date', $date->year);
+            })
+            ->having('bookings_count', '>', 0)
+            ->orderBy('bookings_count', 'desc')
+            ->take(10)
+            ->get();
+
+        return response()->json([
+            'topPackages' => $topPackages
+        ]);
     }
 }

@@ -21,3 +21,5 @@ require('./components/nail-customization/NailCustomization');
 require('./components/ServicePageReviews');
 require('./components/Schedule');
 require('./components/AddBooking');
+require('./components/Report');
+require('./components/ReportTopProduct');
