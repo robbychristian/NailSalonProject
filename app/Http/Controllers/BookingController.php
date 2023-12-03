@@ -210,7 +210,21 @@ class BookingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $booking = Bookings::with('packages', 'products', 'productsAddOns','branch')->find($id);
+
+        $serviceIdArr = [];
+        if(count($booking->packages) > 0){
+            foreach($booking->packages as $package){
+                $serviceIdArr[] = 1;
+            }
+        } 
+        if(count($booking->products) > 0){
+            foreach($booking->products as $product){
+                $serviceIdArr[] = $product->service_id;
+            }
+        }
+        // return $serviceIdArr;
+        return view('modules.booking.edit', compact('booking', 'serviceIdArr'));
     }
 
     /**
@@ -223,6 +237,28 @@ class BookingController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function updateBooking(Request $request, $id)
+    {
+        // $booking = [
+        //     'date' => $request->date,
+        //     'time_in' => $request->time_in,
+        //     'time_out' => $request->time_out,
+        //     'branch' => $request->branch,
+        //     'staff_id' => $request->staff_id,
+        // ];
+
+        $branchId = Branches::where('branch_address', $request->branch)->pluck('id')->first();
+
+        Bookings::where('id', $id)->update([
+            'date' => $request->date,
+            'time_in' => $request->time_in,
+            'time_out' => $request->time_out,
+            'branch_id' => $branchId,
+            'staff_id' => $request->staff_id,
+        ]);
+
     }
 
     /**

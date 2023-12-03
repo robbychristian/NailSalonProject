@@ -23,3 +23,4 @@ require('./components/Schedule');
 require('./components/AddBooking');
 require('./components/Report');
 require('./components/ReportTopProduct');
+require('./components/EditBooking');

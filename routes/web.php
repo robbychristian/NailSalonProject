@@ -91,4 +91,5 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('discounts', DiscountsController::class);
     Route::get('/discount/products', [DiscountsController::class, 'createProductDiscounts'])->name('discounts.products');
     Route::post('/discount/products', [DiscountsController::class, 'storeProductDiscounts'])->name('discounts.products');
+    Route::post('/updateBooking/{id}',[BookingController::class, 'updateBooking']);
 });
