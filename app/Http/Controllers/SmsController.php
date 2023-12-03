@@ -38,31 +38,36 @@ class SmsController extends Controller
      */
     public function store(CreateSmsRequest $request)
     {
-        $users = User::with('userProfile')->where('is_notify', 1)->get();
-        $receiverNumbers = $users->pluck('userProfile.contact_no')->toArray();
-        // return $contactNum;
-        // $receiverNumbers = [
-        //     "+639686079696",
-        //     "+639686079696"
-        // ];
-        $message = $request->message_content;
+        // $users = User::with('userProfile')->where('is_notify', 1)->get();
+        // $receiverNumbers = $users->pluck('userProfile.contact_no')->toArray();
 
-        try {
-            $account_sid = getenv("TWILIO_SID");
-            $auth_token = getenv("TWILIO_TOKEN");
-            $twilio_number = getenv("TWILIO_FROM");
+        $receiverNumbers = [
+            "+639686079696",
+            "+639276054756"
+        ];
 
-            $client = new Client($account_sid, $auth_token);
-            foreach ($receiverNumbers as $receiverNumber) {
-                $client->messages->create($receiverNumber, [
-                    'from' => $twilio_number,
-                    'body' => $message
-                ]);
+        // return $receiverNumbers;
+
+        $basic  = new \Vonage\Client\Credentials\Basic(env("VONAGE_API_KEY"), env("VONAGE_API_SECRET"));
+        $client = new \Vonage\Client($basic);
+
+        //check balance
+        // $response = $client->account()->getBalance();
+        // echo round($response->getBalance(), 2) . " EUR\n";
+
+        foreach ($receiverNumbers as $number) {
+            $response = $client->sms()->send(
+                new \Vonage\SMS\Message\SMS($number, "Nail Salon", $request->message_content)
+            );
+
+            $message = $response->current();
+
+            if ($message->getStatus() == 0) {
+                echo "The message was sent successfully\n";
+                // return redirect()->back()->with('success', 'You have successfully sent the message!');
+            } else {
+                echo "The message failed with status: " . $message->getStatus() . "\n";
             }
-
-            return redirect()->back()->with('success', 'You have successfully sent the message!');
-        } catch (Exception $e) {
-            dd("Error: " . $e->getMessage());
         }
     }
 
