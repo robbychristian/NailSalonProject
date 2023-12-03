@@ -33,7 +33,11 @@ class BookingController extends Controller
     {
         if (Auth::user()->user_role == 1) {
             $bookings = Bookings::all();
-        } else {
+        } else if(Auth::user()->user_role == 3){
+            $staff_id = Staff::where('user_id',  Auth::user()->id)->value('id');
+            $bookings = Bookings::where('staff_id', $staff_id)->get();
+        }
+        else {
             $bookings = Bookings::where('user_id', Auth::user()->id)->get();
         }
         return view('modules.booking.index', compact('bookings'));

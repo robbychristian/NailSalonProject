@@ -112,37 +112,70 @@
                                 </td>
                                 <td class="px-6 py-4" colspan="4">
                                     <div class="flex">
-                                        <a href="{{ route('booking.show', $booking->id) }}"
-                                            class="font-medium text-darker-pink hover:underline mr-2">View</a>
+                                        @if (Auth::user()->user_role == 1)
+                                            <a href="{{ route('booking.show', $booking->id) }}"
+                                                class="font-medium text-darker-pink hover:underline mr-2">View</a>
 
-                                        @if ($booking->booking_status == 1)
-                                            <a href="{{ route('booking.edit', $booking->id) }}"
-                                                class="font-medium text-darker-pink hover:underline">Edit</a>
-                                        @endif
-                                        @if ($booking->payment->payment_status != 1 && $booking->booking_status == 1)
-                                            <form action="{{ route('bookings.cancel', $booking->id) }}" method="POST">
-                                                @csrf
-                                                <button type="submit"
-                                                    class="ml-2 font-medium text-darker-pink hover:underline">Cancel</button>
-                                            </form>
-                                        @endif
-                                        @if ($booking->payment->payment_status != 1 && Auth::user()->user_role == 1 && $booking->booking_status == 1)
-                                            <form action="{{ route('bookings.approve', $booking->id) }}" method="POST">
-                                                @csrf
-                                                {{-- @method('DELETE') --}}
-                                                <button type="submit"
-                                                    class="ml-2 font-medium text-darker-pink hover:underline">Approve</button>
-                                            </form>
+                                            @if ($booking->booking_status == 1)
+                                                <a href="{{ route('booking.edit', $booking->id) }}"
+                                                    class="font-medium text-darker-pink hover:underline">Edit</a>
+                                            @endif
+                                            @if ($booking->payment->payment_status != 1 && $booking->booking_status == 1)
+                                                <form action="{{ route('bookings.cancel', $booking->id) }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit"
+                                                        class="ml-2 font-medium text-darker-pink hover:underline">Cancel</button>
+                                                </form>
+                                            @endif
+                                            @if ($booking->payment->payment_status != 1 && $booking->booking_status == 1)
+                                                <form action="{{ route('bookings.approve', $booking->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    {{-- @method('DELETE') --}}
+                                                    <button type="submit"
+                                                        class="ml-2 font-medium text-darker-pink hover:underline">Approve</button>
+                                                </form>
+                                            @endif
+
+                                            @if ($booking->payment->payment_status != 1 && $booking->booking_status == 1)
+                                                <form action="{{ route('booking.destroy', $booking->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="ml-2 font-medium text-red-600 hover:underline">Delete</button>
+                                                </form>
+                                            @endif
+                                        @elseif (Auth::user()->user_role == 2)
+                                            {{-- USER SIDE --}}
+                                            <a href="{{ route('booking.show', $booking->id) }}"
+                                                class="font-medium text-darker-pink hover:underline mr-2">View</a>
+
+                                            @if ($booking->booking_status == 1)
+                                                <a href="{{ route('booking.edit', $booking->id) }}"
+                                                    class="font-medium text-darker-pink hover:underline">Edit</a>
+                                            @endif
+                                            @if ($booking->payment->payment_status != 1 && $booking->booking_status == 1)
+                                                <form action="{{ route('bookings.cancel', $booking->id) }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit"
+                                                        class="ml-2 font-medium text-darker-pink hover:underline">Cancel</button>
+                                                </form>
+                                            @endif
+
+                                            @if ($booking->payment->payment_status != 1 && $booking->booking_status == 1)
+                                                <form action="{{ route('booking.destroy', $booking->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="ml-2 font-medium text-red-600 hover:underline">Delete</button>
+                                                </form>
+                                            @endif
+                                        @elseif (Auth::user()->user_role == 3)
+                                            {{-- STAFF SIDE --}}
+                                            <a href="{{ route('booking.show', $booking->id) }}"
+                                                class="font-medium text-darker-pink hover:underline mr-2">View</a>
                                         @endif
 
-                                        @if ($booking->payment->payment_status != 1 && $booking->booking_status == 1)
-                                            <form action="{{ route('booking.destroy', $booking->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="ml-2 font-medium text-red-600 hover:underline">Delete</button>
-                                            </form>
-                                        @endif
                                     </div>
                                 </td>
                             </tr>
