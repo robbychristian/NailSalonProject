@@ -12,13 +12,13 @@
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                     Discounts
                 </h1>
-                {{-- <a href="{{ route('discounts.create') }}"
+                <a href="{{ route('discounts.products') }}"
                     class="text-white bg-darker-pink hover:bg-darker-pink-90 font-medium rounded-lg text-sm px-4 py-2 inline-flex items-center">
                     <i class="fa-solid fa-plus mr-2"></i>
-                    Add Discount (Service)
-                </a> --}}
+                    Add Discount
+                </a>
 
-                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown-discount"
+                {{-- <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown-discount"
                     class="text-white bg-darker-pink hover:bg-darker-pink-90 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
                     type="button">Add Discount <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -27,7 +27,7 @@
                     </svg>
                 </button>
 
-                <!-- Dropdown menu -->
+             
                 <div id="dropdown-discount" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
                     <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
                         <li>
@@ -38,7 +38,7 @@
                                 class="block px-4 py-2 hover:bg-gray-100">Products</a>
                         </li>
                     </ul>
-                </div>
+                </div> --}}
 
             </div>
 
@@ -59,9 +59,9 @@
                                 Product
                             </th>
 
-                            <th scope="col" class="px-6 py-3">
+                            {{-- <th scope="col" class="px-6 py-3">
                                 Service
-                            </th>
+                            </th> --}}
                             <th scope="col" class="px-6 py-3">
                                 Discount Percentage
                             </th>
@@ -85,9 +85,9 @@
                                 <td class="px-6 py-4">
                                     {{ $discount->product->product_name ?? null }}
                                 </td>
-                                <td class="px-6 py-4">
+                                {{-- <td class="px-6 py-4">
                                     {{ $discount->service->service_name ?? null }}
-                                </td>
+                                </td> --}}
                                 <td class="px-6 py-4">
                                     {{ $discount->discount_percent }}
                                 </td>

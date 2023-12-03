@@ -16,10 +16,11 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('booking_id');
+            $table->string('discount_id')->nullable();
             $table->string('total_price');
             $table->string('payment_status');
             $table->timestamps();
-
+            
             $table->foreign('booking_id')->references('id')->on('bookings');
         });
     }

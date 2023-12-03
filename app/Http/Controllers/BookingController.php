@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BookingHasCustomization;
 use App\Models\Bookings;
 use App\Models\Branches;
+use App\Models\Discounts;
 use App\Models\NailColors;
 use App\Models\NailCustomization;
 use App\Models\Packages;
@@ -70,7 +71,8 @@ class BookingController extends Controller
             'service3' => $request->service3,
             'addon3' => $request->addon3,
             'total_price' => $request->total_price,
-            'nail_customization_id' => $request->nail_customization_id
+            'nail_customization_id' => $request->nail_customization_id,
+            'discount_id' => $request->discount_id
         ];
 
         $branchId = Branches::where('branch_address', $booking['branch'])->pluck('id')->first();
@@ -133,13 +135,29 @@ class BookingController extends Controller
         }
 
         $numberOfBookings = Bookings::where('user_id', $booking['user_id'])->count();
+        $discountPercent = Discounts::where('id', $booking['discount_id'])->value('discount_percent'); // inform mobile
         $totalPrice = 0;
-        if ($numberOfBookings >= 5) {
+        if ($numberOfBookings >= 5 && $discountPercent != NULL) {
+            // have discount & loyal
             User::where('id', $booking['user_id'])->update([
                 'is_loyal' => 1
             ]);
-            $totalPrice = $booking['total_price'] * 0.9;
-        } else {
+            $totalPrice = $booking['total_price'] * 0.9 * (1 - $discountPercent / 100);
+        } else if($numberOfBookings < 5 && $discountPercent != NULL){
+            // have discount but not loyal
+            User::where('id', $booking['user_id'])->update([
+                'is_loyal' => NULL
+            ]);
+            $totalPrice = $booking['total_price'] * (1 - $discountPercent / 100);
+
+        } else if($numberOfBookings >= 5 && $discountPercent == NULL) {
+            // no discount but loyal
+            User::where('id', $booking['user_id'])->update([
+                'is_loyal' => 1
+            ]);
+            $totalPrice = $booking['total_price'] * 0.9; 
+        } else if($numberOfBookings < 5 && $discountPercent == NULL) {
+            // no discount and not loyal
             User::where('id', $booking['user_id'])->update([
                 'is_loyal' => NULL
             ]);
@@ -148,6 +166,7 @@ class BookingController extends Controller
 
         $payment = Payments::create([
             'booking_id' => $bookingDetails->id,
+            'discount_id' => $discountPercent == '' ? NULL : $booking['discount_id'],
             'total_price' => $totalPrice,
             'payment_status' => 0,
         ]);

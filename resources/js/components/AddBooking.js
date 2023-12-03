@@ -47,7 +47,9 @@ const AddBooking = (props) => {
         nailCustomizationId: '',
 
         isChecked: false,
-        totalPrice: 0
+        totalPrice: 0,
+
+        discountId: 'None'
     });
 
     const handleNext = () => {
@@ -106,7 +108,7 @@ const AddBooking = (props) => {
 
             formdata.append('total_price', formValues.totalPrice);
             formdata.append('nail_customization_id', formValues.nailCustomizationId)
-
+            formdata.append('discount_id', formValues.discountId);
             console.log([...formdata]);
             axios.post('/booking', formdata)
                 .then((response) => {
@@ -601,9 +603,10 @@ const AddBooking = (props) => {
 
             })
     }, [formValues.selectedUser]);
-
+    
     const [discounts, setDiscounts] = useState([]);
     const [filteredDiscounts, setFilteredDiscounts] = useState([]);
+    const [discountPrice, setDiscountPrice] = useState(0);
     useEffect(() => {
         axios.get('/api/getApplicableDiscounts')
             .then((response) => {
@@ -626,9 +629,31 @@ const AddBooking = (props) => {
         })
         console.log(`eto yung filtered list ${JSON.stringify(filtered)}`)
         setFilteredDiscounts(filtered)
+
+        setFormValues((prevValues) => ({
+            ...prevValues,
+            discountId: 'None'
+        }));
+        setDiscountPrice(0);
     }, [formValues.product1Field, formValues.product2Field, formValues.product3Field])
 
+    const handleDiscountChange = (e) => {
+        const { name, value } = e.target || e._d || {};
 
+        setFormValues((prevValues) => ({
+            ...prevValues,
+            discountId: value
+        }));
+
+        if(value == 'None') {
+            setDiscountPrice(0);
+            // setDiscountPrice(0)
+        } else {
+            const selectedDiscount = discounts.find((item) => item.id === value);
+            setDiscountPrice(selectedDiscount.discount_percent)
+        }
+
+    }
     return (
         <Fragment>
             <ToastContainer />
@@ -1805,7 +1830,7 @@ const AddBooking = (props) => {
 
                                             <div className="flex justify-between mb-3">
                                                 <Typography variant="subtitle1">
-                                                    Discount:
+                                                    Loyalty Discount:
                                                 </Typography>
                                                 {userDetails.is_loyal == 1 ? <Chip
                                                     color="success"
@@ -1821,21 +1846,49 @@ const AddBooking = (props) => {
                                                 }
                                             </div>
                                             <hr></hr>
-                                            <TextField
-                                                select
-                                                label="Choose a Discount"
-
-                                            >
-                                                <MenuItem value="None">--None--</MenuItem>
-                                                {filteredDiscounts.map((item, index) => (
-                                                    <MenuItem value={item.id}>{item.discount_name} - {item.discount_percent}</MenuItem>
-                                                ))}
-                                            </TextField>
-                                            {/* {TODO: GET THE MODE FOR SERVICE TYPE AND ADD THE DISCOUNT AMOUNT ON THE TOTAL PRICE THEN SAVE THE ID OF THE DISCOUNT} */}
+                                            <div className="grid grid-cols-12 mb-3 py-4">
+                                                <div className="col-span-8">
+                                                    <Typography variant="subtitle1">Other Discounts:</Typography>
+                                                </div>
+                                                <div className="col-span-4">
+                                                    <TextField
+                                                    select
+                                                    label="Choose a Discount"
+                                                    fullWidth
+                                                    name="discountId"
+                                                    value={formValues.discountId}
+                                                    onChange={handleDiscountChange}
+                                                    
+                                                >
+                                                        <MenuItem value="None">--None--</MenuItem>
+                                                        {filteredDiscounts.map((item, index) => (
+                                                        <MenuItem key={index} value={item.id}>{item.discount_name} - {item.discount_percent}%</MenuItem>
+                                                        ))}
+                                                    </TextField>
+                                                </div>
+                                            </div>
                                             <hr></hr>
                                             <div className="flex justify-end mt-3">
                                                 <Typography variant="h4">
-                                                    {userDetails.is_loyal == 1 ? <b>₱ {Number(formValues.totalPrice) * Number(0.9)}</b> : <b>₱{formValues.totalPrice}</b>}
+                                                    {/* have discount & loyal */}
+                                                    {discountPrice != 0 && userDetails.is_loyal == 1 &&
+                                                    <b>₱ {Number(formValues.totalPrice) * Number(0.9) * (1 - Number(discountPrice) / 100)}</b> 
+                                                    }
+
+                                                    {/* have discount but not loyal */}
+                                                    {discountPrice != 0 && userDetails.is_loyal != 1 &&
+                                                    <b>₱ {Number(formValues.totalPrice) * (1 - Number(discountPrice) / 100)}</b> 
+                                                    }
+                                                    {/* no discount but loyal */}
+                                                    {discountPrice == 0 && userDetails.is_loyal == 1 &&
+                                                    <b>₱ {Number(formValues.totalPrice) * Number(0.9)}</b> 
+                                                    }
+
+                                                    {/* no discount and not loyal */}
+                                                    {discountPrice == 0 && userDetails.is_loyal != 1 &&
+                                                    <b>₱ {Number(formValues.totalPrice)}</b> 
+                                                    }
+                                                    {/* {userDetails.is_loyal == 1 ? <b>₱ {Number(formValues.totalPrice) * Number(0.9)}</b> : <b>₱{formValues.totalPrice}</b>} */}
                                                 </Typography>
                                             </div>
                                         </Grid>

@@ -30,8 +30,8 @@ class DiscountsController extends Controller
      */
     public function create()
     {
-        $services = Services::all();
-        return view('modules.discounts.create', compact('services'));
+        // $services = Services::all();
+        // return view('modules.discounts.create', compact('services'));
     }
 
     public function createProductDiscounts()
