@@ -150,11 +150,17 @@
                                             <a href="{{ route('booking.show', $booking->id) }}"
                                                 class="font-medium text-darker-pink hover:underline mr-2">View</a>
 
-                                            @if ($booking->booking_status == 1)
+                                            @php
+                                                $bookingDate = \Carbon\Carbon::parse($booking->date);
+                                                $currentDate = \Carbon\Carbon::now();
+                                                $daysDifference = $currentDate->diffInDays($bookingDate, false); // false means don't round the result
+                                            @endphp
+
+                                            @if ($booking->booking_status == 1 && $daysDifference >= 2)
                                                 <a href="{{ route('booking.edit', $booking->id) }}"
                                                     class="font-medium text-darker-pink hover:underline">Edit</a>
                                             @endif
-                                            @if ($booking->payment->payment_status != 1 && $booking->booking_status == 1)
+                                            @if ($booking->payment->payment_status != 1 && $booking->booking_status == 1 && $daysDifference >= 2)
                                                 <form action="{{ route('bookings.cancel', $booking->id) }}" method="POST">
                                                     @csrf
                                                     <button type="submit"
@@ -162,14 +168,14 @@
                                                 </form>
                                             @endif
 
-                                            @if ($booking->payment->payment_status != 1 && $booking->booking_status == 1)
+                                            {{-- @if ($booking->payment->payment_status != 1 && $booking->booking_status == 1)
                                                 <form action="{{ route('booking.destroy', $booking->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
                                                         class="ml-2 font-medium text-red-600 hover:underline">Delete</button>
                                                 </form>
-                                            @endif
+                                            @endif --}}
                                         @elseif (Auth::user()->user_role == 3)
                                             {{-- STAFF SIDE --}}
                                             <a href="{{ route('booking.show', $booking->id) }}"
